@@ -1,27 +1,57 @@
 <?php
 /*
  * @category Design Pattern Tutorial
- * @package Bridge Sample
+ * @package Flyweight Sample
  * @author Dmitry Sheiko <me@dsheiko.com>
  * @licence MIT
  */
 
-include 'Dao/Api/ApiInterface.php';
-include 'Dao/Api/Local.php';
-include 'Dao/Api/Remote.php';
-include 'Dao/User.php';
+include 'Glyph/AbstractGlyph.php';
+include 'Glyph/Character.php';
+include 'Glyph/Context.php';
+include 'Glyph/Factory.php';
+include 'Glyph/Row.php';
+include 'Font/Abstractfont.php';
+include 'Font/Times.php';
+include 'Font/VerdanaBold.php';
+include 'Window/Context.php';
+
+
+
+// Shortcut function
+function char($char)
+{
+    return \Glyph\Factory::createChar($char);
+}
 
 /**
  * Usage
  */
-$dao = new \Dao\User("remote");
-print $dao->fetchProfile(1);
 
-$dao = new \Dao\User("local");
-print $dao->fetchProfile(1);
+$window = new \Window\Context();
+$times = new \Font\Times();
+$verdana = new \Font\VerdanaBold();
+$row = \Glyph\Factory::createRow();
+$context = new \Glyph\Context();
+$row->insert(char("e"), $context)
+       ->insert(char("x"), $context)
+       ->insert(char("c"), $context)
+       ->setFont($verdana, $context) 
+       ->insert(char("e"), $context)
+       ->insert(char("e"), $context)
+       ->setFont($times, $context)
+       ->insert(char("d"), $context)
+       ->render($window, $context);
+
+$window->render();
 
 /*
  * Output
  */
-// Profile #1 via remote API
-// Profile #1 via local API
+//Row content:
+//e - Times Roman  12  reused
+//x - Times Roman  12
+//c - Times Roman  12
+//e - Verdana Bold 12  reused
+//e - Verdana Bold 12  reused
+//d - Times Roman  12

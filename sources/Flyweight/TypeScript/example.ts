@@ -1,6 +1,6 @@
 /*
  * @category Design Pattern Tutorial
- * @package Bridge Sample
+ * @package flyweight Sample
  * @author Dmitry Sheiko <me@dsheiko.com>
  * @licence MIT
  */

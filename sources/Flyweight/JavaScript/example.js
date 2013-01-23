@@ -1,87 +1,119 @@
 /*
  * @category Design Pattern Tutorial
- * @package Bridge Sample
+ * @package Flyweight Sample
  * @author Dmitry Sheiko <me@dsheiko.com>
  * @licence MIT
+ * @jscs standard:Jquery
+ * Code style: http://docs.jquery.com/JQuery_Core_Style_Guidelines
  */
-(function ( window ) {
+(function () {
 
     "use strict";
     /*global console:false */
 
-var document = window.document,
-    // Concrete implementor
-    sessionStorageApi = (function() {
+var ERROR_INUSUFFICIENT_ARG_TYPE = 1,
+    ERROR_INUSUFFICIENT_ARG_VALUE = 2,
+    ERROR_NODE_IS_UNDEFINED = 3,
+    ErrorMap = [],
+    
+    /**
+     * Flyweight 
+     */
+    ErrorLogEntry = function( errCode ){
+       return {
+           getMessage: function( context ) {
+               return ErrorMap[ errCode ] + " " + context.getDate();
+           }
+       };
+    },
+    /**
+     * Flyweight context keeps extrinsic state of ErrorLogEntry (datetime stamp)
+     */
+    ErrorLogEntryContext = function( date ){
+       return {
+           getDate: function() {
+               return date;
+           }
+       };
+    },
+
+   /**
+    * FlyweightFactory creates flyweights and ensures they are shared properly
+    */
+    ErrorLogEntryFactory = (function(){
+       var messages = [], 
+           callCount = 0, 
+           creationCount = 0;
+       return {
+           make : function( errCode ) {
+               if (typeof messages[ errCode ] === 'undefined') {
+                   messages[ errCode ] = new ErrorLogEntry( errCode );
+                   creationCount += 1;
+               }
+               callCount += 1;
+               return messages[ errCode ];
+           },
+           getInstanceCount: function() {
+
+               return creationCount;
+           },
+           getRequestCount: function() {
+               return callCount;
+           }
+       };
+    }()),
+    /**
+     * Client
+     */
+    ErrorLogger = function(){
+        var errCodes = [], 
+            dates = [];
         return {
-            // Operation implementation
-            save: function ( name, value ) {
-                console.log( 'Saved in SessionStorage' );
-                window.sessionStorage[ name ] = value;
+            log: function( errCode ) {
+                errCodes.push( ErrorLogEntryFactory.make(errCode) );
+                dates.push( new ErrorLogEntryContext(new Date()) );
             },
-            // Operation implementation
-            get: function ( name ) {
-                return window.sessionStorage[ name ];
+            printMessages: function() {
+                errCodes.forEach(function( logEntry, inx ){
+                    console.log( logEntry.getMessage(dates[ inx ]) );
+                });
             }
         };
-    }()), 
-    // Concrete implementor
-    cookieApi = (function() {
-        return {
-            // Operation implementation
-            save: function ( name, value ) {
-                console.log( 'Saved in Cookies' );
-                document.cookie = name + "=" + escape( value );
-            },
-            // Operation implementation
-            get: function ( name ) {
-                var key, 
-                    val, 
-                    cookieArr = document.cookie.split( ";" ),
-                    i = 0, 
-                    len = cookieArr.length;
-                    
-                for ( ; i < len; i++) {
-                      key = cookieArr[ i ].substr( 0, cookieArr[i].indexOf( "=" ) );
-                      val = cookieArr[ i ].substr( cookieArr[i].indexOf( "=" ) + 1 );
-                      key = key.replace( /^\s+|\s+$/g , "" );
-                      if ( key === name ) {
-                        return unescape( val );
-                      }
-                  }
-            }
-        }
-    }()),
-    // Refined abstraction
-    NotepadWidget = function( api ) {
-        var id = 'noteWidgetText',
-            text = 'Lorem ipsum';
-        return {
-            getText: function() {
-                return text;
-            },
-            restoreState: function() {
-                text = api.get( id );
-            },
-            saveState: function() {
-                api.save( id, text );
-            }
-        }
-    }
+    },
+    logger;
+    
+ErrorMap[ERROR_INUSUFFICIENT_ARG_TYPE] = 'Insufficient argument type';
+ErrorMap[ERROR_INUSUFFICIENT_ARG_VALUE] = 'Insufficient argument value';
+ErrorMap[ERROR_NODE_IS_UNDEFINED] = 'Node is undefined';
+
+
 
 /**
  * Usage
  */
-var apiDelegate = sessionStorageApi,
-    notepad = new NotepadWidget( apiDelegate );
 
-notepad.saveState();
-notepad.restoreState();
-console.log( notepad.getText() );
+logger = new ErrorLogger();
+logger.log( ERROR_INUSUFFICIENT_ARG_TYPE );
+logger.log( ERROR_INUSUFFICIENT_ARG_TYPE );
+logger.log( ERROR_INUSUFFICIENT_ARG_VALUE );
+logger.log( ERROR_INUSUFFICIENT_ARG_TYPE );
+logger.log( ERROR_NODE_IS_UNDEFINED );
+
+logger.printMessages();
+
+console.log( ErrorLogEntryFactory.getRequestCount() + " ErrorLogEntry instances were requested");
+console.log( ErrorLogEntryFactory.getInstanceCount() + " LogEntry instances were really created");
+
 
 /**
  * Output
  */
-// Saved in SessionStorage
-// Lorem ipsum
+// Insufficient argument type Wed Jan 23 2013 21:41:07 GMT+0100 (CET)
+// Insufficient argument type Wed Jan 23 2013 21:41:07 GMT+0100 (CET)
+// Insufficient argument value Wed Jan 23 2013 21:41:07 GMT+0100 (CET)
+// Insufficient argument type Wed Jan 23 2013 21:41:07 GMT+0100 (CET)
+// Node is undefined Wed Jan 23 2013 21:41:07 GMT+0100 (CET)
+// 5 ErrorLogEntry instances were requested
+// 3 LogEntry instances were really created
 
-}( window ));
+}());
