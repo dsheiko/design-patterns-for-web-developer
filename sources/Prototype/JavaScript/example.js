@@ -3,6 +3,8 @@
  * @package Prototype Sample
  * @author Dmitry Sheiko <me@dsheiko.com>
  * @licence MIT
+ * @jscs standard:Jquery
+ * Code style: http://docs.jquery.com/JQuery_Core_Style_Guidelines
  * 
  * In this application we need a button to submit the form (Save changes) 
  * and a button to preserve the form data (Save draft). The framework comprises 
@@ -19,6 +21,7 @@
 (function( window ){
 
 "use strict";
+/*global console:false */
 
 var document = window.document,
     console = window.console,

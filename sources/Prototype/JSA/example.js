@@ -3,14 +3,18 @@
  * @package Prototype Sample
  * @author Dmitry Sheiko <me@dsheiko.com>
  * @licence MIT
+ * @jscs standard:Jquery
+ * Code style: http://docs.jquery.com/JQuery_Core_Style_Guidelines
  */
 
 (function( window ){
 
 "use strict";
+ /*global console:false, require:false, escape:false, unescape:false */
 
 var document = window.document,
     console = window.console,
+    jsa = require("../../../vendors/jsa/jsa.core-interface.min"),
     Toolbar = {
         Button: function( options ) {
             var node = document.createElement( "button" );

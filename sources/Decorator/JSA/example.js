@@ -3,13 +3,15 @@
  * @package Bridge Sample
  * @author Dmitry Sheiko <me@dsheiko.com>
  * @licence MIT
+ * @jscs standard:Jquery
+ * Code style: http://docs.jquery.com/JQuery_Core_Style_Guidelines
  */
 (function () {
 
     "use strict";
     /*global console:false, require:false */
     
-var jsa = require("../../../lib/jsa.core.min"),
+var jsa = require("../../../vendors/jsa/jsa.core-interface.min"),
     MacbookAbstract = function() {
         return {
             getPrice: function() {

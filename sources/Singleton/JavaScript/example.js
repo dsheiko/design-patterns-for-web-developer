@@ -3,10 +3,13 @@
  * @package Singleton Sample
  * @author Dmitry Sheiko <me@dsheiko.com>
  * @licence MIT
+ * @jscs standard:Jquery
+ * Code style: http://docs.jquery.com/JQuery_Core_Style_Guidelines
  */
 (function( window ) {
 
 "use strict";
+/*global console:false */
 
 var console = window.console,
     registry = (function(){

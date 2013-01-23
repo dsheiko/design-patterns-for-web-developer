@@ -3,6 +3,8 @@
  * @package Adapter Sample
  * @author Dmitry Sheiko <me@dsheiko.com>
  * @licence MIT
+ * @jscs standard:Jquery
+ * Code style: http://docs.jquery.com/JQuery_Core_Style_Guidelines
  */
 
 /*global window:true, jQuery:false */
