@@ -6,17 +6,21 @@
  * @jscs standard:Jquery
  * Code style: http://docs.jquery.com/JQuery_Core_Style_Guidelines
  */
-(function( window ) {
+(function( global ) {
 
 "use strict";
  /*global console:false, require:false, escape:false, unescape:false */
 
-var console = window.console,
-    jsa = require("../../../vendors/jsa/jsa.core-interface.min"),
-    registry =(function(){
+var jsa = require("../../../vendors/jsa/jsa.umd"),
+    registryInterface = {
+        set: [ "string", "any" ],
+        get: [ "string" ]
+    },
+    registry = (function(){
     var Registry = function() {
         var data = {};
         return {
+            __implements__: registryInterface,
             set : function( name, value ) {
                 data[ name ] = value;
             },
@@ -34,4 +38,4 @@ var console = window.console,
 registry.set( 'aVar', 'aValue' );
 console.log( registry.get( 'aVar' ) );
 
-}( window ));
+}( this));

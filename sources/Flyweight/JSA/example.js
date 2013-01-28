@@ -14,7 +14,7 @@
 var ERROR_INUSUFFICIENT_ARG_TYPE = 1,
     ERROR_INUSUFFICIENT_ARG_VALUE = 2,
     ERROR_NODE_IS_UNDEFINED = 3,
-    jsa = require("../../../vendors/jsa/jsa.core-interface.min"),
+    jsa = require("../../../vendors/jsa/jsa.umd"),
     ErrorMap = [],
     
     FlyweightContext = function() {
@@ -25,8 +25,12 @@ var ERROR_INUSUFFICIENT_ARG_TYPE = 1,
      * Flyweight context keeps extrinsic state of ErrorLogEntry (datetime stamp)
      */
     ErrorLogEntryContext = function( date ){
+       var date; 
        return {
            __extends__: FlyweightContext,
+           __constructor__: function( date ) {
+               
+           },
            getDate: function() {
                return date;
            }
@@ -39,11 +43,15 @@ var ERROR_INUSUFFICIENT_ARG_TYPE = 1,
     /**
      * Flyweight 
      */
-    ErrorLogEntry = function( errCode ){
+    ErrorLogEntry = function(){
        return {
            __implements__: FlyweightInterface,
+           __constructor__: function( errCode ) {
+               this.errCode = errCode;
+           },
+           errCode: 0,
            getMessage: function( context ) {
-               return ErrorMap[ errCode ] + " " + context.getDate();
+               return ErrorMap[ this.errCode ] + " " + context.getDate();
            }
        };
     },
@@ -53,13 +61,13 @@ var ERROR_INUSUFFICIENT_ARG_TYPE = 1,
     * FlyweightFactory creates flyweights and ensures they are shared properly
     */
     ErrorLogEntryFactory = (function(){
-       var messages = [], 
+       var messages = {}, 
            callCount = 0, 
            creationCount = 0;
        return {
            make : function( errCode ) {
                if (typeof messages[ errCode ] === 'undefined') {
-                   messages[ errCode ] = new ErrorLogEntry( errCode );
+                   messages[ errCode ] = ErrorLogEntry.createInstance( errCode );
                    creationCount += 1;
                }
                callCount += 1;
@@ -89,7 +97,7 @@ var ERROR_INUSUFFICIENT_ARG_TYPE = 1,
             __implements__: Client,
             log: function( errCode ) {
                 errCodes.push( ErrorLogEntryFactory.make(errCode) );
-                dates.push( new ErrorLogEntryContext(new Date()) );
+                dates.push( ErrorLogEntryContext.createInstance(new Date()) );
             },
             printMessages: function() {
                 errCodes.forEach(function( logEntry, inx ){
@@ -100,17 +108,16 @@ var ERROR_INUSUFFICIENT_ARG_TYPE = 1,
     },
     logger;
     
-ErrorMap[ERROR_INUSUFFICIENT_ARG_TYPE] = 'Insufficient argument type';
-ErrorMap[ERROR_INUSUFFICIENT_ARG_VALUE] = 'Insufficient argument value';
-ErrorMap[ERROR_NODE_IS_UNDEFINED] = 'Node is undefined';
-
+ErrorMap[ ERROR_INUSUFFICIENT_ARG_TYPE ] = 'Insufficient argument type';
+ErrorMap[ ERROR_INUSUFFICIENT_ARG_VALUE ] = 'Insufficient argument value';
+ErrorMap[ ERROR_NODE_IS_UNDEFINED ] = 'Node is undefined';
 
 
 /**
  * Usage
  */
 
-logger = new ErrorLogger();
+logger = ErrorLogger.createInstance();
 logger.log( ERROR_INUSUFFICIENT_ARG_TYPE );
 logger.log( ERROR_INUSUFFICIENT_ARG_TYPE );
 logger.log( ERROR_INUSUFFICIENT_ARG_VALUE );
@@ -118,6 +125,8 @@ logger.log( ERROR_INUSUFFICIENT_ARG_TYPE );
 logger.log( ERROR_NODE_IS_UNDEFINED );
 
 logger.printMessages();
+
+
 
 console.log( ErrorLogEntryFactory.getRequestCount() + " ErrorLogEntry instances were requested");
 console.log( ErrorLogEntryFactory.getInstanceCount() + " LogEntry instances were really created");

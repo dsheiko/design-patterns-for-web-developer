@@ -11,7 +11,7 @@
 /*global console:false, require:false */
 
 // Composite
-var jsa = require("../../../vendors/jsa/jsa.core-interface.min"),
+var jsa = require("../../../vendors/jsa/jsa.umd"),
     Graphic = function() {
         return {
             collection: [],

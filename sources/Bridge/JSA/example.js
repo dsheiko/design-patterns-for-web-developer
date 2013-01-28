@@ -6,14 +6,14 @@
  * @jscs standard:Jquery
  * Code style: http://docs.jquery.com/JQuery_Core_Style_Guidelines
  */
-(function ( window ) {
+(function ( global ) {
 
     "use strict";
     /*global console:false, require:false, escape:false, unescape:false */
     
-var jsa = require("../../../vendors/jsa/jsa.core-interface.min"),
-    document = window.document,
-    console = window.console,
+var jsa = require("../../../vendors/jsa/jsa.umd"),
+    document = global.document,
+    console = global.console,
 
     StorageApiInterface = {
         save: [ "string", "string" ],
@@ -35,11 +35,11 @@ var jsa = require("../../../vendors/jsa/jsa.core-interface.min"),
                 // Operation implementation
                 save: function ( name, value ) {
                     console.log( 'Saved in SessionStorage' );
-                    window.sessionStorage[ name ] = value;
+                    global.sessionStorage[ name ] = value;
                 },
                 // Operation implementation
                 get: function ( name ) {
-                    return window.sessionStorage[ name ];
+                    return global.sessionStorage[ name ];
                 }
             };
         }, 
@@ -117,4 +117,4 @@ console.log( notepad.getText() );
 // Saved in SessionStorage
 // Lorem ipsum
 
-}( window ));
+}( this ));

@@ -11,7 +11,7 @@
     "use strict";
     /*global console:false, require:false */
     
-var jsa = require("../../../vendors/jsa/jsa.core-interface.min"),
+var jsa = require("../../../vendors/jsa/jsa.umd"),
     // Client
     PageClass = function( options ) {
         return {

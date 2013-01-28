@@ -14,7 +14,7 @@
 
 var document = window.document,
     console = window.console,
-    jsa = require("../../../vendors/jsa/jsa.core-interface.min"),
+    jsa = require("../../../vendors/jsa/jsa.umd"),
     Toolbar = {
         Button: function( options ) {
             var node = document.createElement( "button" );
