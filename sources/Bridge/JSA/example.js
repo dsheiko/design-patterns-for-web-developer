@@ -54,7 +54,7 @@ var jsa = require("../../../vendors/jsa/jsa.umd"),
             }
         };
     },
-    // RefmedAbstraction
+    // Refined Abstraction
     OnDesktopSlideShow = function( imp ) {
         return {
             "__extends__": AbstractSlideShow,
@@ -69,7 +69,7 @@ var jsa = require("../../../vendors/jsa/jsa.umd"),
             }
         };
     },
-    // RefmedAbstraction
+    // Refined Abstraction
     OnMobileSlideShow = function( imp ) {
         return {
             "__extends__": AbstractSlideShow,

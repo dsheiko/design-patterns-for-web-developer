@@ -8,7 +8,7 @@
 
 include 'Analytics/Imp/ImpAbstract.php';
 include 'Analytics/Imp/GoogleAnalytics.php';
-include 'Analytics/Imp/LocalStats.php';
+include 'Analytics/Imp/LocalAnalytics.php';
 include 'Analytics/AnalyticsAbstract.php';
 include 'Analytics/GraphViewData.php';
 include 'Analytics/TableViewData.php';

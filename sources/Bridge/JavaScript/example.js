@@ -42,7 +42,7 @@ var AbstractImplementor = function() {
             }
         };
     },
-    // RefmedAbstraction
+    // Refined Abstraction
     onDesktopSlideShow = function( imp ) {
         return Object.create( new AbstractSlideShow( imp ), {
             bindNavigation: { value: function() {
@@ -55,7 +55,7 @@ var AbstractImplementor = function() {
             }}
         });
     },
-    // RefmedAbstraction
+    // Refined Abstraction
     onMobileSlideShow = function( imp ) {
         return Object.create( new AbstractSlideShow( imp ), {
             bindTouchGestures: { value: function() {

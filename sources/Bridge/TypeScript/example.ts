@@ -68,7 +68,7 @@ class AbstractSlideShow
     }
 }
 
-// RefmedAbstraction
+// Refined Abstraction
 class OnDesktopSlideShow extends AbstractSlideShow
 {
     constructor(imp: AbstractImplementor)
@@ -88,7 +88,7 @@ class OnDesktopSlideShow extends AbstractSlideShow
     }
 }
 
-// RefmedAbstraction
+// Refined Abstraction
 class OnMobileSlideShow extends AbstractSlideShow
 {
     constructor(imp: AbstractImplementor)

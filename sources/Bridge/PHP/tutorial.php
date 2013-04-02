@@ -9,14 +9,14 @@
 
 // File: ./Analytics/TableViewData.php
 namespace Analytics;
-// RefmedAbstraction
+// Refined Abstraction
 class TableViewData extends AnalyticsAbstract
 {
 }
 
 // File: ./Analytics/GraphViewData.php
 namespace Analytics;
-// RefmedAbstraction
+// Refined Abstraction
 class GraphViewData extends AnalyticsAbstract
 {
     public function queryAudienceStats($profileId = 0, $sDate = "", $eDate = "")
@@ -46,11 +46,11 @@ class GoogleAnalytics extends ImpAbstract
     }
 }
 
-// File: ./Analytics/Imp/LocalStats.php
+// File: ./Analytics/Imp/LocalAnalytics.php
 namespace Analytics\Imp;
 
 // Concrete implementror
-class LocalStats extends ImpAbstract
+class LocalAnalytics extends ImpAbstract
 {
     public function queryVisitsRate($profileId = 0, $sDate = '-1 week', $eDate = '-1 day')
     {
@@ -99,7 +99,7 @@ class AnalyticsAbstract
 
 include 'Analytics/Imp/ImpAbstract.php';
 include 'Analytics/Imp/GoogleAnalytics.php';
-include 'Analytics/Imp/LocalStats.php';
+include 'Analytics/Imp/LocalAnalytics.php';
 include 'Analytics/AnalyticsAbstract.php';
 include 'Analytics/GraphViewData.php';
 include 'Analytics/TableViewData.php';
