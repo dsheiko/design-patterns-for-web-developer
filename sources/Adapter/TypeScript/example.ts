@@ -10,10 +10,10 @@ module Adapter
     export interface AbstractAdapter
     {
         find( selector: string ): AbstractAdapter;
-        setAttr( attr: string, value: string ): void;
-        getAttr( attr: string ): string;
+        setAttr( attr: string, value: string ): AbstractAdapter;
+        getAttr( attr: string ): any;
     }
-    export class Jquery
+    export class Jquery implements AbstractAdapter
     {
         private _node;
         private _qs;
@@ -28,12 +28,13 @@ module Adapter
         }
         public setAttr( attr: string, value: string ) {
             this._node.attr( attr, value );
+            return this;
         }
         public getAttr( attr: string ) {
             return this._node.attr( attr );
         }
     }
-    export class Yui
+    export class Yui implements AbstractAdapter
     {
         private _node;
         private _qs;
@@ -48,6 +49,7 @@ module Adapter
         }
         public setAttr( attr: string, value: string ) {
             this._node.set( attr, value );
+            return this;
         }
         public getAttr( attr: string ) {
             return this._node.get( attr );
@@ -55,7 +57,7 @@ module Adapter
     }
 }
 
-module Framework
+module node
 {
     export function factory()
     {
@@ -77,4 +79,4 @@ module Framework
  */
 declare var jQuery;
 declare var YUI;
-Framework.factory().find( 'div' ).set( 'id', 'something' );
+node.factory().find( 'div' ).set( 'id', 'something' );

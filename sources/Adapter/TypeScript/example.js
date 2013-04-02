@@ -10,6 +10,7 @@ var Adapter;
         };
         Jquery.prototype.setAttr = function (attr, value) {
             this._node.attr(attr, value);
+            return this;
         };
         Jquery.prototype.getAttr = function (attr) {
             return this._node.attr(attr);
@@ -27,6 +28,7 @@ var Adapter;
         };
         Yui.prototype.setAttr = function (attr, value) {
             this._node.set(attr, value);
+            return this;
         };
         Yui.prototype.getAttr = function (attr) {
             return this._node.get(attr);
@@ -36,8 +38,8 @@ var Adapter;
     Adapter.Yui = Yui;    
 })(Adapter || (Adapter = {}));
 
-var Framework;
-(function (Framework) {
+var node;
+(function (node) {
     function factory() {
         var instance = null;
         if(jQuery !== undefined) {
@@ -52,7 +54,7 @@ var Framework;
         }
         return instance;
     }
-    Framework.factory = factory;
-})(Framework || (Framework = {}));
+    node.factory = factory;
+})(node || (node = {}));
 
-Framework.factory().find('div').set('id', 'something');
+node.factory().find('div').set('id', 'something');

@@ -46,7 +46,7 @@ var $ = window.jQuery,
         };
     },
     
-    Framework = (function() {
+    node = (function() {
         if ( window.jQuery !== undefined ) {
             return new Jquery_Adapter( window.jQuery );
         } else if ( window.YUI !== undefined ) {
@@ -59,6 +59,6 @@ var $ = window.jQuery,
 /**
  * Usage
  */
-Framework.find( 'div' ).set( 'id', 'something' );
+node.find( 'div' ).set( 'id', 'something' );
 
 }( window ));
