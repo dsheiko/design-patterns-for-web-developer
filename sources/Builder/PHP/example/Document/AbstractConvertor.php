@@ -1,7 +1,10 @@
 <?php
-
-// Abstract builder
-// File: ./Document/AbstractConvertor.php
+/*
+ * @category Design Pattern Tutorial
+ * @package Builder Sample
+ * @author Dmitry Sheiko <me@dsheiko.com>
+ * @licence MIT
+ */
 namespace Document;
 
 abstract class AbstractConvertor
@@ -10,7 +13,7 @@ abstract class AbstractConvertor
     abstract public function setAuthor($author);
     abstract public function setTitle($title);
     abstract public function setText($text);
-    public function getDocument() 
+    public function getDocument()
     {
         return$this->_buffer;
     }

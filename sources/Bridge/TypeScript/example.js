@@ -1,66 +1,86 @@
+var __extends = this.__extends || function (d, b) {
+    function __() { this.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = new __();
+}
 "use strict";
-var StorageApi;
-(function (StorageApi) {
-    var sessionStorage = (function () {
-        function sessionStorage() { }
-        sessionStorage.prototype.save = function (name, value) {
-            console.log('Saved in SessionStorage');
-            window.sessionStorage[name] = value;
-        };
-        sessionStorage.prototype.get = function (name) {
-            return window.sessionStorage[name];
-        };
-        return sessionStorage;
-    })();
-    StorageApi.sessionStorage = sessionStorage;    
-    var cookies = (function () {
-        function cookies() { }
-        cookies.prototype.save = function (name, value) {
-            console.log('Saved in Cookies');
-            document.cookie = name + "=" + escape(value);
-        };
-        cookies.prototype.get = function (name) {
-            var key;
-            var val;
-            var cookieArr = document.cookie.split(";");
-            var i = 0;
-            var len = cookieArr.length;
-
-            for(; i < len; i++) {
-                key = cookieArr[i].substr(0, cookieArr[i].indexOf("="));
-                val = cookieArr[i].substr(cookieArr[i].indexOf("=") + 1);
-                key = key.replace(/^\s+|\s+$/g, "");
-                if(key === name) {
-                    return unescape(val);
-                }
-            }
-            return '';
-        };
-        return cookies;
-    })();
-    StorageApi.cookies = cookies;    
-})(StorageApi || (StorageApi = {}));
-
-var NotepadWidget = (function () {
-    function NotepadWidget(api) {
-        this.id = 'noteWidgetText';
-        this.text = 'Lorem ipsum';
-        this.api = api;
-    }
-    NotepadWidget.prototype.getText = function () {
-        return this.text;
+var AbstractImplementor = (function () {
+    function AbstractImplementor() { }
+    AbstractImplementor.prototype.renderBorder = function () {
+        console.log("Border");
     };
-    NotepadWidget.prototype.restoreState = function () {
-        this.text = this.api.get(this.id);
+    AbstractImplementor.prototype.renderPaginator = function () {
     };
-    NotepadWidget.prototype.saveState = function () {
-        this.api.save(this.id, this.text);
-    };
-    return NotepadWidget;
+    return AbstractImplementor;
 })();
-var spiDelegate = new StorageApi.sessionStorage();
-var notepad = new NotepadWidget(spiDelegate);
+var ThemeA = (function (_super) {
+    __extends(ThemeA, _super);
+    function ThemeA() {
+        _super.apply(this, arguments);
 
-notepad.saveState();
-notepad.restoreState();
-console.log(notepad.getText());
+    }
+    ThemeA.prototype.renderPaginator = function () {
+        console.log("Thumbnails");
+    };
+    return ThemeA;
+})(AbstractImplementor);
+var ThemeB = (function (_super) {
+    __extends(ThemeB, _super);
+    function ThemeB() {
+        _super.apply(this, arguments);
+
+    }
+    ThemeB.prototype.renderPaginator = function () {
+        console.log("Bullets");
+    };
+    return ThemeB;
+})(AbstractImplementor);
+var AbstractSlideShow = (function () {
+    function AbstractSlideShow(imp) {
+        this.imp = null;
+        this.imp = imp;
+    }
+    AbstractSlideShow.prototype.renderBorder = function () {
+        this.imp.renderBorder();
+    };
+    AbstractSlideShow.prototype.renderNavigation = function () {
+        this.imp.renderPaginator();
+    };
+    return AbstractSlideShow;
+})();
+var OnDesktopSlideShow = (function (_super) {
+    __extends(OnDesktopSlideShow, _super);
+    function OnDesktopSlideShow(imp) {
+        _super.call(this, imp);
+    }
+    OnDesktopSlideShow.prototype.bindNavigation = function () {
+        console.log("Navigation bound");
+    };
+    OnDesktopSlideShow.prototype.render = function () {
+        this.renderBorder();
+        this.renderNavigation();
+        this.bindNavigation();
+    };
+    return OnDesktopSlideShow;
+})(AbstractSlideShow);
+var OnMobileSlideShow = (function (_super) {
+    __extends(OnMobileSlideShow, _super);
+    function OnMobileSlideShow(imp) {
+        _super.call(this, imp);
+    }
+    OnMobileSlideShow.prototype.bindTouchGestures = function () {
+        console.log("Touch gestures bound");
+    };
+    OnMobileSlideShow.prototype.render = function () {
+        this.renderBorder();
+        this.bindTouchGestures();
+    };
+    return OnMobileSlideShow;
+})(AbstractSlideShow);
+var deskThemAImp = new OnDesktopSlideShow(new ThemeA());
+var deskThemBImp = new OnDesktopSlideShow(new ThemeB());
+var mobileThemAImp = new OnMobileSlideShow(new ThemeA());
+
+deskThemAImp.render();
+deskThemBImp.render();
+mobileThemAImp.render();

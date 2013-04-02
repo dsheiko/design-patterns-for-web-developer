@@ -1,6 +1,10 @@
 <?php
-
-// File: ./Document/Entity.php
+/*
+ * @category Design Pattern Tutorial
+ * @package Builder Sample
+ * @author Dmitry Sheiko <me@dsheiko.com>
+ * @licence MIT
+ */
 namespace Document;
 
 class Entity

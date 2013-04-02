@@ -6,84 +6,88 @@
  * @jscs standard:Jquery
  * Code style: http://docs.jquery.com/JQuery_Core_Style_Guidelines
  */
-(function ( window ) {
+(function ( global ) {
 
     "use strict";
     /*global console:false */
-
-var document = window.document,
-    // Concrete implementor
-    sessionStorageApi = (function() {
+    // Implementer on the Bridge
+var AbstractImplementor = function() {
         return {
-            // Operation implementation
-            save: function ( name, value ) {
-                console.log( 'Saved in SessionStorage' );
-                window.sessionStorage[ name ] = value;
-            },
-            // Operation implementation
-            get: function ( name ) {
-                return window.sessionStorage[ name ];
+            renderBorder: function() {
+                console.log("Border");
             }
         };
-    }()), 
-    // Concrete implementor
-    cookieApi = (function() {
+    },
+    // Concrete implementer
+    themeA = Object.create( new AbstractImplementor(), {
+        renderPaginator: { value: function() {
+            console.log("Thumbnails");
+        }}
+    }),
+    // Concrete implementer
+    themeB = Object.create( new AbstractImplementor(), {
+        renderPaginator: { value: function() {
+            console.log("Bullets");
+        }}
+    }),
+    // Abstraction on the Bridge
+    // Abstraction forwards client requests to its Implementor object.
+    AbstractSlideShow = function( imp ) {
         return {
-            // Operation implementation
-            save: function ( name, value ) {
-                console.log( 'Saved in Cookies' );
-                document.cookie = name + "=" + escape( value );
+            renderBorder: function() {
+                return imp.renderBorder();
             },
-            // Operation implementation
-            get: function ( name ) {
-                var key, 
-                    val, 
-                    cookieArr = document.cookie.split( ";" ),
-                    i = 0, 
-                    len = cookieArr.length;
-                    
-                for ( ; i < len; i++) {
-                      key = cookieArr[ i ].substr( 0, cookieArr[i].indexOf( "=" ) );
-                      val = cookieArr[ i ].substr( cookieArr[i].indexOf( "=" ) + 1 );
-                      key = key.replace( /^\s+|\s+$/g , "" );
-                      if ( key === name ) {
-                        return unescape( val );
-                      }
-                  }
+            renderNavigation: function() {
+                return imp.renderPaginator();
             }
-        }
-    }()),
-    // Refined abstraction
-    NotepadWidget = function( api ) {
-        var id = 'noteWidgetText',
-            text = 'Lorem ipsum';
-        return {
-            getText: function() {
-                return text;
-            },
-            restoreState: function() {
-                text = api.get( id );
-            },
-            saveState: function() {
-                api.save( id, text );
-            }
-        }
-    }
+        };
+    },
+    // RefmedAbstraction
+    onDesktopSlideShow = function( imp ) {
+        return Object.create( new AbstractSlideShow( imp ), {
+            bindNavigation: { value: function() {
+                console.log("Navigation bound");
+            }},
+            render: { value: function() {
+                this.renderBorder();
+                this.renderNavigation();
+                this.bindNavigation();
+            }}
+        });
+    },
+    // RefmedAbstraction
+    onMobileSlideShow = function( imp ) {
+        return Object.create( new AbstractSlideShow( imp ), {
+            bindTouchGestures: { value: function() {
+                console.log("Touch gestures bound");
+            }},
+            render: { value: function() {
+                this.renderBorder();
+                this.bindTouchGestures();
+            }}
+        });
+    };
 
 /**
  * Usage
  */
-var apiDelegate = sessionStorageApi,
-    notepad = new NotepadWidget( apiDelegate );
 
-notepad.saveState();
-notepad.restoreState();
-console.log( notepad.getText() );
-
+onDesktopSlideShow( themeA ).render();
+onDesktopSlideShow( themeB ).render();
+onMobileSlideShow( themeA ).render();
 /**
  * Output
  */
-// Saved in SessionStorage
-// Lorem ipsum
 
-}( window ));
+// Border
+// Thumbnails
+// Navigation bound
+//
+// Border
+// Bullets
+// Navigation bound
+//
+// Border
+// Touch gestures bound
+
+}( this ));

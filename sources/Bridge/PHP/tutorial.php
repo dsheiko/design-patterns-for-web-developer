@@ -3,94 +3,118 @@
  * @category Design Pattern Tutorial
  * @package Bridge Sample
  * @author Dmitry Sheiko <me@dsheiko.com>
- * @link http://dsheiko.com
+ * @licence MIT
  */
 
 
-// File: ./Dao/Api/ApiInterface.php
-
-namespace Dao\Api;
-/**
- * Implementor
- */
-interface ApiInterface
+// File: ./Analytics/TableViewData.php
+namespace Analytics;
+// RefmedAbstraction
+class TableViewData extends AnalyticsAbstract
 {
-    public function fetchProfile($guid);
 }
 
-// File: ./Dao/Api/Local.php
-
-namespace Dao\Api;
-/**
- * Concrete implementor 2
- */
-class Local implements ApiInterface
+// File: ./Analytics/GraphViewData.php
+namespace Analytics;
+// RefmedAbstraction
+class GraphViewData extends AnalyticsAbstract
 {
-    public function fetchProfile($guid)
+    public function queryAudienceStats($profileId = 0, $sDate = "", $eDate = "")
     {
-        return sprintf ("Profile #%d via local API\n", $guid);
+        return json_encode(array(
+            $this->_imp->queryVisitsRate($profileId, $sDate, $eDate),
+            $this->_imp->queryPageViewsRate($profileId, $sDate, $eDate)
+        ));
     }
 }
 
-// File: ./Dao/Api/Remote.php
+// File: ./Analytics/Imp/GoogleAnalytics.php
 
-namespace Dao\Api;
-/**
- * Concrete implementor 1
- */
-class Remote implements ApiInterface
+namespace Analytics\Imp;
+// Concrete implementror
+class GoogleAnalytics extends ImpAbstract
 {
-    public function fetchProfile($guid)
+    public function queryVisitsRate($profileId = 0, $sDate = '-1 week', $eDate = '-1 day')
     {
-        return sprintf ("Profile #%d via remote API\n", $guid);
+        // Mock query
+        return "Visits rate stats array";
+    }
+    public function queryPageViewsRate($profileId = 0, $sDate = '-1 week', $eDate = '-1 day')
+    {
+        // Mock query
+        return "Page views rate stats array";
     }
 }
 
-// File: ./Dao/User.php
+// File: ./Analytics/Imp/LocalStats.php
+namespace Analytics\Imp;
 
-namespace Dao;
-/**
- * Abstraction
- */
-class User
+// Concrete implementror
+class LocalStats extends ImpAbstract
 {
-    private $_api;
-    public function  __construct($apiName)
+    public function queryVisitsRate($profileId = 0, $sDate = '-1 week', $eDate = '-1 day')
     {
-        switch ($apiName) {
-            case "local":
-                $this->_api = new \Dao\Api\Local();
-                break;
-            case "remote":
-                $this->_api = new \Dao\Api\Remote();
-                break;
-            default:
-                throw new \Exception("Invalid API " . $apiName);
-        }
+        // Mock query
+        return "Visits rate stats array";
     }
-    public function fetchProfile($guid)
+    public function queryPageViewsRate($profileId = 0, $sDate = '-1 week', $eDate = '-1 day')
     {
-        return $this->_api->fetchProfile($guid);
+        // Mock query
+        return "Page views rate stats array";
+    }
+}
+
+// File: ./Analytics/Imp/ImpAbstract.php
+
+namespace Analytics\Imp;
+// Implementer on the Bridge
+abstract class ImpAbstract
+{
+    abstract public function queryVisitsRate($profileId = 0, $sDate = '-1 week', $eDate = '-1 day');
+    abstract public function queryPageViewsRate($profileId = 0, $sDate = '-1 week', $eDate = '-1 day');
+}
+
+// File: ./Analytics/AnalyticsAbstract.php
+
+namespace Analytics;
+// Abstraction on the Bridge
+// Abstraction forwards client requests to its Implementor object.
+class AnalyticsAbstract
+{
+    protected $_imp;
+    public function __construct()
+    {
+        $this->_imp = new \Analytics\Imp\GoogleAnalytics();
+    }
+    public function queryVisitsRate($profileId = 0, $sDate = '-1 week', $eDate = '-1 day')
+    {
+        return $this->_imp->queryVisitsRate($profileId, $sDate, $eDate);
+    }
+    public function queryPageViewsRate($profileId = 0, $sDate = '-1 week', $eDate = '-1 day')
+    {
+        return $this->_imp->queryPageViewsRate($profileId, $sDate, $eDate);
     }
 }
 //File: example.php
 
-include 'Dao/Api/ApiInterface.php';
-include 'Dao/Api/Local.php';
-include 'Dao/Api/Remote.php';
-include 'Dao/User.php';
+include 'Analytics/Imp/ImpAbstract.php';
+include 'Analytics/Imp/GoogleAnalytics.php';
+include 'Analytics/Imp/LocalStats.php';
+include 'Analytics/AnalyticsAbstract.php';
+include 'Analytics/GraphViewData.php';
+include 'Analytics/TableViewData.php';
+
 
 /**
  * Usage
  */
-$dao = new \Dao\User("remote");
-print $dao->fetchProfile(1);
+$tblDataSrc = new \Analytics\TableViewData();
+var_dump($tblDataSrc->queryVisitsRate());
 
-$dao = new \Dao\User("local");
-print $dao->fetchProfile(1);
-
+$graphDataSrc = new \Analytics\GraphViewData();
+var_dump($graphDataSrc->queryAudienceStats());
 /*
  * Output
  */
-// Profile #1 via remote API
-// Profile #1 via local API
+// Visits rate stats array
+// ["Visits rate stats array","Page views rate stats array"]

@@ -9,93 +9,76 @@
 (function ( global ) {
 
     "use strict";
-    /*global console:false, require:false, escape:false, unescape:false */
-    
+    /*global console:false, require:false */
+
 var jsa = require("../../../vendors/jsa/jsa.umd"),
-    document = global.document,
-    console = global.console,
-
-    StorageApiInterface = {
-        save: [ "string", "string" ],
-        get: [ "string" ]
-    },
-    
-   
-    StorageApi = {
-         // Abstract implementor
-        Abstract: function() {
-            return {
-                __implements__: StorageApiInterface
-            };
-        },
-        // Concrete implementor
-        SessionStorage: function() {
-            return {
-                __extends__: StorageApi.Abstract,
-                // Operation implementation
-                save: function ( name, value ) {
-                    console.log( 'Saved in SessionStorage' );
-                    global.sessionStorage[ name ] = value;
-                },
-                // Operation implementation
-                get: function ( name ) {
-                    return global.sessionStorage[ name ];
-                }
-            };
-        }, 
-        // Concrete implementor
-        Cookie: function() {
-            return {
-                __extends__: StorageApi.Abstract,
-                // Operation implementation
-                save: function ( name, value ) {
-                    console.log( 'Saved in Cookies' );
-                    document.cookie = name + "=" + escape( value );
-                },
-                // Operation implementation
-                get: function ( name ) {
-                    var key, 
-                        val, 
-                        cookieArr = document.cookie.split( ";" ),
-                        i = 0, 
-                        len = cookieArr.length;
-
-                    for ( ; i < len; i++) {
-                          key = cookieArr[ i ].substr( 0, cookieArr[i].indexOf( "=" ) );
-                          val = cookieArr[ i ].substr( cookieArr[i].indexOf( "=" ) + 1 );
-                          key = key.replace( /^\s+|\s+$/g , "" );
-                          if ( key === name ) {
-                            return unescape( val );
-                          }
-                      }
-                }
-            };
-        }
-    },
-    
-    NotepadInterface = {
-        setDelegate: [ StorageApi.Abstract ],
-        getText:  [],
-        restoreState: [],
-        saveState: []
-    },
-    // Refined abstraction
-    NotepadWidget = function() {
-        var api,
-            id = 'noteWidgetText',
-            text = 'Lorem ipsum';
+        // Implementer on the Bridge
+    AbstractImplementor = function() {
         return {
-            setDelegate: function( apiArg ) {
-                api = apiArg;
+            renderBorder: function() {
+                console.log("Border");
+            }
+        };
+    },
+    // Concrete implementer
+    ThemeA = function() {
+        return {
+            "__extends__": AbstractImplementor,
+            renderPaginator: function(){
+                console.log("Thumbnails");
+            }
+        };
+    },
+    // Concrete implementer
+    ThemeB = function() {
+        return {
+            "__extends__": AbstractImplementor,
+            renderPaginator: function(){
+                console.log("Bullets");
+            }
+        };
+    },
+    // Abstraction on the Bridge
+    // Abstraction forwards client requests to its Implementor object.
+    AbstractSlideShow = function() {
+        return {
+            "__constructor__": function( imp ) {
+                this.imp = imp;
             },
-            getText: function() {
-                return text;
+            imp: null,
+            renderBorder: function() {
+                return this.imp.renderBorder();
             },
-            restoreState: function() {
-                text = api.get( id );
+            renderNavigation: function() {
+                return this.imp.renderPaginator();
+            }
+        };
+    },
+    // RefmedAbstraction
+    OnDesktopSlideShow = function( imp ) {
+        return {
+            "__extends__": AbstractSlideShow,
+            bindNavigation: function() {
+                console.log("Navigation bound");
             },
-            saveState: function() {
-                api.save( id, text );
+            render: function() {
+
+                this.renderBorder();
+                this.renderNavigation();
+                this.bindNavigation();
+            }
+        };
+    },
+    // RefmedAbstraction
+    OnMobileSlideShow = function( imp ) {
+        return {
+            "__extends__": AbstractSlideShow,
+            bindTouchGestures: function() {
+                console.log("Touch gestures bound");
+            },
+            render: function() {
+                this.renderBorder();
+                this.bindTouchGestures();
             }
         };
     };
@@ -103,18 +86,26 @@ var jsa = require("../../../vendors/jsa/jsa.umd"),
 /**
  * Usage
  */
-var apiDelegate = StorageApi.SessionStorage.createInstance(),
-    notepad = NotepadWidget.createInstance();
+var deskThemAImp = OnDesktopSlideShow.createInstance( ThemeA.createInstance() ),
+    deskThemBImp = OnDesktopSlideShow.createInstance( ThemeB.createInstance() ),
+    mobileThemAImp = OnMobileSlideShow.createInstance( ThemeA.createInstance() );
 
-notepad.setDelegate( apiDelegate );
-notepad.saveState();
-notepad.restoreState();
-console.log( notepad.getText() );
+deskThemAImp.render();
+deskThemBImp.render();
+mobileThemAImp.render();
 
 /**
  * Output
  */
-// Saved in SessionStorage
-// Lorem ipsum
+// Border
+// Thumbnails
+// Navigation bound
+//
+// Border
+// Bullets
+// Navigation bound
+//
+// Border
+// Touch gestures bound
 
 }( this ));

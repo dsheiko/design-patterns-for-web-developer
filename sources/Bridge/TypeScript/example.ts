@@ -7,99 +7,133 @@
 
 "use strict";
 
-declare var window;
-declare var document;
 declare var console;
-declare var escape;
-declare var unescape;
 
-// Abstract implementor
-interface StorageApiInterface
+interface ImplementorInterface
 {
-    save( name: string, value: string ): void;
-    get( name: string ): string;
+    renderBorder(): void;
+    renderPaginator(): void;
 }
 
-module StorageApi {
-    
-    // Concrete implementor
-    export class sessionStorage 
+// Implementer on the Bridge
+class AbstractImplementor implements ImplementorInterface
+{
+    public renderBorder(): void
     {
-        public save(name: string, value: string): void {
-            console.log( 'Saved in SessionStorage' );
-            window.sessionStorage[ name ] = value;
-        }
-        public get(name: string): string {
-            return window.sessionStorage[ name ];
-        }
+        console.log("Border");
     }
-
-    // Concrete implementor
-    export class cookies 
+    // Workaround abstract method. This one is required
+    // due to implemented interface but yet empty; is meant to be overriden
+    public renderPaginator()
     {
-        public save(name: string, value: string): void {
-            console.log( 'Saved in Cookies' );
-            document.cookie = name + "=" + escape( value );
-        }
-        public get(name: string): string {
-            var key: string, 
-                val: string, 
-                cookieArr: string[] = document.cookie.split( ";" ),
-                i: number = 0, 
-                len: number = cookieArr.length;
-
-            for ( ; i < len; i++) {
-                  key = cookieArr[ i ].substr( 0, cookieArr[i].indexOf( "=" ) );
-                  val = cookieArr[ i ].substr( cookieArr[i].indexOf( "=" ) + 1 );
-                  key = key.replace( /^\s+|\s+$/g , "" );
-                  if ( key === name ) {
-                    return unescape( val );
-                  }
-            }
-            return '';
-        }
     }
-
 }
 
-class NotepadWidget
-{ 
-    private id: string = 'noteWidgetText';
-    private api: StorageApiInterface;
-    private text: string = 'Lorem ipsum';
+// Concrete implementer
+class ThemeA extends AbstractImplementor
+{
+    public renderPaginator()
+    {
+        console.log("Thumbnails");
+    }
+}
 
-    constructor( api: StorageApiInterface ) {
-        this.api = api;
-    };
-    
-    public getText(): string {
-        return this.text;
-    };
- 
-    public restoreState(): void {
-        this.text = this.api.get( this.id );
-    };
+// Concrete implementer
+class ThemeB extends AbstractImplementor
+{
+    public renderPaginator()
+    {
+        console.log("Bullets");
+    }
+}
 
-    public saveState(): void {
-        this.api.save( this.id, this.text );
-    };
-    
+// Abstraction on the Bridge
+// Abstraction forwards client requests to its Implementor object.
+class AbstractSlideShow
+{
+    private imp = null;
+    constructor(imp: AbstractImplementor)
+    {
+        this.imp = imp;
+    }
+
+    public renderBorder(): void
+    {
+        this.imp.renderBorder();
+    }
+
+    public renderNavigation(): void
+    {
+        this.imp.renderPaginator();
+    }
+}
+
+// RefmedAbstraction
+class OnDesktopSlideShow extends AbstractSlideShow
+{
+    constructor(imp: AbstractImplementor)
+    {
+        super( imp );
+    }
+
+    public bindNavigation(): void
+    {
+        console.log("Navigation bound");
+    }
+    public render(): void
+    {
+        this.renderBorder();
+        this.renderNavigation();
+        this.bindNavigation();
+    }
+}
+
+// RefmedAbstraction
+class OnMobileSlideShow extends AbstractSlideShow
+{
+    constructor(imp: AbstractImplementor)
+    {
+        super( imp );
+    }
+
+    public bindTouchGestures(): void
+    {
+        console.log("Touch gestures bound");
+    }
+    public render(): void
+    {
+        this.renderBorder();
+        this.bindTouchGestures();
+    }
 }
 
 /**
  * Usage
  */
 
-var spiDelegate = new StorageApi.sessionStorage(),
-    notepad = new NotepadWidget( spiDelegate );
+var deskThemAImp = new OnDesktopSlideShow( new ThemeA() ),
+    deskThemBImp = new OnDesktopSlideShow( new ThemeB() ),
+    mobileThemAImp = new OnMobileSlideShow( new ThemeA() );
 
-notepad.saveState();
-notepad.restoreState();
-console.log( notepad.getText() );
+deskThemAImp.render();
+deskThemBImp.render();
+mobileThemAImp.render();
+
 
 /**
  * Output
  */
 
-// Saved in SessionStorage
-// Lorem ipsum
+/**
+ * Output
+ */
+// Border
+// Thumbnails
+// Navigation bound
+//
+// Border
+// Bullets
+// Navigation bound
+//
+// Border
+// Touch gestures bound

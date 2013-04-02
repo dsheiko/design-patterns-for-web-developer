@@ -1,4 +1,10 @@
 <?php
+/*
+ * @category Design Pattern Tutorial
+ * @package Builder Sample
+ * @author Dmitry Sheiko <me@dsheiko.com>
+ * @licence MIT
+ */
 include './Document/Entity.php';
 include './Document/Reader.php';
 include './Document/AbstractConvertor.php';

@@ -1,6 +1,10 @@
 <?php
-// Director
-// File: ./Document/Reader.php
+/*
+ * @category Design Pattern Tutorial
+ * @package Builder Sample
+ * @author Dmitry Sheiko <me@dsheiko.com>
+ * @licence MIT
+ */
 namespace Document;
 
 class Reader
@@ -15,5 +19,5 @@ class Reader
         }
         return $convertor->getDocument();
     }
-    
+
 }

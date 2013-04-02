@@ -1,7 +1,10 @@
 <?php
-
-// Concrete builder
-// File: ./Document/Convertor/Epub.php
+/*
+ * @category Design Pattern Tutorial
+ * @package Builder Sample
+ * @author Dmitry Sheiko <me@dsheiko.com>
+ * @licence MIT
+ */
 namespace Document\Convertor;
 
 class Epub extends \Document\AbstractConvertor

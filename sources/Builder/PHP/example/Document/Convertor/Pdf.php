@@ -1,7 +1,10 @@
 <?php
-
-// Concrete builder
-// File: ./Document/Convertor/Pdf.php
+/*
+ * @category Design Pattern Tutorial
+ * @package Builder Sample
+ * @author Dmitry Sheiko <me@dsheiko.com>
+ * @licence MIT
+ */
 namespace Document\Convertor;
 
 class Pdf extends \Document\AbstractConvertor
@@ -18,5 +21,5 @@ class Pdf extends \Document\AbstractConvertor
     {
         $this->_buffer .= "PDF: {$text}\n";
     }
-    
+
 }
