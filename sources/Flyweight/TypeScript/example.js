@@ -1,66 +1,84 @@
 "use strict";
-var StorageApi;
-(function (StorageApi) {
-    var sessionStorage = (function () {
-        function sessionStorage() { }
-        sessionStorage.prototype.save = function (name, value) {
-            console.log('Saved in SessionStorage');
-            window.sessionStorage[name] = value;
-        };
-        sessionStorage.prototype.get = function (name) {
-            return window.sessionStorage[name];
-        };
-        return sessionStorage;
-    })();
-    StorageApi.sessionStorage = sessionStorage;    
-    var cookies = (function () {
-        function cookies() { }
-        cookies.prototype.save = function (name, value) {
-            console.log('Saved in Cookies');
-            document.cookie = name + "=" + escape(value);
-        };
-        cookies.prototype.get = function (name) {
-            var key;
-            var val;
-            var cookieArr = document.cookie.split(";");
-            var i = 0;
-            var len = cookieArr.length;
+var ERROR_INUSUFFICIENT_ARG_TYPE = 1;
+var ERROR_INUSUFFICIENT_ARG_VALUE = 2;
+var ERROR_NODE_IS_UNDEFINED = 3;
+var errorMap = [];
+var logger;
 
-            for(; i < len; i++) {
-                key = cookieArr[i].substr(0, cookieArr[i].indexOf("="));
-                val = cookieArr[i].substr(cookieArr[i].indexOf("=") + 1);
-                key = key.replace(/^\s+|\s+$/g, "");
-                if(key === name) {
-                    return unescape(val);
-                }
-            }
-            return '';
-        };
-        return cookies;
-    })();
-    StorageApi.cookies = cookies;    
-})(StorageApi || (StorageApi = {}));
-
-var NotepadWidget = (function () {
-    function NotepadWidget(api) {
-        this.id = 'noteWidgetText';
-        this.text = 'Lorem ipsum';
-        this.api = api;
+var ErrorLogEntryContext = (function () {
+    function ErrorLogEntryContext(date) {
+        this.date = date;
     }
-    NotepadWidget.prototype.getText = function () {
-        return this.text;
+    ErrorLogEntryContext.prototype.getDate = function () {
+        return this.date;
     };
-    NotepadWidget.prototype.restoreState = function () {
-        this.text = this.api.get(this.id);
-    };
-    NotepadWidget.prototype.saveState = function () {
-        this.api.save(this.id, this.text);
-    };
-    return NotepadWidget;
+    return ErrorLogEntryContext;
 })();
-var spiDelegate = new StorageApi.sessionStorage();
-var notepad = new NotepadWidget(spiDelegate);
-
-notepad.saveState();
-notepad.restoreState();
-console.log(notepad.getText());
+var ErrorLogEntry = (function () {
+    function ErrorLogEntry(errCode) {
+        this.errCode = errCode;
+    }
+    ErrorLogEntry.prototype.getMessage = function (context) {
+        return errorMap[this.errCode] + " " + context.getDate();
+    };
+    return ErrorLogEntry;
+})();
+var ErrorLogEntryFactory = (function () {
+    function ErrorLogEntryFactory() {
+        this.messages = {
+        };
+        this.callCount = 0;
+        this.creationCount = 0;
+    }
+    ErrorLogEntryFactory.prototype.make = function (errCode) {
+        if(typeof this.messages[errCode] === 'undefined') {
+            this.messages[errCode] = new ErrorLogEntry(errCode);
+            this.creationCount += 1;
+        }
+        this.callCount += 1;
+        return this.messages[errCode];
+    };
+    ErrorLogEntryFactory.prototype.getInstanceCount = function () {
+        return this.creationCount;
+    };
+    ErrorLogEntryFactory.prototype.getRequestCount = function () {
+        return this.callCount;
+    };
+    return ErrorLogEntryFactory;
+})();
+var ErrorLogger = (function () {
+    function ErrorLogger(factory) {
+        this.errCodes = [];
+        this.dates = [];
+        this.factory = factory;
+    }
+    ErrorLogger.prototype.log = function (errCode) {
+        this.errCodes.push(this.factory.make(errCode));
+        this.dates.push(new ErrorLogEntryContext(new Date()));
+    };
+    ErrorLogger.prototype.printMessages = function () {
+        var that = this;
+        this.errCodes.forEach(function (logEntry, inx) {
+            console.log(logEntry.getMessage(that.dates[inx]));
+        });
+    };
+    ErrorLogger.prototype.getInstanceCount = function () {
+        return this.factory.getInstanceCount();
+    };
+    ErrorLogger.prototype.getRequestCount = function () {
+        return this.factory.getRequestCount();
+    };
+    return ErrorLogger;
+})();
+errorMap[ERROR_INUSUFFICIENT_ARG_TYPE] = 'Insufficient argument type';
+errorMap[ERROR_INUSUFFICIENT_ARG_VALUE] = 'Insufficient argument value';
+errorMap[ERROR_NODE_IS_UNDEFINED] = 'Node is undefined';
+logger = new ErrorLogger(new ErrorLogEntryFactory());
+logger.log(ERROR_INUSUFFICIENT_ARG_TYPE);
+logger.log(ERROR_INUSUFFICIENT_ARG_TYPE);
+logger.log(ERROR_INUSUFFICIENT_ARG_VALUE);
+logger.log(ERROR_INUSUFFICIENT_ARG_TYPE);
+logger.log(ERROR_NODE_IS_UNDEFINED);
+logger.printMessages();
+console.log(logger.getRequestCount() + " ErrorLogEntry instances were requested");
+console.log(logger.getInstanceCount() + " LogEntry instances were really created");

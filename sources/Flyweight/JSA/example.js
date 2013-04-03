@@ -10,38 +10,38 @@
 
     "use strict";
     /*global console:false, require:false, escape:false, unescape:false */
-    
+
 var ERROR_INUSUFFICIENT_ARG_TYPE = 1,
     ERROR_INUSUFFICIENT_ARG_VALUE = 2,
     ERROR_NODE_IS_UNDEFINED = 3,
     jsa = require("../../../vendors/jsa/jsa.umd"),
     ErrorMap = [],
-    
+
     FlyweightContext = function() {
         return {};
     },
-    
+
     /**
      * Flyweight context keeps extrinsic state of ErrorLogEntry (datetime stamp)
      */
-    ErrorLogEntryContext = function( date ){
-       var date; 
+    ErrorLogEntryContext = function(){
+       var date;
        return {
            __extends__: FlyweightContext,
-           __constructor__: function( date ) {
-               
+           __constructor__: function( inputDate ) {
+               date = inputDate;
            },
            getDate: function() {
                return date;
            }
        };
     },
-    
+
     FlyweightInterface = {
         getMessage: ErrorLogEntryContext
     },
     /**
-     * Flyweight 
+     * Flyweight
      */
     ErrorLogEntry = function(){
        return {
@@ -55,14 +55,14 @@ var ERROR_INUSUFFICIENT_ARG_TYPE = 1,
            }
        };
     },
-    
+
 
    /**
     * FlyweightFactory creates flyweights and ensures they are shared properly
     */
     ErrorLogEntryFactory = (function(){
-       var messages = {}, 
-           callCount = 0, 
+       var messages = {},
+           callCount = 0,
            creationCount = 0;
        return {
            make : function( errCode ) {
@@ -82,7 +82,7 @@ var ERROR_INUSUFFICIENT_ARG_TYPE = 1,
            }
        };
     }()),
-    
+
     Client = {
         log: [ "number" ],
         printMessages: []
@@ -91,7 +91,7 @@ var ERROR_INUSUFFICIENT_ARG_TYPE = 1,
      * Client
      */
     ErrorLogger = function(){
-        var errCodes = [], 
+        var errCodes = [],
             dates = [];
         return {
             __implements__: Client,
@@ -107,7 +107,7 @@ var ERROR_INUSUFFICIENT_ARG_TYPE = 1,
         };
     },
     logger;
-    
+
 ErrorMap[ ERROR_INUSUFFICIENT_ARG_TYPE ] = 'Insufficient argument type';
 ErrorMap[ ERROR_INUSUFFICIENT_ARG_VALUE ] = 'Insufficient argument value';
 ErrorMap[ ERROR_NODE_IS_UNDEFINED ] = 'Node is undefined';

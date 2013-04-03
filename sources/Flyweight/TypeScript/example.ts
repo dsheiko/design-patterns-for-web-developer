@@ -7,99 +7,151 @@
 
 "use strict";
 
-declare var window;
-declare var document;
 declare var console;
-declare var escape;
-declare var unescape;
 
-// Abstract implementor
-interface StorageApiInterface
-{
-    save( name: string, value: string ): void;
-    get( name: string ): string;
-}
+var ERROR_INUSUFFICIENT_ARG_TYPE = 1,
+    ERROR_INUSUFFICIENT_ARG_VALUE = 2,
+    ERROR_NODE_IS_UNDEFINED = 3,
+    errorMap = [],
+    logger: Client;
 
-module StorageApi {
-    
-    // Concrete implementor
-    export class sessionStorage 
+    // Abstract flyweight context
+    interface FlyweightContext
     {
-        public save(name: string, value: string): void {
-            console.log( 'Saved in SessionStorage' );
-            window.sessionStorage[ name ] = value;
+        getDate(): Date;
+    }
+    // Flyweight context keeps extrinsic state of
+    // ErrorLogEntry (datetime stamp)
+    class ErrorLogEntryContext implements FlyweightContext
+    {
+        private date;
+        constructor( date )
+        {
+            this.date = date;
         }
-        public get(name: string): string {
-            return window.sessionStorage[ name ];
+        public getDate(): Date
+        {
+            return this.date;
+        }
+    }
+    // Flyweight interface
+    interface FlyweightInterface
+    {
+        getMessage( context: FlyweightContext ): string;
+    }
+    // Concrete Flyweight
+    class ErrorLogEntry implements FlyweightInterface
+    {
+        private errCode: number;
+        constructor( errCode )
+        {
+            this.errCode = errCode;
+        }
+        public getMessage( context: FlyweightContext ): string
+        {
+               return errorMap[ this.errCode ] + " " + context.getDate();
         }
     }
 
-    // Concrete implementor
-    export class cookies 
+    // FlyweightFactory creates flyweights and ensures they are shared properly
+    class ErrorLogEntryFactory
     {
-        public save(name: string, value: string): void {
-            console.log( 'Saved in Cookies' );
-            document.cookie = name + "=" + escape( value );
-        }
-        public get(name: string): string {
-            var key: string, 
-                val: string, 
-                cookieArr: string[] = document.cookie.split( ";" ),
-                i: number = 0, 
-                len: number = cookieArr.length;
+        private messages = {};
+        private callCount = 0;
+        private creationCount = 0;
 
-            for ( ; i < len; i++) {
-                  key = cookieArr[ i ].substr( 0, cookieArr[i].indexOf( "=" ) );
-                  val = cookieArr[ i ].substr( cookieArr[i].indexOf( "=" ) + 1 );
-                  key = key.replace( /^\s+|\s+$/g , "" );
-                  if ( key === name ) {
-                    return unescape( val );
-                  }
+        public make( errCode ): string
+        {
+            if (typeof this.messages[ errCode ] === 'undefined') {
+                this.messages[ errCode ] = new ErrorLogEntry( errCode );
+                this.creationCount += 1;
             }
-            return '';
+            this.callCount += 1;
+            return this.messages[ errCode ];
+        }
+        public getInstanceCount(): number
+        {
+            return this.creationCount;
+        }
+        public getRequestCount(): number
+        {
+            return this.callCount;
         }
     }
 
-}
+    // Client
+    interface Client
+    {
+        log(errCode: number): void;
+        printMessages(): void;
+        getInstanceCount(): number;
+        getRequestCount(): number;
+    }
 
-class NotepadWidget
-{ 
-    private id: string = 'noteWidgetText';
-    private api: StorageApiInterface;
-    private text: string = 'Lorem ipsum';
+    // Concrete Client
+    class ErrorLogger implements Client
+    {
+        private errCodes = [];
+        private dates = [];
+        private factory: ErrorLogEntryFactory;
 
-    constructor( api: StorageApiInterface ) {
-        this.api = api;
-    };
-    
-    public getText(): string {
-        return this.text;
-    };
- 
-    public restoreState(): void {
-        this.text = this.api.get( this.id );
-    };
+        constructor( factory )
+        {
+            this.factory = factory;
+        }
 
-    public saveState(): void {
-        this.api.save( this.id, this.text );
-    };
-    
-}
+        public log( errCode ): void
+        {
+            this.errCodes.push( this.factory.make( errCode ) );
+            this.dates.push( new ErrorLogEntryContext( new Date() ) );
+        }
+        public printMessages(): void
+        {
+            var that = this;
+            this.errCodes.forEach(function( logEntry, inx ){
+                console.log( logEntry.getMessage( that.dates[ inx ] ) );
+            });
+        }
+
+        public getInstanceCount(): number
+        {
+            return this.factory.getInstanceCount();
+        }
+        public getRequestCount(): number
+        {
+            return this.factory.getRequestCount();
+        }
+    }
+
+errorMap[ ERROR_INUSUFFICIENT_ARG_TYPE ] = 'Insufficient argument type';
+errorMap[ ERROR_INUSUFFICIENT_ARG_VALUE ] = 'Insufficient argument value';
+errorMap[ ERROR_NODE_IS_UNDEFINED ] = 'Node is undefined';
+
 
 /**
  * Usage
  */
 
-var spiDelegate = new StorageApi.sessionStorage(),
-    notepad = new NotepadWidget( spiDelegate );
+logger = new ErrorLogger( new ErrorLogEntryFactory() );
+logger.log( ERROR_INUSUFFICIENT_ARG_TYPE );
+logger.log( ERROR_INUSUFFICIENT_ARG_TYPE );
+logger.log( ERROR_INUSUFFICIENT_ARG_VALUE );
+logger.log( ERROR_INUSUFFICIENT_ARG_TYPE );
+logger.log( ERROR_NODE_IS_UNDEFINED );
 
-notepad.saveState();
-notepad.restoreState();
-console.log( notepad.getText() );
+logger.printMessages();
+
+console.log( logger.getRequestCount() + " ErrorLogEntry instances were requested" );
+console.log( logger.getInstanceCount() + " LogEntry instances were really created" );
 
 /**
  * Output
  */
 
-// Saved in SessionStorage
-// Lorem ipsum
+// Insufficient argument type Wed Apr 03 2013 17:25:24 GMT+0200 (CEST)
+// Insufficient argument type Wed Apr 03 2013 17:25:24 GMT+0200 (CEST)
+// Insufficient argument value Wed Apr 03 2013 17:25:24 GMT+0200 (CEST)
+// Insufficient argument type Wed Apr 03 2013 17:25:24 GMT+0200 (CEST)
+// Node is undefined Wed Apr 03 2013 17:25:24 GMT+0200 (CEST)
+// 5 ErrorLogEntry instances were requested
+// 3 LogEntry instances were really created
