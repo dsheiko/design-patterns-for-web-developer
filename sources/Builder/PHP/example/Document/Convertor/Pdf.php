@@ -6,7 +6,7 @@
  * @licence MIT
  */
 namespace Document\Convertor;
-
+// Concrete builder
 class Pdf extends \Document\AbstractConvertor
 {
     public function setAuthor($author)

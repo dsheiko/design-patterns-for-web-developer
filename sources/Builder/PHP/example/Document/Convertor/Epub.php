@@ -6,7 +6,7 @@
  * @licence MIT
  */
 namespace Document\Convertor;
-
+// Concrete builder
 class Epub extends \Document\AbstractConvertor
 {
     public function setAuthor($author)

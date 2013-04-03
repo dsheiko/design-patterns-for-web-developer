@@ -1,0 +1,20 @@
+GoF's definition:
+
+Separate the construction of a complex object from its representation so that the same construction process can create different representations.
+
+The pattern allows:
+
+    decoupling construction of complex objects from the module;
+    multiple representations of object construction algorithm;
+    run-time control over object construction process;
+    an application design abstraction where one object acts as a Director and other as subordinated Builders.
+
+
+Imagine that we have an object consisting of many parts which we 
+need to re-build into a new one so that its parts had different representations.
+Let's say we work on a text convertor which is expected to process 
+properly all the parts of the original document. In following example you can
+find AbstractConvertor with conversion methods for every part of the document (Author, Title, Text).
+It provides an interface to be implemented by the subclasses Epub and Pdf.
+Class Entity represents the document
+Reader is director, it receices instances of document and concrete convertor

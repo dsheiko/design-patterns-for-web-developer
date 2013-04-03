@@ -6,7 +6,7 @@
  * @licence MIT
  */
 namespace Document;
-
+// Director
 class Reader
 {
     public function getDocument(\Document\Entity $document
