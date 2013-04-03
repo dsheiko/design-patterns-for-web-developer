@@ -10,11 +10,17 @@ The pattern allows:
     an application design abstraction where one object acts as a Director and other as subordinated Builders.
 
 
-Imagine that we have an object consisting of many parts which we 
-need to re-build into a new one so that its parts had different representations.
-Let's say we work on a text convertor which is expected to process 
+Imagine that we have an object consisting of many parts which we
+need to re-build into a new one so, that its parts had different representations.
+For instance we work on a text convertor which is expected to process
 properly all the parts of the original document. In following example you can
-find AbstractConvertor with conversion methods for every part of the document (Author, Title, Text).
-It provides an interface to be implemented by the subclasses Epub and Pdf.
-Class Entity represents the document
-Reader is director, it receices instances of document and concrete convertor
+find Builder (AbstractConvertor) object with all the methods to convert every
+property of the initial document (Author, Title, Chapter).
+Concrete Builders Epub and Pdf implement Builder interface
+for the responsive text formats. The Director (Reader) constructs
+a new object (Product) from a given initial document (Entity) and using a Concrete Builder.
+
+In EcmaScript example we use Director (moduleManager) to build a widget based
+on a supplied configuration and using a given Concrete Builder (ThemeA).
+Thus if configuration changes toward an other theme, it's going to be transparent
+for the client application.
