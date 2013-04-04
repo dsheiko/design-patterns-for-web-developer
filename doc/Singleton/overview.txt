@@ -8,3 +8,11 @@ The pattern allows:
 
     control over concrete class instantiating so that the only instance could be obtained.
 
+In following example you can find an implementation of Registry. 
+Registry itself is often considered as a pattern or even anti-pattern, but
+shows how Singleton is used. 
+exchange with states.. It's capable of keeping mixed types -
+php magic methods ...
+
+Obviously we have to ensure that whenever we refer to 
+Registry we reach the same instance.
