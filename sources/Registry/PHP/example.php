@@ -6,11 +6,12 @@
  * @licence MIT
  */
 
-class Singleton
+namespace Lib;
+
+class Registry
 {
     private static $_instance = null;
-
-    public $foo = "value";
+    private $_data = array();
 
     public static function getInstance()
     {
@@ -20,13 +21,18 @@ class Singleton
         return (self::$_instance = new self());
     }
 
+    public function  __set($name,  $value)
+    {
+        $this->_data[$name] = $value;
+    }
+    public function  __get($name)
+    {
+        return (isset ($this->_data[$name]) ? $this->_data[$name] : null);
+    }
+
 }
 /**
  * Usage
  */
-var_dump(\Singleton::getInstance() === \Singleton::getInstance());
-
-/**
- * Output
- */
-// true
+\Lib\Registry::getInstance()->aVar = 'aValue';
+var_dump(\Lib\Registry::getInstance()->aVar);

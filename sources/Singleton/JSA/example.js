@@ -1,4 +1,4 @@
-/* 
+/*
  * @category Design Pattern Tutorial
  * @package Singleton Sample
  * @author Dmitry Sheiko <me@dsheiko.com>
@@ -9,33 +9,32 @@
 (function( global ) {
 
 "use strict";
- /*global console:false, require:false, escape:false, unescape:false */
+ /*global console:false, require:false */
 
 var jsa = require("../../../vendors/jsa/jsa.umd"),
-    registryInterface = {
-        set: [ "string", "any" ],
-        get: [ "string" ]
-    },
-    registry = (function(){
-    var Registry = function() {
-        var data = {};
-        return {
-            __implements__: registryInterface,
-            set : function( name, value ) {
-                data[ name ] = value;
-            },
-            get : function( name ) {
-                return data.hasOwnProperty( name ) && data[ name ];
-            }
-        };
-    };
-    return Registry.createInstance();
-}());
+    o1,
+    o2,
+    Singleton = function() {
+        if ( Singleton._selfInstance ) {
+            return Singleton._selfInstance;
+        }
+        return ( Singleton._selfInstance = {
+            foo: "initialValue"
+        });
+  };
+
 
 /*
  * Usage
  */
-registry.set( 'aVar', 'aValue' );
-console.log( registry.get( 'aVar' ) );
+Singleton.createInstance();
+o1 = new Singleton();
+o2 = Singleton();
+o2.foo = "changedValue";
+console.log( o1.foo === o2.foo );
+/**
+ * Output
+ */
+// true
 
 }( this));

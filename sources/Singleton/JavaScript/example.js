@@ -1,4 +1,4 @@
-/* 
+/*
  * @category Design Pattern Tutorial
  * @package Singleton Sample
  * @author Dmitry Sheiko <me@dsheiko.com>
@@ -6,28 +6,28 @@
  * @jscs standard:Jquery
  * Code style: http://docs.jquery.com/JQuery_Core_Style_Guidelines
  */
-(function( window ) {
+(function() {
 
 "use strict";
 /*global console:false */
 
-var console = window.console,
-    registry = (function(){
-    var data = {};
-    return {
-        set : function( name, value ) {
-            data[ name ] = value;
-        },
-        get : function( name ) {
-            return data.hasOwnProperty( name ) && data[ name ];
+var o1,
+    o2,
+    Singleton = function() {
+        if ( Singleton._selfInstance ) {
+            return Singleton._selfInstance;
         }
-    };
-})();
-
+        Singleton._selfInstance = this;
+        this.foo = "value";
+  };
 /*
  * Usage
  */
-registry.set( 'aVar', 'aValue' );
-console.log( registry.get( 'aVar' ) );
-
-}( window ));
+o1 = new Singleton();
+o2 = Singleton();
+console.log( o1 === o2 );
+/**
+ * Output
+ */
+// true
+}());

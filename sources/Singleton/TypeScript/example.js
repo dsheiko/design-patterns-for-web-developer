@@ -1,17 +1,12 @@
 "use strict";
-var Registry;
-(function (Registry) {
-    var data = {
-    };
-    function set(name, value) {
-        data[name] = value;
+var Singleton = (function () {
+    function Singleton() {
+        this.foo = "value";
     }
-    Registry.set = set;
-    function get(name) {
-        return data.hasOwnProperty(name) && data[name];
+    Singleton.instance = null;
+    Singleton.getInstance = function getInstance() {
+        return Singleton.instance || (Singleton.instance = new Singleton());
     }
-    Registry.get = get;
-})(Registry || (Registry = {}));
-
-Registry.set('aVar', 'aValue');
-console.log(Registry.get('aVar'));
+    return Singleton;
+})();
+console.log(Singleton.getInstance() === Singleton.getInstance());
