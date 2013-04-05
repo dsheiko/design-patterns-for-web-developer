@@ -5,7 +5,7 @@ abstract class Convertor
 {
     abstract public function convertLink($url, $content);
     abstract public function convertImg($url, $title);
-    abstract public function convertCode($path);
+    abstract public function convertCode($path, $lang);
     abstract public function convertVar($title);
     abstract public function convertSamp($title);
     abstract public function convertDfn($title);
@@ -26,17 +26,19 @@ class HtmlConvertor extends Convertor
     }
     public function convertImg($url, $title)
     {
-        return strtr('<img src="[url]" title="[title]" alt="[title]" />', array(
+        return strtr('<p><img src="[url]" title="[title]" alt="[title]" /></p>', array(
             "[url]" => $url,
             "[title]" => $title
         ));
     }
-    public function convertCode($path)
+    public function convertCode($path, $lang)
     {
         $file = PATH_ROOT . "/" . ltrim($path, "./");
+        $allowedLangs = array("js", "php", "bash", "xml", "java", "css", "plain");
+        in_array($lang, $allowedLangs) || $lang = "plain";
         if (file_exists($file)) {
-            $code = file_get_contents($file);
-            return "\n<code>\n{$code}\n</code>\n";
+            $code = htmlentities(file_get_contents($file));
+            return "\n<pre class=\"brush: {$lang}\">\n{$code}\n</pre>\n";
         } else {
             return $path . " not found\n";
         }
@@ -141,7 +143,8 @@ class BlockTranslator extends Translator
     }
     public function translateCode($params)
     {
-        return $this->_convertor->convertCode($params);
+        list ($path, $lang) = explode("|", $params);
+        return $this->_convertor->convertCode($path, $lang);
     }
     public function translateVar($params)
     {
@@ -212,7 +215,6 @@ class ParagraphTranslator extends Translator
     {
         // CR+LF to LF
         $markup = preg_replace("/\r/s", "", $markup);
-        var_dump($markup);
         // Remove trailing spaces
         $markup = preg_replace("/\n\s+\n/s", "\n\n", $markup);
         // Remove repeating EOL
@@ -222,8 +224,9 @@ class ParagraphTranslator extends Translator
 
         return array_reduce($pars, function($acc, $p) use($convertor) {
             $p = trim($p);
-            $acc .= strpos($p, "<") !== 0 ?
-                $convertor->convertParagraph($p) : $p . PHP_EOL;
+            $acc .= (strpos($p, "<") === 0 || strpos($p, "[") === 0) ?
+                $p . PHP_EOL :
+                $convertor->convertParagraph($p) ;
             return $acc;
         }, "");
     }
@@ -246,22 +249,14 @@ class Client
     }
 }
 
-var_dump( Client::convert('
-    xxxx [var:xxxxx] xxc
-    xxxx
-    xxx
-
-[code:sources/Singleton/PHP/example.php]
-
-h1. xxxxxDDDDD
-
-* item1
-* item2
-* item3
-
-    xxxxxx
-    xxxx
-    xxx
-
-    ccvvv
-'));
+// Iterate though directories
+$doc = fopen("index.html", "w");
+$it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator("."));
+while($it->valid()) {
+    if (!$it->isDot() && preg_match("/\.wiki$/", $it->getSubPathName())) {
+        fwrite($doc, Client::convert(
+        file_get_contents($it->getSubPathName())));
+    }
+    $it->next();
+}
+fclose($doc);
