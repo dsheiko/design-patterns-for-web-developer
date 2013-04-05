@@ -5,7 +5,7 @@ Gang of Four|
 Gamma, Erich; Helm, Richard; Johnson, Ralph; Vlissides, John (1994-10-31). Design Patterns: Elements of Reusable Object-Oriented Software|
 http://www.goodreads.com/book/show/85009.Design_Patterns]
 
-[img:doc/AbstractFactory/uml.png|Abstract Factory class diagram]
+[img:doc/AbstractFactory/uml.png|Abstract Factory pattern class diagram]
 
 The pattern allows:
 
@@ -35,7 +35,7 @@ implementations of those for desktop PC and mobile devices. To create a widget o
 and further deals with interfaces, not concrete implementations.
 As soon as configuration changed (e.g according user agent) the application gets widgets represented respectevly
 
-[img:doc/AbstractFactory/PHP/uml.png|Abstract Factory PHP example class diagram]
+[img:doc/AbstractFactory/PHP/uml.png|Abstract Factory pattern PHP example class diagram]
 
 [code:sources/AbstractFactory/PHP/tutorial.php|php]
 
@@ -45,7 +45,7 @@ Here we solve the same task as above: the application builds widgets based on su
 we either get real widgets or mock ones for unit-testing.
 We will use [var:Object.create] to extend abstract objects.
 
-[img:doc/AbstractFactory/EcmaScript/uml.png|Abstract Factory EcmaScript example class diagram]
+[img:doc/AbstractFactory/EcmaScript/uml.png|Abstract Factory pattern EcmaScript example class diagram]
 
 [code:sources/AbstractFactory/JavaScript/example.js|js]
 

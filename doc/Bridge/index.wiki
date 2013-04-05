@@ -5,6 +5,8 @@ Gang of Four|
 Gamma, Erich; Helm, Richard; Johnson, Ralph; Vlissides, John (1994-10-31). Design Patterns: Elements of Reusable Object-Oriented Software|
 http://www.goodreads.com/book/show/85009.Design_Patterns]
 
+[img:doc/Bridge/uml.png|Bridge pattern class diagram]
+
 The pattern allows:
 
 * to avoid permanent binding between abstraction and its implementation;
@@ -24,7 +26,7 @@ which implement [var:ImpAbstract] interface for both data sources.
 [var:AnalyticsAbstract] consumes API provided by [var:ImpAbstract] and expose own
 methods to subsclasses [var:GraphViewData] and [var:TableViewData].
 
-[img:doc/Bridge/PHP/uml.png|Bridge PHP example class diagram]
+[img:doc/Bridge/PHP/uml.png|Bridge pattern PHP example class diagram]
 
 [code:sources/Bridge/PHP/tutorial.php|php]
 
@@ -40,7 +42,7 @@ touch gestures to navigate slides.
 theme classes and subclasses. [var:AbstractSlideShow] is a client to [var:AbstractImplementor],
 which forward the API to subclasses [var:OnDesktopSlideShow] and [var:OnMobileSlideShow].
 
-[img:doc/Bridge/EcmaScript/uml.png|Bridge EcmaScript example class diagram]
+[img:doc/Bridge/EcmaScript/uml.png|Bridge pattern EcmaScript example class diagram]
 
 [code:sources/Bridge/JavaScript/example.js|js]
 

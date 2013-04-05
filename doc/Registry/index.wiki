@@ -1,0 +1,60 @@
+h2. Registry
+
+[blockquote:A well-known object that other objects can use to find common objects and services.|
+Martin Fowler|
+Fowler, Martin (2002-11-05). Patterns of Enterprise Application Architecture|
+http://www.goodreads.com/book/show/70156.Patterns_of_Enterprise_Application_Architecture]
+
+[img:doc/Registry/uml.png|Registry pattern class diagram]
+
+The pattern allows:
+
+* simple way of sharing common objects across the application
+
+Registry is a container where we can store objects and values in the application scope.
+That makes common objects available throughout the application. This pattern is often
+presented as an alternative to using global storage. You can find example of Registry implementation
+[link:http://framework.zend.com/manual/1.12/en/zend.registry.using.html|in Zend Framework 1.xx Zend_Registry library]
+
+h3. Antipattern
+While unit testing we are supposed to deal small,
+discrete units of code that do not have dependencies.
+This requires us to either remove dependencies or
+mock them in such a way that the dependencies are neutralized.
+If you retrieve an object from the registry, and then modify it, every subsequent retrieval
+from the registry will reflect that modification.
+This creates a significant issue for it prevents from testing a discrete unit of code.
+
+Registry pattern promotes poorer design overall. Using the pattern
+we just take an object without any knowledge of where, when and how the object is meant to be accessed.
+This leads to developers being lazy about their architecture, and eventually leads to poorer code.
+
+h3. PHP Example
+
+In the example Registry is implemented as a [link:#Singleton|Singleton].
+That's a very common case of Registry. You can use it share any types
+of objects and values like you otherwise would do it with [var:$GLOBALS].
+It's especailly easy to use while you can set and access Registry properties dynamically
+by means [link:http://php.net/manual/en/language.oop5.overloading.php|PHP overloading].
+
+[img:doc/Registry/PHP/uml.png|Registry pattern PHP example class diagram]
+
+[code:sources/Registry/PHP/tutorial.php|php]
+
+h3. JavaScript Example
+
+To get an object in EcmaScript one doesn't need a class. We can access Registry
+without instantiating it. Thus we don't need it to be a [link:#Singleton|Singleton].
+
+[img:doc/Registry/EcmaScript/uml.png|Registry pattern EcmaScript example class diagram]
+
+[code:sources/Registry/JavaScript/example.js|js]
+
+h3. JSA Example
+
+[code:sources/Registry/JSA/example.js|js]
+
+h3. TypeScript Example
+
+[code:sources/Registry/TypeScript/example.ts|js]
+
