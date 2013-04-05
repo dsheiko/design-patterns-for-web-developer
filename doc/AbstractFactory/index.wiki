@@ -20,12 +20,10 @@ concrete factories is isolated from implementation classes. Client doesn't know 
 of a concrete factory. The pattern also makes it easy to switch between product families. Since concrete factories
 implement the same interface, simply change of the concrete factory on the client will bring to a different product family.
 
-h3. Related Patterns
-
 AbstractFactory classes are often implemented with factory methods ({var|Factory Method}),
 but they can also be implemented via Prototype.
 
-A concrete factory is usually designed as a Singleton.
+A concrete factory is usually designed as a [link:#Singleton|Singleton].
 
 h3. PHP Example
 

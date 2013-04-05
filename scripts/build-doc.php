@@ -26,7 +26,7 @@ class HtmlConvertor extends Convertor
     }
     public function convertImg($url, $title)
     {
-        return strtr('<p><img src="[url]" title="[title]" alt="[title]" /></p>', array(
+        return strtr('<figure><img src="[url]" title="[title]" alt="[title]" /><figcaption>[title]</figcaption></figure>', array(
             "[url]" => $url,
             "[title]" => $title
         ));
@@ -40,7 +40,7 @@ class HtmlConvertor extends Convertor
             $code = htmlentities(file_get_contents($file));
             return "\n<pre class=\"brush: {$lang}\">\n{$code}\n</pre>\n";
         } else {
-            return $path . " not found\n";
+            throw new Exception($path . " not found\n");
         }
     }
     public function convertVar($title)
