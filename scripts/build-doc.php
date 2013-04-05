@@ -1,9 +1,21 @@
 <?php
+define("PATH_ROOT", realpath(__DIR__ . "/.."));
 
+abstract class Convertor
+{
+    abstract public function convertLink($url, $content);
+    abstract public function convertImg($url, $title);
+    abstract public function convertCode($path);
+    abstract public function convertVar($title);
+    abstract public function convertSamp($title);
+    abstract public function convertDfn($title);
+    abstract public function convertBlockquote($content, $author, $title, $url);
+    abstract public function convertParagraph($content);
+    abstract public function convertLi($content);
+    abstract public function convertHeader($lvl, $content);
+}
 
-
-
-class HtmlConvertor
+class HtmlConvertor extends Convertor
 {
     public function convertLink($url, $content)
     {
@@ -11,6 +23,23 @@ class HtmlConvertor
             "[url]" => $url,
             "[content]" => $content
         ));
+    }
+    public function convertImg($url, $title)
+    {
+        return strtr('<img src="[url]" title="[title]" alt="[title]" />', array(
+            "[url]" => $url,
+            "[title]" => $title
+        ));
+    }
+    public function convertCode($path)
+    {
+        $file = PATH_ROOT . "/" . ltrim($path, "./");
+        if (file_exists($file)) {
+            $code = file_get_contents($file);
+            return "\n<code>\n{$code}\n</code>\n";
+        } else {
+            return $path . " not found\n";
+        }
     }
     public function convertVar($title)
     {
@@ -38,7 +67,7 @@ class HtmlConvertor
     }
     public function convertParagraph($content)
     {
-        return $content ? "<p>{$content}</p>" : "";
+        return $content ? "\n<p>{$content}</p>\n" : "";
     }
     public function convertLi($content)
     {
@@ -46,18 +75,27 @@ class HtmlConvertor
     }
     public function getUlOpening()
     {
-        return "<ul>\n";
+        return "\n<ul>\n";
     }
     public function getUlClosing()
     {
-        return "\n</ul>";
+        return "</ul>\n";
+    }
+    public function convertHeader($lvl, $content)
+    {
+        return strtr("<h[lvl]>[content]</h[lvl]>", array(
+            "[lvl]" => $lvl,
+            "[content]" => $content
+        ));
     }
 }
 
-// translate macros
-// translate inline
-// trnslate lists
-class BlockTranslator
+
+abstract class Translator
+{
+    abstract public function translate($markup);
+}
+class BlockTranslator extends Translator
 {
     private $_convertor;
     public function __construct($convertor)
@@ -66,20 +104,26 @@ class BlockTranslator
     }
     /**
      * [link:url|title]
-     * 
+     * [img:url|title]
+     * [code:path]
+     * [var:title]
+     * [dfn:title]
+     * [samp:title]
+     * [blockquote:content|author|title|url]
+     *
      */
     public function translate($markup)
     {
         preg_match_all("/\[(\w+)\:(.*?)\]/s", $markup, $matches);
         if (!$matches[1]) {
             return $markup;
-        } 
+        }
         foreach ($matches[1] as $inx => $operator) {
             $method = "translate" . ucfirst($operator);
-            
+
             if (method_exists($this, $method)) {
-                $markup = str_replace($matches[0][$inx], 
-                    $this->$method($matches[2][$inx]), 
+                $markup = str_replace($matches[0][$inx],
+                    $this->$method($matches[2][$inx]),
                     $markup);
             }
         }
@@ -89,6 +133,15 @@ class BlockTranslator
     {
         list ($url, $content) = explode("|", $params);
         return $this->_convertor->convertLink($url, $content);
+    }
+    public function translateImg($params)
+    {
+        list ($url, $title) = explode("|", $params);
+        return $this->_convertor->convertImg($url, $title);
+    }
+    public function translateCode($params)
+    {
+        return $this->_convertor->convertCode($params);
     }
     public function translateVar($params)
     {
@@ -108,17 +161,13 @@ class BlockTranslator
         return $this->_convertor->convertBlockquote($content, $author, $title, $url);
     }
 }
-class PerLineTranslator
+class PerLineTranslator extends Translator
 {
     private $_convertor;
     public function __construct($convertor)
     {
         $this->_convertor = $convertor;
     }
-    /**
-     * * list item
-     * 
-     */
     public function translate($markup)
     {
         $indices = array();
@@ -126,27 +175,33 @@ class PerLineTranslator
         if (!$lines) {
             return $markup;
         }
-        var_dump($lines);
         foreach ($lines as $inx => $line) {
-            if (preg_match("/^\s*\*/", $line)) {
+            // Parse h{n}. header
+            if (preg_match("/^\s*h(\d)\.(.*?)$/", $line, $matches)) {
+                $lines[$inx] = $this->_convertor->convertHeader($matches[1], $matches[2]);
+            }
+            // Parse * list item
+            if (preg_match("/^\s*\*/", $lines[$inx])) {
+                $lines[$inx] = $this->_convertor->convertLi(
+                    preg_replace("/^\s*\*/", "", $lines[$inx])
+                );
                 if (!isset($indices[$inx - 1])) {
-                    $line = $this->_convertor->getUlOpening() . $line;
+                    $lines[$inx] = $this->_convertor->getUlOpening() . $lines[$inx];
                 }
                 $indices[$inx] = true;
-                $line = $this->_convertor->convertLi($line);
             } else {
                 if (isset($indices[$inx - 1])) {
-                    $line = "\n</ul>" . $line;
+                    $lines[$inx] = $lines[$inx] . $this->_convertor->getUlClosing();
                 }
             }
         }
         if (isset($indices[$inx])) {
-            $lines[$inx] = $lines[$inx] . $this->_convertor->getUlClosing();
+            $lines[$inx] = $this->_convertor->getUlClosing() . $lines[$inx];
         }
         return implode("\n", $lines);
     }
 }
-class ParagraphTranslator
+class ParagraphTranslator extends Translator
 {
     private $_convertor;
     public function __construct($convertor)
@@ -155,14 +210,20 @@ class ParagraphTranslator
     }
     public function translate($markup)
     {
+        // CR+LF to LF
         $markup = preg_replace("/\r/s", "", $markup);
+        var_dump($markup);
         // Remove trailing spaces
         $markup = preg_replace("/\n\s+\n/s", "\n\n", $markup);
+        // Remove repeating EOL
         $markup = preg_replace("/\n{2}/s", "\n\n", $markup);
         $pars = explode("\n\n", $markup);
         $convertor = $this->_convertor;
+
         return array_reduce($pars, function($acc, $p) use($convertor) {
-            $acc .= $convertor->convertParagraph($p);
+            $p = trim($p);
+            $acc .= strpos($p, "<") !== 0 ?
+                $convertor->convertParagraph($p) : $p . PHP_EOL;
             return $acc;
         }, "");
     }
@@ -172,47 +233,28 @@ class Client
     static public function convert($markup)
     {
         $convertor = new HtmlConvertor();
-        $translator = new BlockTranslator($convertor);
-        $markup = $translator->translate($markup);
-         $translator = new PerLineTranslator($convertor);
-        $markup = $translator->translate($markup);
-        $translator = new ParagraphTranslator($convertor);
-        $markup = $translator->translate($markup);
-       
+        $translators = array(
+            "PerLineTranslator",
+            "ParagraphTranslator",
+            "BlockTranslator",
+        );
+        foreach ($translators as $className) {
+            $translator = new $className($convertor);
+            $markup = $translator->translate($markup);
+        }
         return $markup;
     }
 }
-
-// *xxx* - bold
-// _xxx_ - italic
-// -xxx- - strike
-// +xxx+ - underline
-// ^xxx^ - superscript
-// h1. xxx - header
-// [title|link] or [link] - external link
-//      [title|abbr:text] - abbreviated phrase (http://reference.sitepoint.com/html/abbr)
-//      [title|acronym:text] - acronym (http://reference.sitepoint.com/html/acronym)
-//      [dfn:text] - defining instance of a term (http://reference.sitepoint.com/html/dfn)
-//      [samp:text] - a sample of characters (http://reference.sitepoint.com/html/samp)
-//      [var:text] - variable (http://reference.sitepoint.com/html/var)
-//      [blockquote:quote|author|title|url]
-//
-//
-// !filename|title=title! - atttached image
-//  * xxx - list
-//  *# xxx - list
-// ||col1||col2|| - table
-// |cell1|cell2|
-// {code:php}xxx{code} - code
-// {html}xxx{html} - html
-// {quote}xxx{quote} - quoting
-
 
 var_dump( Client::convert('
     xxxx [var:xxxxx] xxc
     xxxx
     xxx
-    
+
+[code:sources/Singleton/PHP/example.php]
+
+h1. xxxxxDDDDD
+
 * item1
 * item2
 * item3
