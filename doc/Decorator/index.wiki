@@ -1,0 +1,38 @@
+h2. Decorator
+
+[blockquote:Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality.|
+Gang of Four|
+Gamma, Erich; Helm, Richard; Johnson, Ralph; Vlissides, John (1994-10-31). Design Patterns: Elements of Reusable Object-Oriented Software|
+http://www.goodreads.com/book/show/85009.Design_Patterns]
+
+[img:doc/Decorator/uml.png|Decorator pattern class diagram]
+
+The pattern allows:
+
+* for extending (decoration) the functionality of a certain object at run-time, independently of other instances of the same class.
+
+When we need to enrich an individual object with a particular responsibility using inheritance may be impractical.
+Let's take ZF Form library. By using the library one can build a basic form, form A, form b with any combination. 
+If we had relied on inheritance we would have had a discrete subclass per every combination. Decora...
+
+Sometimes responsiblities for individual objects
+
+h3. PHP Example
+
+[img:doc/Decorator/PHP/uml.png|Decorator pattern PHP example class diagram]
+
+[code:sources/Decorator/PHP/tutorial.php|php]
+
+h3. JavaScript Example
+
+[img:doc/Decorator/EcmaScript/uml.png|Decorator pattern EcmaScript example class diagram]
+
+[code:sources/Decorator/JavaScript/example.js|js]
+
+h3. JSA Example
+
+[code:sources/Decorator/JSA/example.js|js]
+
+h3. TypeScript Example
+
+[code:sources/Decorator/TypeScript/example.ts|js]
