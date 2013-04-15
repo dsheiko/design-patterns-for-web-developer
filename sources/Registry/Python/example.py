@@ -3,7 +3,7 @@
 # @package Registry Sample
 # @author Dmitry Sheiko <me@dsheiko.com>
 # @licence MIT
-
+#
 class Registry:
     # Declare static property to hold a reference to the single instance
     # of Registry

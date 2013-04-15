@@ -1,9 +1,9 @@
 #
 # @category Design Pattern Tutorial
-# @package Singleton Sample
+# @package Registry Sample
 # @author Dmitry Sheiko <me@dsheiko.com>
 # @licence MIT
-
+#
 class Singleton:
     # Declare static property to hold a reference to the single instance
     # of Singleton
