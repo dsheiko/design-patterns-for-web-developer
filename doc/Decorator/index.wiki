@@ -11,11 +11,19 @@ The pattern allows:
 
 * for extending (decoration) the functionality of a certain object at run-time, independently of other instances of the same class.
 
-When we need to enrich an individual object with a particular responsibility using inheritance may be impractical.
-Let's take ZF Form library. By using the library one can build a basic form, form A, form b with any combination. 
-If we had relied on inheritance we would have had a discrete subclass per every combination. Decora...
+When we need to enhance an individual object with a particular responsibility, use of inheritance may be impractical.
+Let's say we have a widget class. In some cases we need this widget with border, 
+in some with scrollbar, in some with both. Relying on inheritance we would need 
+not only classes for every representation, but also classes for every combination, provided 
+number of possible combinations increases excessively with every new added representation. Using decorators 
+we can configure representation on the fly. So we take concrete widget and pass it to scrollbar decorator. 
+Then we pass derived object to border decorator. Thus, we get widget enhanced with both border and scrollbar.
 
-Sometimes responsiblities for individual objects
+Known uses
+ZF 1.x utilized the decorator pattern in order to render elements and forms. So one could simply make a decorator...
+ 
+
+
 
 h3. PHP Example
 
