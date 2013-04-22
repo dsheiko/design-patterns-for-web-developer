@@ -1439,9 +1439,6 @@ This is useful when exactly one object is needed to coordinate actions across th
 
 ###  PHP Example
 
-![Singleton pattern PHP example class diagram](./assets/img/Singleton/PHP/uml.png)
-
-
 {% highlight php linenos %}
 <?php
 /*
@@ -1479,9 +1476,6 @@ var_dump(\Singleton::getInstance() === \Singleton::getInstance());
 
 
 ###  JavaScript Example
-
-![Singleton pattern EcmaScript example class diagram](./assets/img/Singleton/EcmaScript/uml.png)
-
 
 {% highlight js linenos %}
 /*

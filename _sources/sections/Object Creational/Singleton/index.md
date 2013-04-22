@@ -18,18 +18,12 @@ This is useful when exactly one object is needed to coordinate actions across th
 
 ###  PHP Example
 
-![Singleton pattern PHP example class diagram](./assets/img/Singleton/PHP/uml.png)
-
-
 {% highlight php linenos %}
 {% include "examples/Singleton/PHP/tutorial.php" %}
 {% endhighlight %}
 
 
 ###  JavaScript Example
-
-![Singleton pattern EcmaScript example class diagram](./assets/img/Singleton/EcmaScript/uml.png)
-
 
 {% highlight js linenos %}
 {% include "examples/Singleton/JavaScript/example.js" %}
