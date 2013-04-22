@@ -204,6 +204,8 @@ var fs = require("fs"),
     }());
 
 
+    process.chdir( "./_sources")
+
     builder.processPath( "./sections/Object Creational", "Object Creational" );
     builder.processPath( "./sections/Object Structural", "Object Structural" );
     builder.save();
