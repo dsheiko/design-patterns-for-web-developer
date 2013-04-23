@@ -1,6 +1,6 @@
 ---
 title: Why object-oriented programming?
-category: Introduction
+category: ..
 ---
 
 OOP is meant to improve maintainability, make code easier to read and understand.

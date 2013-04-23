@@ -43,29 +43,47 @@
     <div class="bs-docs-sidebar">
 <ul class="nav bs-docs-sidenav">
 <h3 class="bs-docs-sidenav-heading"><a href="/">Design Patterns for Web-Developer</a></h3>
-<li><a href="#">Introduction</a>
+<li><a href="#">..</a>
 <ul class="nav">
-<li><a href="#introduction-introduction">Introduction</a></li>
-<li><a href="#introduction-design-patterns">Design Patterns</a></li>
-<li><a href="#introduction-why-object-oriented-programming-">Why object-oriented programming?</a></li>
+<li><a href="#cover">Cover</a></li>
+<li><a href="#preface">Preface</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#what-is-a-design-pattern-">What Is a Design Pattern?</a></li>
+<li><a href="#why-object-oriented-programming-">Why object-oriented programming?</a></li>
 </ul><li><a href="#">Object Creational</a>
 <ul class="nav">
-<li><a href="#object-creational-abstract-factory">Abstract Factory</a></li>
-<li><a href="#object-creational-builder">Builder</a></li>
-<li><a href="#object-creational-prototype">Prototype</a></li>
-<li><a href="#object-creational-singleton">Singleton</a></li>
+<li><a href="#abstract-factory">Abstract Factory</a></li>
+<li><a href="#builder">Builder</a></li>
+<li><a href="#prototype">Prototype</a></li>
+<li><a href="#singleton">Singleton</a></li>
 </ul><li><a href="#">Object Structural</a>
 <ul class="nav">
-<li><a href="#object-structural-bridge">Bridge</a></li>
-<li><a href="#object-structural-decorator">Decorator</a></li>
-<li><a href="#object-structural-flyweight">Flyweight</a></li>
+<li><a href="#adapter">Adapter</a></li>
+<li><a href="#bridge">Bridge</a></li>
+<li><a href="#composite">Composite</a></li>
+<li><a href="#decorator">Decorator</a></li>
+<li><a href="#flyweight">Flyweight</a></li>
 </ul></ul>
 </div>
 
 
     <!-- Page content of course! -->
     <div class="bs-docs-container">
-    <h2 class="bs-docs-section" id="introduction-introduction">Introduction</h2>
+    <h2 class="bs-docs-section" id="cover"> </h2>
+<article id="cover" class="bs-docs-section-header">
+
+  <h1 id="design-patterns-for-web-developer">Design Patterns for Web-Developer</h1>
+
+  <p class="lead">Online book by <a href="http::/dsheiko.com">Dmitry Sheiko</a></p>
+
+</article>
+
+<h2 class="bs-docs-section" id="preface">Preface</h2>
+<p>Why This Handbook Was Written</p>
+
+<h2 class="bs-docs-section" id="introduction">Introduction</h2>
+<p>Why This Handbook Was Written</p>
+
 <p>After having your project fully tested, deployed and running, it seems the application architecture is pretty
 good enough. All the requirements met and everybody is happy. But then as it happens,
 the requirements change and you, all of sudden, find yourself in the time of troubles.
@@ -96,16 +114,16 @@ For a software engineer an example of good designed code gives much more vision 
 I think the best way to go with Design Patterns, that running each one through the playground.
 Once implemented an approach, it makes easier to do it again when you need it. And here below I did it for myself.</p>
 
-<h2 class="bs-docs-section" id="introduction-design-patterns">Design Patterns</h2>
-<p>Inventor of design patterns Christopher Alexander has put it like that:
-&#8220;Each pattern describes a problem which occurs over and over again in
+<h2 class="bs-docs-section" id="what-is-a-design-pattern-">What Is a Design Pattern?</h2>
+<p>Inventor of design patterns Christopher Alexander ([Alexander et al.]) has put it like that:
+“Each pattern describes a problem which occurs over and over again in
 our environment, and then describes the core of the solution to that
 problem, in such a way that you can use this solution a million
-times over, without ever doing it the same way twice&#8221;. He was no programmer,
+times over, without ever doing it the same way twice”. He was no programmer,
 but an architect and anyway the definition is still true for software
 architecture. Software design patterns have been applied practically for a long time, but
-gained formalization of the concept and further popularity after the book &#8220;Elements of Reusable Object-Oriented Software&#8221;
-was published by so-called &#8220;Gang of Four&#8221; (Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides).</p>
+gained formalization of the concept and further popularity after the book “Elements of Reusable Object-Oriented Software”
+was published by so-called “Gang of Four” (Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides).</p>
 
 <div class="bs-docs-sidenote">
   <h4 id="notable-books">Notable books</h4>
@@ -120,9 +138,9 @@ was published by so-called &#8220;Gang of Four&#8221; (Erich Gamma, Richard Helm
 
 <p>Design patterns describe object-oriented designs, but can be, theoretically,
 achieved on procedural languages. In that case there must be introduced
-additional patterns such as &#8220;Inheritance,&#8221; &#8220;Encapsulation,&#8221; and &#8220;Polymorphism.&#8221;</p>
+additional patterns such as “Inheritance,” “Encapsulation,” and “Polymorphism.”</p>
 
-<h2 class="bs-docs-section" id="introduction-why-object-oriented-programming-">Why object-oriented programming?</h2>
+<h2 class="bs-docs-section" id="why-object-oriented-programming-">Why object-oriented programming?</h2>
 <p>OOP is meant to improve maintainability, make code easier to read and understand.
 Object-oriented design patterns provide proved solution, recognizable by other developer by name.</p>
 
@@ -215,7 +233,7 @@ any member of the class serves to achieve the goal the class meant for.</p>
 <span class="p">}</span>
 </code></pre></div>
 
-<h2 class="bs-docs-section" id="object-creational-abstract-factory">Abstract Factory</h2>
+<h2 class="bs-docs-section" id="abstract-factory">Abstract Factory</h2>
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Provide an interface for creating families of related or dependent objects without specifying their concrete classes.
@@ -236,7 +254,7 @@ Provide an interface for creating families of related or dependent objects witho
 
 <p>Abstract factory declares an interface to be implemented by every concrete factory responsible
 for creation of product objects (usually belonging to a family). So the client using
-concrete factories is isolated from implementation classes. Client doesn&#8217;t know product class names; that&#8217;s responsibility
+concrete factories is isolated from implementation classes. Client doesn’t know product class names; that’s responsibility
 of a concrete factory. The pattern also makes it easy to switch between product families. Since concrete factories
 implement the same interface, simply change of the concrete factory on the client will bring to a different product family.</p>
 
@@ -247,8 +265,8 @@ but they can also be implemented via Prototype.</p>
 
 <h3 id="php-example">PHP Example</h3>
 
-<p>Let&#8217;s imagine we are required to build a UI, which is represented differently depending on the configuration.
-If the page is requested on a desktop PC it uses jQuery UI framework. If it&#8217;s on a mobile device - jQuery Mobile.
+<p>Let’s imagine we are required to build a UI, which is represented differently depending on the configuration.
+If the page is requested on a desktop PC it uses jQuery UI framework. If it’s on a mobile device - jQuery Mobile.
 In this example we have two interfaces <var>\Widget\Button\iButton</var> and <var>\Widget\Dialog\iDialog</var> and
 implementations of those for desktop PC and mobile devices. To create a widget object we use factories: <var>Widget\Factory\Desktop</var> and
 <var>Widget\Factory\Mobile</var>. Thus the client (<var>\Application</var>) picks out the required factory (here based on passed in configuration object)
@@ -738,7 +756,7 @@ We will use <var>Object.create</var> to extend abstract objects.</p>
 <span class="c1">// Carousel widget rendered</span>
 </code></pre></div>
 
-<h2 class="bs-docs-section" id="object-creational-builder">Builder</h2>
+<h2 class="bs-docs-section" id="builder">Builder</h2>
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Separate the construction of a complex object from its representation so that the same construction process can create different representations.
@@ -882,7 +900,7 @@ a new object (Product) from a given initial document (<var>Entity</var>) and usi
 
 <p>In EcmaScript example we use Director (<var>moduleManager</var>) to build a widget based
 on a supplied configuration and using a given Concrete Builder (<var>ThemeA</var>).
-Thus if configuration changes toward an other theme, it&#8217;s going to be transparent
+Thus if configuration changes toward an other theme, it’s going to be transparent
 for the client application.</p>
 
 <p><img src="./assets/img/Builder/EcmaScript/uml.png" alt="Builder pattern EcmaScript example class diagram" /></p>
@@ -1203,7 +1221,7 @@ for the client application.</p>
 <span class="c1">// The module has resize control</span>
 </code></pre></div>
 
-<h2 class="bs-docs-section" id="object-creational-prototype">Prototype</h2>
+<h2 class="bs-docs-section" id="prototype">Prototype</h2>
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Specify the kinds of objects to create using a prototypical instance, and create new objects by copying this prototype.
@@ -1228,7 +1246,7 @@ we can reduce the number of classes.</p>
 
 <h3 id="php-example-2">PHP Example</h3>
 
-<p>Let&#8217;s assume, we deal with micro-formats in our application.
+<p>Let’s assume, we deal with micro-formats in our application.
 The application is built on the framework, which already has base class (<var>Element</var>)
 for HTML element objects. Thus, every element makes an instance of this class.
 Micro-format elements are HTML elements, which are marked in a particular way
@@ -1325,7 +1343,7 @@ Now we have a state-full object, which we clone every time we need a new a micro
 
 <p>In this imaginable application we need a button to submit the form (Save changes)
  and a button to preserve the form data (Save draft). The framework comprises
- an object representing an abstract button (<var>Toolbar.Button</var>). The object&#8217;s
+ an object representing an abstract button (<var>Toolbar.Button</var>). The object’s
  constructor receives configuration object as an argument (object specifiers). Thus, any instance
  of <var>Toolbar.Button</var> makes a configured button. Any button meant for saving has
  a particular appearance. In <a href="http://twitter.github.com/bootstrap">Twitter Bootstrap 2</a> it is gained by adding class
@@ -1591,7 +1609,7 @@ Now we have a state-full object, which we clone every time we need a new a micro
 <span class="c1">// &lt;button class=&quot;btn-large btn-inline btn-primary&quot;&gt;</span>
 </code></pre></div>
 
-<h2 class="bs-docs-section" id="object-creational-singleton">Singleton</h2>
+<h2 class="bs-docs-section" id="singleton">Singleton</h2>
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Ensure a class only has one instance, and provide a global point of access to it.
@@ -1761,7 +1779,325 @@ This is useful when exactly one object is needed to coordinate actions across th
 <span class="c1">// true</span>
 </code></pre></div>
 
-<h2 class="bs-docs-section" id="object-structural-bridge">Bridge</h2>
+<h2 class="bs-docs-section" id="adapter">Adapter</h2>
+<blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
+<p>
+Convert the interface of a class into another interface clients expect. 
+Adapter lets classes work together that couldn’t otherwise because of incompatible interfaces.
+</p>
+<footer>—  <cite><a title="Gamma, Erich; Helm, Richard; Johnson, Ralph; Vlissides, John (1994-10-31). Design Patterns: Elements of Reusable Object-Oriented Software" href="http://www.goodreads.com/book/show/85009.Design_Patterns">Gang of Four</a></cite></footer>
+</blockquote>
+
+<p><img src="./assets/img/Adapter/uml.png" alt="Adapter pattern class diagram" /></p>
+
+<p>The pattern allows:</p>
+
+<ul>
+  <li>classes with disparate interfaces to work together through an intermediate object</li>
+</ul>
+
+<p>In real life we use adapters to convert attributes of one device to another otherwise incompatible. Foe example, 
+a mains power plug adapter which allows British plugs to be connected to American sockets. 
+The same in programming. We use adapters to reuse objects cooperating with 
+incompatible interfaces. That can be unrelated classes or classes wit unpredictable interfaces.<br />
+For instance, in Database Abstract Layer (DAL). You need an API
+to access DB, but you don’t want to be confined to a single driver. 
+Every driver provides its own interface. So you work out your own API and make a 
+target object which converts driver (adoptee) API into that of yours. </p>
+
+<h3 id="related-patterns">Related patterns</h3>
+
+<p>Bridge separates an interface from its implementation, when Adapter modifies interface of an existing object.</p>
+
+<p>Decorator extends another object without changing its interface. Besides, it supports 
+recursive composition, which is not achievable by Adapter.  </p>
+
+<p>Proxy provides representative or surrogate for another object while not changing its interface.</p>
+
+<h3 id="php-example-4">PHP Example</h3>
+
+<p>Most of PHP frameworks implement DAL using the Adapter pattern. Thus, you are likely familiar with the approach 
+and can easily follow the example. Here we provide DB access via MySQLi and PDO drivers. 
+Each of them exposes its own API. So we define common API in AdapterInterface and 
+make adapters per driver implementing it using object composition. The factory creates an instance of required adapter based 
+on a supplied  configuration.</p>
+
+<p><img src="./assets/img/Adapter/PHP/uml.png" alt="Adapter pattern PHP example class diagram" /></p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="cm">/*</span>
+<span class="cm"> * @category Design Pattern Tutorial</span>
+<span class="cm"> * @package Bridge Sample</span>
+<span class="cm"> * @author Dmitry Sheiko &lt;me@dsheiko.com&gt;</span>
+<span class="cm"> * @licence MIT </span>
+<span class="cm"> */</span>
+
+
+<span class="c1">// File: ./Db/Adapter/AdapterInterface.php</span>
+<span class="k">namespace</span> <span class="nx">Db\Adapter</span><span class="p">;</span>
+<span class="sd">/**</span>
+<span class="sd"> * Abstract interface</span>
+<span class="sd"> */</span>
+<span class="k">interface</span> <span class="nx">AdapterInterface</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">connect</span><span class="p">(</span><span class="nx">\Db\Config</span> <span class="nv">$config</span><span class="p">);</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">fetch</span><span class="p">(</span><span class="nv">$sql</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// File: ./Db/Adapter/Mysql.php</span>
+<span class="k">namespace</span> <span class="nx">Db\Adapter</span><span class="p">;</span>
+<span class="sd">/**</span>
+<span class="sd"> * MySQLi Adapter</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">Mysqli</span> <span class="k">implements</span> <span class="nx">\Db\Adapter\AdapterInterface</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$_mysqli</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">connect</span><span class="p">(</span><span class="nx">\Db\Config</span> <span class="nv">$config</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_mysqli</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\mysqli</span><span class="p">(</span><span class="nv">$config</span><span class="o">-&gt;</span><span class="na">host</span><span class="p">,</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">,</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">password</span>
+            <span class="p">,</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">dbscheme</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">fetch</span><span class="p">(</span><span class="nv">$sql</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_mysqli</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="nv">$sql</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">fetch_object</span><span class="p">();</span>
+    <span class="p">}</span>
+    
+<span class="p">}</span>
+
+<span class="c1">// File: ./Db/Adapter/Pdo.php</span>
+
+<span class="k">namespace</span> <span class="nx">Db\Adapter</span><span class="p">;</span>
+<span class="sd">/**</span>
+<span class="sd"> * MySQLi Pdo</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">Pdo</span> <span class="k">implements</span> <span class="nx">\Db\Adapter\AdapterInterface</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="nv">$_dbh</span><span class="p">;</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">connect</span><span class="p">(</span><span class="nx">\Db\Config</span> <span class="nv">$config</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$dsn</span> <span class="o">=</span> <span class="nb">sprintf</span><span class="p">(</span><span class="s1">&#39;msqli::dbname=%s;host=%s&#39;</span><span class="p">,</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">dbscheme</span><span class="p">,</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">host</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_dbh</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\PDO</span><span class="p">(</span><span class="nv">$dsn</span><span class="p">,</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">,</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">password</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">fetch</span><span class="p">(</span><span class="nv">$sql</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$sth</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_dbh</span><span class="o">-&gt;</span><span class="na">prepare</span><span class="p">(</span><span class="nv">$sql</span><span class="p">);</span>
+        <span class="nv">$sth</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">();</span>
+        <span class="k">return</span> <span class="nv">$sth</span><span class="o">-&gt;</span><span class="na">fetch</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// File: ./Db/Config.php</span>
+
+<span class="k">namespace</span> <span class="nx">Db</span><span class="p">;</span>
+<span class="sd">/**</span>
+<span class="sd"> * Usage</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">Config</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$driver</span> <span class="o">=</span> <span class="s1">&#39;Mysqli&#39;</span><span class="p">;</span>
+    <span class="k">public</span> <span class="nv">$host</span> <span class="o">=</span> <span class="s1">&#39;localhost&#39;</span><span class="p">;</span>
+    <span class="k">public</span> <span class="nv">$user</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span><span class="p">;</span>
+    <span class="k">public</span> <span class="nv">$password</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span><span class="p">;</span>
+    <span class="k">public</span> <span class="nv">$dbscheme</span> <span class="o">=</span> <span class="s1">&#39;test_test&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// File: ./Db/Factory.php</span>
+
+<span class="k">namespace</span> <span class="nx">Db</span><span class="p">;</span>
+<span class="sd">/**</span>
+<span class="sd"> * Db Factory</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">Factory</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">connect</span><span class="p">(</span><span class="nx">Config</span> <span class="nv">$config</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$className</span> <span class="o">=</span> <span class="nb">sprintf</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">Db</span><span class="se">\\</span><span class="s2">Adapter</span><span class="se">\\</span><span class="s2">%s&quot;</span><span class="p">,</span> <span class="nv">$config</span><span class="o">-&gt;</span><span class="na">driver</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">class_exists</span><span class="p">(</span><span class="nv">$className</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nv">$adapter</span> <span class="o">=</span> <span class="k">new</span> <span class="nv">$className</span><span class="p">();</span>
+            <span class="nv">$adapter</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">(</span><span class="nv">$config</span><span class="p">);</span>
+            <span class="k">return</span> <span class="nv">$adapter</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">//File: example.php</span>
+<span class="k">include</span> <span class="s2">&quot;Db/Config.php&quot;</span><span class="p">;</span>
+<span class="k">include</span> <span class="s2">&quot;Db/Factory.php&quot;</span><span class="p">;</span>
+<span class="k">include</span> <span class="s2">&quot;Db/Adapter/AdapterInterface.php&quot;</span><span class="p">;</span>
+<span class="k">include</span> <span class="s2">&quot;Db/Adapter/Mysql.php&quot;</span><span class="p">;</span>
+<span class="k">include</span> <span class="s2">&quot;Db/Adapter/Pdo.php&quot;</span><span class="p">;</span>
+
+<span class="nv">$config</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\Db\Config</span><span class="p">();</span>
+
+<span class="nv">$db</span> <span class="o">=</span> <span class="nx">\Db\Factory</span><span class="o">::</span><span class="na">connect</span><span class="p">(</span><span class="nv">$config</span><span class="p">);</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$db</span><span class="o">-&gt;</span><span class="na">fetch</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM `test`&#39;</span><span class="p">));</span>
+</code></pre></div>
+
+<h3 id="javascript-example-4">JavaScript Example</h3>
+
+<p>Imagine that we are to write a plugin which can be used with jQuery as well as with YUI libraries.
+The plugin solves some task required DOM modification. Each of these libraries provides a distinct 
+DOM manipulation API. We declare third one and adapters per library to make their 
+interfaces compatible to that one of ours.  Node.factory returns instance of adapter depending on
+which library is available in global scope.</p>
+
+<p><img src="./assets/img/Adapter/EcmaScript/uml.png" alt="Adapter pattern EcmaScript example class diagram" /></p>
+
+<div class="highlight"><pre><code class="js"><span class="cm">/*</span>
+<span class="cm"> * @category Design Pattern Tutorial</span>
+<span class="cm"> * @package Adapter Sample</span>
+<span class="cm"> * @author Dmitry Sheiko &lt;me@dsheiko.com&gt;</span>
+<span class="cm"> * @licence MIT</span>
+<span class="cm"> * @jscs standard:Jquery</span>
+<span class="cm"> * Code style: http://docs.jquery.com/JQuery_Core_Style_Guidelines</span>
+<span class="cm"> */</span>
+
+<span class="cm">/*global window:true, jQuery:false */</span>
+
+<span class="p">(</span><span class="kd">function</span><span class="p">(</span> <span class="nb">window</span><span class="p">,</span> <span class="kc">undefined</span> <span class="p">)</span> <span class="p">{</span>
+
+<span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span><span class="p">,</span>
+    <span class="nx">YUI</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">YUI</span><span class="p">,</span>
+    <span class="nx">Jquery_Adapter</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">$</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">_node</span><span class="p">;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="nx">find</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">selector</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="nx">_node</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span> <span class="nx">selector</span> <span class="p">);</span>
+                <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+            <span class="p">},</span>
+            <span class="nx">setAttr</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">attr</span><span class="p">,</span> <span class="nx">value</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="nx">_node</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span> <span class="nx">attr</span><span class="p">,</span> <span class="nx">value</span> <span class="p">);</span>
+            <span class="p">},</span>
+            <span class="nx">getAttr</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">attr</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">_node</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span> <span class="nx">attr</span> <span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+    <span class="p">},</span>
+    
+    <span class="nx">Yui_Adapter</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">Y</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">_node</span><span class="p">;</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="nx">find</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">selector</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="nx">_node</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span> <span class="nx">selector</span> <span class="p">);</span>
+                <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+            <span class="p">},</span>
+            <span class="nx">setAttr</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">attr</span><span class="p">,</span> <span class="nx">value</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="nx">_node</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span> <span class="nx">attr</span><span class="p">,</span> <span class="nx">value</span> <span class="p">);</span>
+            <span class="p">},</span>
+            <span class="nx">getAttr</span> <span class="o">:</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">attr</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="nx">_node</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span> <span class="nx">attr</span> <span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+    <span class="p">},</span>
+    
+    <span class="nx">node</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nx">Jquery_Adapter</span><span class="p">(</span> <span class="nb">window</span><span class="p">.</span><span class="nx">jQuery</span> <span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="nb">window</span><span class="p">.</span><span class="nx">YUI</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nx">Yui_Adapter</span><span class="p">(</span> <span class="nb">window</span><span class="p">.</span><span class="nx">YUI</span> <span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span> <span class="s2">&quot;Neither jQuery nor YUI library available&quot;</span> <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}());</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Usage</span>
+<span class="cm"> */</span>
+<span class="nx">node</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="s1">&#39;div&#39;</span> <span class="p">).</span><span class="nx">set</span><span class="p">(</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;something&#39;</span> <span class="p">);</span>
+
+<span class="p">}(</span> <span class="nb">window</span> <span class="p">));</span>
+</code></pre></div>
+
+<h3 id="typescript-example-4">TypeScript Example</h3>
+
+<div class="highlight"><pre><code class="js"><span class="cm">/*</span>
+<span class="cm"> * @category Design Pattern Tutorial</span>
+<span class="cm"> * @package Adapter Sample</span>
+<span class="cm"> * @author Dmitry Sheiko &lt;me@dsheiko.com&gt;</span>
+<span class="cm"> * @licence MIT</span>
+<span class="cm"> */</span>
+
+<span class="nx">module</span> <span class="nx">Adapter</span>
+<span class="p">{</span>
+    <span class="kr">export</span> <span class="kr">interface</span> <span class="nx">AbstractAdapter</span>
+    <span class="p">{</span>
+        <span class="nx">find</span><span class="p">(</span> <span class="nx">selector</span><span class="o">:</span> <span class="nx">string</span> <span class="p">)</span><span class="o">:</span> <span class="nx">AbstractAdapter</span><span class="p">;</span>
+        <span class="nx">setAttr</span><span class="p">(</span> <span class="nx">attr</span><span class="o">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="nx">string</span> <span class="p">)</span><span class="o">:</span> <span class="nx">AbstractAdapter</span><span class="p">;</span>
+        <span class="nx">getAttr</span><span class="p">(</span> <span class="nx">attr</span><span class="o">:</span> <span class="nx">string</span> <span class="p">)</span><span class="o">:</span> <span class="nx">any</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kr">export</span> <span class="kr">class</span> <span class="nx">Jquery</span> <span class="kr">implements</span> <span class="nx">AbstractAdapter</span>
+    <span class="p">{</span>
+        <span class="kr">private</span> <span class="nx">_node</span><span class="p">;</span>
+        <span class="kr">private</span> <span class="nx">_qs</span><span class="p">;</span>
+        <span class="nx">constructor</span><span class="p">(</span> <span class="nx">$</span> <span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_qs</span> <span class="o">=</span> <span class="nx">$</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kr">public</span> <span class="nx">find</span><span class="p">(</span> <span class="nx">selector</span><span class="o">:</span> <span class="nx">string</span> <span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_node</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_qs</span><span class="p">(</span> <span class="nx">selector</span> <span class="p">);</span>
+            <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kr">public</span> <span class="nx">setAttr</span><span class="p">(</span> <span class="nx">attr</span><span class="o">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="nx">string</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_node</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span> <span class="nx">attr</span><span class="p">,</span> <span class="nx">value</span> <span class="p">);</span>
+            <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kr">public</span> <span class="nx">getAttr</span><span class="p">(</span> <span class="nx">attr</span><span class="o">:</span> <span class="nx">string</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_node</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span> <span class="nx">attr</span> <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="kr">export</span> <span class="kr">class</span> <span class="nx">Yui</span> <span class="kr">implements</span> <span class="nx">AbstractAdapter</span>
+    <span class="p">{</span>
+        <span class="kr">private</span> <span class="nx">_node</span><span class="p">;</span>
+        <span class="kr">private</span> <span class="nx">_qs</span><span class="p">;</span>
+        <span class="nx">constructor</span><span class="p">(</span> <span class="nx">Y</span> <span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_qs</span> <span class="o">=</span> <span class="nx">Y</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kr">public</span> <span class="nx">find</span><span class="p">(</span> <span class="nx">selector</span><span class="o">:</span> <span class="nx">string</span> <span class="p">)</span>
+        <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_node</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_qs</span><span class="p">.</span><span class="nx">one</span><span class="p">(</span> <span class="nx">selector</span> <span class="p">);</span>
+            <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kr">public</span> <span class="nx">setAttr</span><span class="p">(</span> <span class="nx">attr</span><span class="o">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">value</span><span class="o">:</span> <span class="nx">string</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">_node</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span> <span class="nx">attr</span><span class="p">,</span> <span class="nx">value</span> <span class="p">);</span>
+            <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kr">public</span> <span class="nx">getAttr</span><span class="p">(</span> <span class="nx">attr</span><span class="o">:</span> <span class="nx">string</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_node</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span> <span class="nx">attr</span> <span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">module</span> <span class="nx">node</span>
+<span class="p">{</span>
+    <span class="kr">export</span> <span class="kd">function</span> <span class="nx">factory</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">instance</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="nx">jQuery</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="nx">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Adapter</span><span class="p">.</span><span class="nx">Jquery</span><span class="p">(</span> <span class="nx">jQuery</span> <span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span> <span class="nx">YUI</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="nx">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Adapter</span><span class="p">.</span><span class="nx">Yui</span><span class="p">(</span> <span class="nx">YUI</span> <span class="p">);</span>
+        <span class="p">}</span> 
+        <span class="k">if</span> <span class="p">(</span> <span class="nx">instance</span> <span class="o">===</span> <span class="kc">null</span> <span class="p">)</span> <span class="p">{</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span> <span class="s2">&quot;Neither jQuery nor YUI library available&quot;</span> <span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="nx">instance</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Usage</span>
+<span class="cm"> */</span>
+<span class="nx">declare</span> <span class="kd">var</span> <span class="nx">jQuery</span><span class="p">;</span>
+<span class="nx">declare</span> <span class="kd">var</span> <span class="nx">YUI</span><span class="p">;</span>
+<span class="nx">node</span><span class="p">.</span><span class="nx">factory</span><span class="p">().</span><span class="nx">find</span><span class="p">(</span> <span class="s1">&#39;div&#39;</span> <span class="p">).</span><span class="nx">set</span><span class="p">(</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;something&#39;</span> <span class="p">);</span>
+</code></pre></div>
+
+<h2 class="bs-docs-section" id="bridge">Bridge</h2>
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Decouple an abstraction from its implementation so that the two can vary independently.
@@ -1783,7 +2119,7 @@ Actually Abstract Factory can be used to build a particular Bridge.
 But what is unique about Bridge - it provides an architecture where abstraction
 and implementation are in separate class hierarchies.</p>
 
-<h3 id="php-example-4">PHP Example</h3>
+<h3 id="php-example-5">PHP Example</h3>
 
 <p>PHP example shows the case where web statistics data can be retrieved from different sources
 (Google Analytics and local DB) and be presented in table or graphic form.
@@ -1916,12 +2252,12 @@ methods to subsclasses <var>GraphViewData</var> and <var>TableViewData</var>.</p
 <span class="c1">// [&quot;Visits rate stats array&quot;,&quot;Page views rate stats array&quot;]</span>
 </code></pre></div>
 
-<h3 id="javascript-example-4">JavaScript Example</h3>
+<h3 id="javascript-example-5">JavaScript Example</h3>
 
 <p>EcmaScript examples describe a solution for themable widget (slideshow).
 Consider a slideshow which is meant to have thumbnail- or bullets-like
 pagination depending on a theme and act differently on desktop and mobile devices.
-Here the slideshow doesn&#8217;t have pagination on mobiles devices, but supports
+Here the slideshow doesn’t have pagination on mobiles devices, but supports
 touch gestures to navigate slides.</p>
 
 <p><var>AbstractImplementor</var> implies an interface to be implemented by by all its derivatives:
@@ -2140,7 +2476,7 @@ which forward the API to subclasses <var>OnDesktopSlideShow</var> and <var>OnMob
 <span class="p">}(</span> <span class="k">this</span> <span class="p">));</span>
 </code></pre></div>
 
-<h3 id="typescript-example-4">TypeScript Example</h3>
+<h3 id="typescript-example-5">TypeScript Example</h3>
 
 <div class="highlight"><pre><code class="js"><span class="cm">/*</span>
 <span class="cm"> * @category Design Pattern Tutorial</span>
@@ -2283,7 +2619,434 @@ which forward the API to subclasses <var>OnDesktopSlideShow</var> and <var>OnMob
 <span class="c1">// Touch gestures bound</span>
 </code></pre></div>
 
-<h2 class="bs-docs-section" id="object-structural-decorator">Decorator</h2>
+<h2 class="bs-docs-section" id="composite">Composite</h2>
+<blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
+<p>
+Compose objects into tree structures to represent part-whole hierarchies. 
+Composite lets clients treat individual objects and compositions of objects uniformly.
+</p>
+<footer>—  <cite><a title="Gamma, Erich; Helm, Richard; Johnson, Ralph; Vlissides, John (1994-10-31). Design Patterns: Elements of Reusable Object-Oriented Software" href="http://www.goodreads.com/book/show/85009.Design_Patterns">Gang of Four</a></cite></footer>
+</blockquote>
+
+<p><img src="./assets/img/Composite/uml.png" alt="Composite pattern class diagram" /></p>
+
+<p>The pattern allows:</p>
+
+<ul>
+  <li></li>
+</ul>
+
+<h3 id="php-example-6">PHP Example</h3>
+
+<p><img src="./assets/img/Composite/PHP/uml.png" alt="Composite pattern PHP example class diagram" /></p>
+
+<div class="highlight"><pre><code class="php"><span class="cp">&lt;?php</span>
+<span class="cm">/*</span>
+<span class="cm"> * @category Design Pattern Tutorial</span>
+<span class="cm"> * @package Composite Sample</span>
+<span class="cm"> * @author Dmitry Sheiko &lt;me@dsheiko.com&gt;</span>
+<span class="cm"> * @link http://dsheiko.com</span>
+<span class="cm"> */</span>
+
+
+<span class="c1">// Abstract component</span>
+<span class="k">abstract</span> <span class="k">class</span> <span class="nc">Element</span>
+<span class="p">{</span>
+    <span class="c1">// Child-element collection</span>
+    <span class="k">protected</span> <span class="nv">$_collection</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+    <span class="c1">// Element name</span>
+    <span class="k">protected</span> <span class="nv">$_name</span><span class="p">;</span>
+    <span class="c1">// Element text </span>
+    <span class="k">protected</span> <span class="nv">$_text</span><span class="p">;</span>
+    <span class="c1">// Indent multiplier </span>
+    <span class="k">static</span> <span class="nv">$_iCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$text</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> 
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_text</span> <span class="o">=</span> <span class="nv">$text</span><span class="p">;</span>
+        
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">add</span><span class="p">(</span><span class="nx">Element</span> <span class="nv">$el</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_collection</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$el</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">// Mock render</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">render</span><span class="p">()</span> 
+    <span class="p">{</span>
+        <span class="nv">$indent</span> <span class="o">=</span> <span class="nb">str_repeat</span><span class="p">(</span><span class="s2">&quot;  &quot;</span><span class="p">,</span> <span class="nx">self</span><span class="o">::</span><span class="nv">$_iCount</span><span class="p">);</span>
+        <span class="k">print</span> <span class="nv">$indent</span> <span class="o">.</span> <span class="s2">&quot;Element </span><span class="si">{</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_name</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">.</span> 
+            <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_text</span> <span class="o">?</span> <span class="s2">&quot; (</span><span class="si">{</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_text</span><span class="si">}</span><span class="s2">)&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_renderEach</span><span class="p">();</span>
+        
+    <span class="p">}</span>
+    <span class="c1">// Render each of child-elements</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">_renderEach</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_collection</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nx">self</span><span class="o">::</span><span class="nv">$_iCount</span><span class="o">++</span><span class="p">;</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_collection</span> <span class="k">as</span> <span class="nv">$el</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$el</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// Div composition</span>
+<span class="k">class</span> <span class="nc">Div</span> <span class="k">extends</span> <span class="nx">Element</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$_name</span> <span class="o">=</span> <span class="s2">&quot;Div&quot;</span><span class="p">;</span>
+    
+<span class="p">}</span>
+<span class="c1">// P composition</span>
+<span class="k">class</span> <span class="nc">P</span> <span class="k">extends</span> <span class="nx">Element</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$_name</span> <span class="o">=</span> <span class="s2">&quot;P&quot;</span><span class="p">;</span>
+   
+<span class="p">}</span>
+<span class="c1">// Leaf object of the composition</span>
+<span class="k">class</span> <span class="nc">Span</span> <span class="k">extends</span> <span class="nx">Element</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="nv">$_name</span> <span class="o">=</span> <span class="s2">&quot;Span&quot;</span><span class="p">;</span>
+    
+<span class="p">}</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * Usage</span>
+<span class="sd"> */</span>
+<span class="nv">$span1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Span</span><span class="p">(</span><span class="s2">&quot;text 1&quot;</span><span class="p">);</span>
+<span class="nv">$span2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Span</span><span class="p">(</span><span class="s2">&quot;text 2&quot;</span><span class="p">);</span>
+<span class="nv">$p</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">P</span><span class="p">();</span>
+<span class="nv">$p</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$span1</span><span class="p">);</span>
+<span class="nv">$p</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$span2</span><span class="p">);</span>
+<span class="nv">$div</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Div</span><span class="p">();</span>
+<span class="nv">$div</span><span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="nv">$p</span><span class="p">);</span>
+<span class="nv">$div</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">();</span>
+
+<span class="c1">// Output:</span>
+<span class="c1">// Element Div</span>
+<span class="c1">//   Element P</span>
+<span class="c1">//     Element Span (text 1)</span>
+<span class="c1">//     Element Span (text 2)</span>
+</code></pre></div>
+
+<h3 id="javascript-example-6">JavaScript Example</h3>
+
+<p><img src="./assets/img/Composite/EcmaScript/uml.png" alt="Composite pattern EcmaScript example class diagram" /></p>
+
+<div class="highlight"><pre><code class="js"><span class="cm">/*</span>
+<span class="cm"> * @category Design Pattern Tutorial</span>
+<span class="cm"> * @package Composite Sample</span>
+<span class="cm"> * @author Dmitry Sheiko &lt;me@dsheiko.com&gt;</span>
+<span class="cm"> * @link http://dsheiko.com</span>
+<span class="cm"> * @jscs standard:Jquery</span>
+<span class="cm"> * Code style: http://docs.jquery.com/JQuery_Core_Style_Guidelines</span>
+<span class="cm"> */</span>
+<span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+<span class="cm">/*global console:false */</span>
+
+<span class="c1">// Composite</span>
+<span class="kd">var</span> <span class="nx">Graphic</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="nx">collection</span><span class="o">:</span> <span class="p">[],</span>
+            <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span> <span class="nx">el</span> <span class="p">){</span>
+                    <span class="nx">el</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+                <span class="p">});</span>
+            <span class="p">},</span>
+            <span class="nx">add</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span> <span class="nx">graphic</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="nx">graphic</span> <span class="k">instanceof</span> <span class="nx">Graphic</span> <span class="p">)</span> <span class="p">{</span>
+                    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;Method argument must be an instance of Graphic&quot;</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span> <span class="nx">graphic</span> <span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+
+    <span class="p">},</span>
+    <span class="c1">// Primitive</span>
+    <span class="nx">Rectangle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">ctx</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">ctx</span> <span class="o">=</span> <span class="nx">ctx</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+
+    <span class="p">},</span>
+    <span class="c1">// Primitive</span>
+    <span class="nx">Line</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">ctx</span><span class="p">,</span> <span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">ctx</span> <span class="o">=</span> <span class="nx">ctx</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">x1</span> <span class="o">=</span> <span class="nx">x1</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">y1</span> <span class="o">=</span> <span class="nx">y1</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">x2</span> <span class="o">=</span> <span class="nx">x2</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">y2</span> <span class="o">=</span> <span class="nx">y2</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="c1">// Container</span>
+    <span class="nx">Picture</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="p">},</span>
+    <span class="nx">client</span><span class="p">;</span> 
+
+<span class="nx">Rectangle</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Graphic</span><span class="p">();</span>
+<span class="nx">Rectangle</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">render</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s1">&#39;Rectangle in context &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> 
+        <span class="s1">&#39; at &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> 
+        <span class="s1">&#39; of &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="s1">&#39;px width and &#39;</span> <span class="o">+</span> 
+        <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">+</span> <span class="s1">&#39;px height&#39;</span> <span class="p">);</span>    
+<span class="p">};</span>
+
+<span class="nx">Line</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Graphic</span><span class="p">();</span>
+<span class="nx">Line</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">render</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s1">&#39;Line in context &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> 
+        <span class="s1">&#39; from &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">x1</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">y1</span> <span class="o">+</span> 
+        <span class="s1">&#39; to &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">x2</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">y2</span> <span class="p">);</span>
+<span class="p">};</span>
+<span class="nx">Picture</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Graphic</span><span class="p">();</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Usage</span>
+<span class="cm"> */</span>
+
+<span class="nx">client</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// Mock function which emulates canvas context</span>
+    <span class="nx">getContext</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;2D&quot;</span> <span class="p">};</span>
+    <span class="p">},</span>
+    <span class="nx">run</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">ctx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(),</span>
+            <span class="nx">rect1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Rectangle</span><span class="p">(</span> <span class="nx">ctx</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">150</span> <span class="p">),</span>
+            <span class="nx">line1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Line</span><span class="p">(</span> <span class="nx">ctx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span> <span class="p">),</span>
+            <span class="nx">line2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Line</span><span class="p">(</span> <span class="nx">ctx</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span> <span class="p">),</span>
+            <span class="nx">pic1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Picture</span><span class="p">();</span>
+        
+        <span class="nx">pic1</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span> <span class="nx">rect1</span> <span class="p">);</span>
+        <span class="nx">pic1</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span> <span class="nx">line1</span> <span class="p">);</span>
+        <span class="nx">pic1</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span> <span class="nx">line2</span> <span class="p">);</span>
+        <span class="nx">pic1</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="nx">client</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
+
+
+<span class="c1">// Output:</span>
+<span class="c1">// Rectangle in context 2D at 70, 70 of 150px width and 150px height</span>
+<span class="c1">// Line in context 2D from 0, 0 to 50, 50</span>
+<span class="c1">// Line in context 2D from 50, 0 to 0, 50</span>
+
+<span class="p">}());</span>
+</code></pre></div>
+
+<h3 id="jsa-example-5">JSA Example</h3>
+
+<div class="highlight"><pre><code class="js"><span class="cm">/*</span>
+<span class="cm"> * @category Design Pattern Tutorial</span>
+<span class="cm"> * @package Composite Sample</span>
+<span class="cm"> * @author Dmitry Sheiko &lt;me@dsheiko.com&gt;</span>
+<span class="cm"> * @link http://dsheiko.com</span>
+<span class="cm"> * @jscs standard:Jquery</span>
+<span class="cm"> * Code style: http://docs.jquery.com/JQuery_Core_Style_Guidelines</span>
+<span class="cm"> */</span>
+<span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+<span class="cm">/*global console:false, require:false */</span>
+
+<span class="c1">// Composite</span>
+<span class="kd">var</span> <span class="nx">jsa</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;../../../vendors/jsa/jsa.umd&quot;</span><span class="p">),</span>
+    <span class="nx">Graphic</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="nx">collection</span><span class="o">:</span> <span class="p">[],</span>
+            <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span> <span class="nx">el</span> <span class="p">){</span>
+                    <span class="nx">el</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+                <span class="p">});</span>
+            <span class="p">},</span>
+            <span class="nx">add</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span> <span class="nx">graphic</span> <span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="nx">graphic</span> <span class="k">instanceof</span> <span class="nx">Graphic</span> <span class="p">)</span> <span class="p">{</span>
+                    <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">&quot;Method argument must be an instance of Graphic&quot;</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="k">this</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span> <span class="nx">graphic</span> <span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+
+    <span class="p">},</span>
+    <span class="c1">// Primitive</span>
+    <span class="nx">Rectangle</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">ctx</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="nx">__extends__</span><span class="o">:</span> <span class="nx">Graphic</span><span class="p">,</span>
+            <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s1">&#39;Rectangle in context &#39;</span> <span class="o">+</span> <span class="nx">ctx</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> 
+                    <span class="s1">&#39; at &#39;</span> <span class="o">+</span> <span class="nx">x</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="nx">y</span> <span class="o">+</span> 
+                    <span class="s1">&#39; of &#39;</span> <span class="o">+</span> <span class="nx">width</span> <span class="o">+</span> <span class="s1">&#39;px width and &#39;</span> <span class="o">+</span> 
+                    <span class="nx">height</span> <span class="o">+</span> <span class="s1">&#39;px height&#39;</span> <span class="p">);</span>    
+            <span class="p">}</span>
+            
+        <span class="p">};</span>
+
+    <span class="p">},</span>
+    <span class="c1">// Primitive</span>
+    <span class="nx">Line</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span> <span class="nx">ctx</span><span class="p">,</span> <span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="nx">__extends__</span><span class="o">:</span> <span class="nx">Graphic</span><span class="p">,</span>
+            <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s1">&#39;Line in context &#39;</span> <span class="o">+</span> <span class="nx">ctx</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> 
+                    <span class="s1">&#39; from &#39;</span> <span class="o">+</span> <span class="nx">x1</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="nx">y1</span> <span class="o">+</span> 
+                    <span class="s1">&#39; to &#39;</span> <span class="o">+</span> <span class="nx">x2</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="nx">y2</span> <span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">};</span>
+    <span class="p">},</span>
+    <span class="c1">// Container</span>
+    <span class="nx">Picture</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="nx">__extends__</span><span class="o">:</span> <span class="nx">Graphic</span>
+        <span class="p">};</span>
+    <span class="p">},</span>
+
+    <span class="nx">client</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="c1">// Mock function which emulates canvas context</span>
+        <span class="nx">getContext</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;2D&quot;</span> <span class="p">};</span>
+        <span class="p">},</span>
+        <span class="nx">run</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">ctx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(),</span>
+                <span class="nx">rect1</span> <span class="o">=</span> <span class="nx">Rectangle</span><span class="p">.</span><span class="nx">createInstance</span><span class="p">(</span> <span class="nx">ctx</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">150</span> <span class="p">),</span>
+                <span class="nx">line1</span> <span class="o">=</span> <span class="nx">Line</span><span class="p">.</span><span class="nx">createInstance</span><span class="p">(</span> <span class="nx">ctx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span> <span class="p">),</span>
+                <span class="nx">line2</span> <span class="o">=</span> <span class="nx">Line</span><span class="p">.</span><span class="nx">createInstance</span><span class="p">(</span> <span class="nx">ctx</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span> <span class="p">),</span>
+                <span class="nx">pic1</span> <span class="o">=</span> <span class="nx">Picture</span><span class="p">.</span><span class="nx">createInstance</span><span class="p">();</span>
+
+            <span class="nx">pic1</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span> <span class="nx">rect1</span> <span class="p">);</span>
+            <span class="nx">pic1</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span> <span class="nx">line1</span> <span class="p">);</span>
+            <span class="nx">pic1</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span> <span class="nx">line2</span> <span class="p">);</span>
+            <span class="nx">pic1</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+
+<span class="nx">client</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
+
+
+<span class="c1">// Output:</span>
+<span class="c1">// Rectangle in context 2D at 70, 70 of 150px width and 150px height</span>
+<span class="c1">// Line in context 2D from 0, 0 to 50, 50</span>
+<span class="c1">// Line in context 2D from 50, 0 to 0, 50</span>
+
+<span class="p">}());</span>
+</code></pre></div>
+
+<h3 id="typescript-example-6">TypeScript Example</h3>
+
+<div class="highlight"><pre><code class="js"><span class="cm">/*</span>
+<span class="cm"> * @category Design Pattern Tutorial</span>
+<span class="cm"> * @package Composite Sample</span>
+<span class="cm"> * @author Dmitry Sheiko &lt;me@dsheiko.com&gt;</span>
+<span class="cm"> * @licence MIT</span>
+<span class="cm"> */</span>
+
+<span class="s2">&quot;use strict&quot;</span><span class="p">;</span>
+
+<span class="nx">declare</span> <span class="kd">var</span> <span class="nx">console</span><span class="p">;</span>
+<span class="c1">// Composite</span>
+<span class="kr">class</span> <span class="nx">Graphic</span> 
+<span class="p">{</span>
+    <span class="kr">private</span> <span class="nx">collection</span><span class="o">:</span><span class="nx">Graphic</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+    
+    <span class="kr">public</span> <span class="nx">render</span><span class="p">()</span><span class="o">:</span><span class="k">void</span> 
+    <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span> <span class="nx">el</span> <span class="p">){</span>
+            <span class="nx">el</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+    <span class="kr">public</span> <span class="nx">add</span><span class="p">(</span><span class="nx">graphic</span><span class="o">:</span> <span class="nx">Graphic</span><span class="p">)</span><span class="o">:</span><span class="k">void</span> 
+    <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span> <span class="nx">graphic</span> <span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// Primitive</span>
+<span class="kr">class</span> <span class="nx">Rectangle</span> <span class="kr">extends</span> <span class="nx">Graphic</span>
+<span class="p">{</span>
+    <span class="kr">private</span> <span class="nx">ctx</span><span class="o">:</span> <span class="nx">CanvasContext</span><span class="p">;</span>
+    <span class="kr">private</span> <span class="nx">x</span><span class="o">:</span> <span class="nx">number</span><span class="p">;</span>
+    <span class="kr">private</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">number</span><span class="p">;</span>
+    <span class="kr">private</span> <span class="nx">width</span><span class="o">:</span> <span class="nx">number</span><span class="p">;</span>
+    <span class="kr">private</span> <span class="nx">height</span><span class="o">:</span> <span class="nx">number</span><span class="p">;</span>
+    <span class="nx">constructor</span><span class="p">(</span> <span class="nx">ctx</span><span class="o">:</span> <span class="nx">CanvasContext</span><span class="p">,</span> <span class="nx">x</span><span class="o">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">width</span><span class="o">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">height</span><span class="o">:</span> <span class="nx">number</span> <span class="p">)</span>
+    <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">ctx</span> <span class="o">=</span> <span class="nx">ctx</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kr">public</span> <span class="nx">render</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s1">&#39;Rectangle in context &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> 
+            <span class="s1">&#39; at &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> 
+            <span class="s1">&#39; of &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="s1">&#39;px width and &#39;</span> <span class="o">+</span> 
+            <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">+</span> <span class="s1">&#39;px height&#39;</span> <span class="p">);</span>   
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// Primitive</span>
+<span class="kr">class</span> <span class="nx">Line</span> <span class="kr">extends</span> <span class="nx">Graphic</span>
+<span class="p">{</span>
+    <span class="kr">private</span> <span class="nx">ctx</span><span class="o">:</span> <span class="nx">CanvasContext</span><span class="p">;</span>
+    <span class="kr">private</span> <span class="nx">x1</span><span class="o">:</span> <span class="nx">number</span><span class="p">;</span>
+    <span class="kr">private</span> <span class="nx">y1</span><span class="o">:</span> <span class="nx">number</span><span class="p">;</span>
+    <span class="kr">private</span> <span class="nx">x2</span><span class="o">:</span> <span class="nx">number</span><span class="p">;</span>
+    <span class="kr">private</span> <span class="nx">y2</span><span class="o">:</span> <span class="nx">number</span><span class="p">;</span>
+    <span class="nx">constructor</span><span class="p">(</span> <span class="nx">ctx</span><span class="o">:</span> <span class="nx">CanvasContext</span><span class="p">,</span> <span class="nx">x1</span><span class="o">:</span><span class="nx">number</span><span class="p">,</span> <span class="nx">y1</span><span class="o">:</span><span class="nx">number</span><span class="p">,</span> <span class="nx">x2</span><span class="o">:</span><span class="nx">number</span><span class="p">,</span> <span class="nx">y2</span><span class="o">:</span><span class="nx">number</span> <span class="p">)</span>
+    <span class="p">{</span>
+ <span class="k">this</span><span class="p">.</span><span class="nx">ctx</span> <span class="o">=</span> <span class="nx">ctx</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kr">public</span> <span class="nx">render</span><span class="p">()</span>
+    <span class="p">{</span>
+         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s1">&#39;Line in context &#39;</span> <span class="o">+</span> <span class="nx">ctx</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> 
+            <span class="s1">&#39; from &#39;</span> <span class="o">+</span> <span class="nx">x1</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="nx">y1</span> <span class="o">+</span> 
+            <span class="s1">&#39; to &#39;</span> <span class="o">+</span> <span class="nx">x2</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="nx">y2</span> <span class="p">);</span> 
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// Composite</span>
+<span class="kr">class</span> <span class="nx">Picture</span> <span class="kr">extends</span> <span class="nx">Graphic</span>
+<span class="p">{</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">CanvasContext</span>
+<span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="nx">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">module</span> <span class="nx">client</span>
+<span class="p">{</span>
+    <span class="c1">// Mock function which emulates canvas context</span>
+    <span class="kd">function</span> <span class="nx">getContext</span><span class="p">()</span><span class="o">:</span> <span class="nx">CanvasContext</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;2D&quot;</span> <span class="p">};</span>
+    <span class="p">}</span>
+    <span class="kr">export</span> <span class="kd">function</span> <span class="nx">run</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">ctx</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(),</span>
+            <span class="nx">rect1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Rectangle</span><span class="p">(</span> <span class="nx">ctx</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">150</span> <span class="p">),</span>
+            <span class="nx">line1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Line</span><span class="p">(</span> <span class="nx">ctx</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">50</span> <span class="p">),</span>
+            <span class="nx">line2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Line</span><span class="p">(</span> <span class="nx">ctx</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">50</span> <span class="p">),</span>
+            <span class="nx">pic1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Picture</span><span class="p">();</span>
+
+        <span class="nx">pic1</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span> <span class="nx">rect1</span> <span class="p">);</span>
+        <span class="nx">pic1</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span> <span class="nx">line1</span> <span class="p">);</span>
+        <span class="nx">pic1</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span> <span class="nx">line2</span> <span class="p">);</span>
+        <span class="nx">pic1</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">client</span><span class="p">.</span><span class="nx">run</span><span class="p">();</span>
+
+
+<span class="c1">// Output:</span>
+<span class="c1">// Rectangle in context 2D at 70, 70 of 150px width and 150px height</span>
+<span class="c1">// Line in context 2D from 0, 0 to 50, 50</span>
+<span class="c1">// Line in context 2D from 50, 0 to 0, 50</span>
+</code></pre></div>
+
+<h2 class="bs-docs-section" id="decorator">Decorator</h2>
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality.
@@ -2300,7 +3063,7 @@ Attach additional responsibilities to an object dynamically. Decorators provide 
 </ul>
 
 <p>When we need to enhance an individual object with a particular responsibility, use of inheritance may be impractical.
-Let&#8217;s say we have a widget class. In some cases we need this widget with border,
+Let’s say we have a widget class. In some cases we need this widget with border,
 in some with scrollbar, in some with both. Relying on inheritance we would need
 not only classes for every representation, but also classes for every combination, provided
 number of possible combinations increases excessively with every new added representation. Using decorators
@@ -2312,7 +3075,7 @@ ZF 1.x utilizes the decorator pattern in order to render elements and forms.
 So when you need a custom representation for a form element, you
 can use one or more decorators on the element class to achieve exactly what you want.</p>
 
-<h3 id="php-example-5">PHP Example</h3>
+<h3 id="php-example-7">PHP Example</h3>
 
 <p>In following example we have \Widget\Concrete class implementing \Widget\WidgetInterface and two
 decorators (\Widget\Decorator\Scrollbar and \Widget\Decorator\StatusBar) that implement
@@ -2422,10 +3185,10 @@ scrollbar and status bar we just wrap widget instance with corresponding decorat
 <span class="c1">// Concrete widget with scrollbar with statusbar</span>
 </code></pre></div>
 
-<h3 id="javascript-example-5">JavaScript Example</h3>
+<h3 id="javascript-example-7">JavaScript Example</h3>
 
 <p>This example shows Decorator pattern from an other prospective. We have here an object, which represents
-a concrete product MacbookAir. It&#8217;s one of the class defined by MacbookAbstract.
+a concrete product MacbookAir. It’s one of the class defined by MacbookAbstract.
 The object comprises the base product configuration and corresponding price.
 Now we can specify decorators for extensible configuration properties (<var>RAM</var>, <var>SDD</var>).
 Combination of decorators will give a product object of the intended configuration.
@@ -2497,7 +3260,7 @@ It can be used e.g. for price calculator.</p>
 <span class="p">}());</span>
 </code></pre></div>
 
-<h3 id="jsa-example-5">JSA Example</h3>
+<h3 id="jsa-example-6">JSA Example</h3>
 
 <div class="highlight"><pre><code class="js"><span class="cm">/*</span>
 <span class="cm"> * @category Design Pattern Tutorial</span>
@@ -2570,7 +3333,7 @@ It can be used e.g. for price calculator.</p>
 <span class="p">}());</span>
 </code></pre></div>
 
-<h3 id="typescript-example-5">TypeScript Example</h3>
+<h3 id="typescript-example-7">TypeScript Example</h3>
 
 <div class="highlight"><pre><code class="js"><span class="cm">/*</span>
 <span class="cm"> * @category Design Pattern Tutorial</span>
@@ -2692,7 +3455,7 @@ It can be used e.g. for price calculator.</p>
 <span class="c1">// Price: $1499</span>
 </code></pre></div>
 
-<h2 class="bs-docs-section" id="object-structural-flyweight">Flyweight</h2>
+<h2 class="bs-docs-section" id="flyweight">Flyweight</h2>
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Use sharing to support large numbers of fine-grained objects efficiently.
@@ -2712,7 +3475,7 @@ Use sharing to support large numbers of fine-grained objects efficiently.
 Flyweight stores its intrinsic state, but extrinsic one is kept by the flyweight context. Thus, being reused
 the same object instance can have different aggregate states depending on the given flyweight context.</p>
 
-<h3 id="php-example-6">PHP Example</h3>
+<h3 id="php-example-8">PHP Example</h3>
 
 <p>If we were to build a text editor, it would take unacceptably much of memory to allocate all the objects graphically representing characters in the document.
 Except we use flyweights. Character flyweight stores only character code. All the related attributes are kept by flyweight context.
@@ -2727,7 +3490,7 @@ Thus, Character has <var>GlyphContext</var> with index set up according to the C
 During Character rendering <var>GlyphContext::getFont</var> returns the font object we expect.</p>
 
 <p>As you see <var>GlyphContext</var> acts as extrinsic state repository.
-Besides, it&#8217;s glyph representation context. You can have many <var>GlyphContext</var> instances keeping different
+Besides, it’s glyph representation context. You can have many <var>GlyphContext</var> instances keeping different
 rendering attributes for the same glyph structure. So by switching context you choose representation strategy for the structure.</p>
 
 <p>Flyweights are created by means a factory, which ensures they are shared properly.
@@ -3015,7 +3778,7 @@ rendering attributes for the same glyph structure. So by switching context you c
 <span class="c1">//d - Times Roman  12</span>
 </code></pre></div>
 
-<h3 id="javascript-example-6">JavaScript Example</h3>
+<h3 id="javascript-example-8">JavaScript Example</h3>
 
 <p>Error log entries can be numerous, though the number of error messages they store is limited.
 We can define error message code as intrinsic state of <var>ErrorLogEntry</var> flyweight and datetime stamp as extrinsic state.
@@ -3146,7 +3909,7 @@ the required information.</p>
 <span class="p">}());</span>
 </code></pre></div>
 
-<h3 id="jsa-example-6">JSA Example</h3>
+<h3 id="jsa-example-7">JSA Example</h3>
 
 <div class="highlight"><pre><code class="js"><span class="cm">/*</span>
 <span class="cm"> * @category Design Pattern Tutorial</span>
@@ -3296,7 +4059,7 @@ the required information.</p>
 <span class="p">}());</span>
 </code></pre></div>
 
-<h3 id="typescript-example-6">TypeScript Example</h3>
+<h3 id="typescript-example-8">TypeScript Example</h3>
 
 <div class="highlight"><pre><code class="js"><span class="cm">/*</span>
 <span class="cm"> * @category Design Pattern Tutorial</span>

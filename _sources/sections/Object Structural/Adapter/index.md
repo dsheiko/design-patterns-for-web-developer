@@ -65,13 +65,6 @@ which library is available in global scope.
 {% endhighlight %}
 
 
-###  JSA Example
-
-
-{% highlight js linenos %}
-{% include "examples/Adapter/JSA/example.js" %}
-{% endhighlight %}
-
 
 ###  TypeScript Example
 

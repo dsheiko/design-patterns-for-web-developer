@@ -60,7 +60,7 @@ var fs = require("fs"),
              * @return {string}
              */
             renderSection: function( section ) {
-                return "\n\n## " + section.title + "\n{: .bs-docs-section #" + section.id + "}\n" +
+                return "\n\n## " + ( section.title === "Cover" ? "&nbsp;" : section.title ) + "\n{: .bs-docs-section #" + section.id + "}\n" +
                     util.trim( section.content );
             }
         }
@@ -140,7 +140,7 @@ var fs = require("fs"),
                             if ( !section.title ) {
                                 throw new Error( "Invalid Liquid syntax: title attribute is missing in file " + file  );
                             }
-                            section.id = util.unqieueId( section.category + "-" + section.title );
+                            section.id = section.id || util.unqieueId( section.title );
                             section.content =  this.processTemplate(this.processInclude(
                                 lines.splice( i + 1 ).join("\n")
                             ));
@@ -229,7 +229,9 @@ var fs = require("fs"),
             "Object Creational",
             "Object Structural"]
         )
-        .processPath("./sections/Introduction/index.md")
+        .processPath("./sections/Introduction/cover.md")
+        .processPath("./sections/Introduction/preface.md")
+        .processPath("./sections/Introduction/introduction.md")
         .processPath("./sections/Introduction/design-patterns.md")
         .processPath("./sections/Introduction/oop.md")
         .processPath("./sections/Object Creational")

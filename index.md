@@ -4,8 +4,25 @@ title: Design Patterns for Web-Developer
 ---
 
 
+## &nbsp;
+{: .bs-docs-section #cover}
+<article id="cover" class="bs-docs-section-header" markdown="1">
+
+# Design Patterns for Web-Developer
+
+Online book by [Dmitry Sheiko](http::/dsheiko.com)
+{: .lead}
+
+</article>
+
+## Preface
+{: .bs-docs-section #preface}
+Why This Handbook Was Written
+
 ## Introduction
-{: .bs-docs-section #introduction-introduction}
+{: .bs-docs-section #introduction}
+Why This Handbook Was Written
+
 After having your project fully tested, deployed and running, it seems the application architecture is pretty
 good enough. All the requirements met and everybody is happy. But then as it happens,
 the requirements change and you, all of sudden, find yourself in the time of troubles.
@@ -36,9 +53,9 @@ For a software engineer an example of good designed code gives much more vision 
 I think the best way to go with Design Patterns, that running each one through the playground.
 Once implemented an approach, it makes easier to do it again when you need it. And here below I did it for myself.
 
-## Design Patterns
-{: .bs-docs-section #introduction-design-patterns}
-Inventor of design patterns Christopher Alexander has put it like that:
+## What Is a Design Pattern?
+{: .bs-docs-section #what-is-a-design-pattern-}
+Inventor of design patterns Christopher Alexander ([Alexander et al.]) has put it like that:
 "Each pattern describes a problem which occurs over and over again in
 our environment, and then describes the core of the solution to that
 problem, in such a way that you can use this solution a million
@@ -62,7 +79,7 @@ achieved on procedural languages. In that case there must be introduced
 additional patterns such as "Inheritance," "Encapsulation," and "Polymorphism."
 
 ## Why object-oriented programming?
-{: .bs-docs-section #introduction-why-object-oriented-programming-}
+{: .bs-docs-section #why-object-oriented-programming-}
 OOP is meant to improve maintainability, make code easier to read and understand.
 Object-oriented design patterns provide proved solution, recognizable by other developer by name.
 
@@ -166,7 +183,7 @@ class \Page\Contact
 {% endhighlight %}
 
 ## Abstract Factory
-{: .bs-docs-section #object-creational-abstract-factory}
+{: .bs-docs-section #abstract-factory}
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Provide an interface for creating families of related or dependent objects without specifying their concrete classes.
@@ -701,7 +718,7 @@ page.render();
 {% endhighlight %}
 
 ## Builder
-{: .bs-docs-section #object-creational-builder}
+{: .bs-docs-section #builder}
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Separate the construction of a complex object from its representation so that the same construction process can create different representations.
@@ -1178,7 +1195,7 @@ class ThemeA extends AbstractBuilder
 {% endhighlight %}
 
 ## Prototype
-{: .bs-docs-section #object-creational-prototype}
+{: .bs-docs-section #prototype}
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Specify the kinds of objects to create using a prototypical instance, and create new objects by copying this prototype.
@@ -1582,7 +1599,7 @@ saveChangesBtn.render();
 {% endhighlight %}
 
 ## Singleton
-{: .bs-docs-section #object-creational-singleton}
+{: .bs-docs-section #singleton}
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Ensure a class only has one instance, and provide a global point of access to it.
@@ -1761,8 +1778,335 @@ console.log(Singleton.getInstance() === Singleton.getInstance());
 
 {% endhighlight %}
 
+## Adapter
+{: .bs-docs-section #adapter}
+<blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
+<p>
+Convert the interface of a class into another interface clients expect. 
+Adapter lets classes work together that couldn’t otherwise because of incompatible interfaces.
+</p>
+<footer>—  <cite><a title="Gamma, Erich; Helm, Richard; Johnson, Ralph; Vlissides, John (1994-10-31). Design Patterns: Elements of Reusable Object-Oriented Software" href="http://www.goodreads.com/book/show/85009.Design_Patterns">Gang of Four</a></cite></footer>
+</blockquote>
+
+
+![Adapter pattern class diagram](./assets/img/Adapter/uml.png)
+
+The pattern allows:
+
+* classes with disparate interfaces to work together through an intermediate object
+
+In real life we use adapters to convert attributes of one device to another otherwise incompatible. Foe example, 
+a mains power plug adapter which allows British plugs to be connected to American sockets. 
+The same in programming. We use adapters to reuse objects cooperating with 
+incompatible interfaces. That can be unrelated classes or classes wit unpredictable interfaces.  
+For instance, in Database Abstract Layer (DAL). You need an API
+to access DB, but you don't want to be confined to a single driver. 
+Every driver provides its own interface. So you work out your own API and make a 
+target object which converts driver (adoptee) API into that of yours. 
+
+### Related patterns
+
+Bridge separates an interface from its implementation, when Adapter modifies interface of an existing object.
+
+Decorator extends another object without changing its interface. Besides, it supports 
+recursive composition, which is not achievable by Adapter.  
+
+Proxy provides representative or surrogate for another object while not changing its interface.
+
+###  PHP Example
+
+Most of PHP frameworks implement DAL using the Adapter pattern. Thus, you are likely familiar with the approach 
+and can easily follow the example. Here we provide DB access via MySQLi and PDO drivers. 
+Each of them exposes its own API. So we define common API in AdapterInterface and 
+make adapters per driver implementing it using object composition. The factory creates an instance of required adapter based 
+on a supplied  configuration.
+
+![Adapter pattern PHP example class diagram](./assets/img/Adapter/PHP/uml.png)
+
+
+{% highlight php linenos %}
+<?php
+/*
+ * @category Design Pattern Tutorial
+ * @package Bridge Sample
+ * @author Dmitry Sheiko <me@dsheiko.com>
+ * @licence MIT 
+ */
+
+
+// File: ./Db/Adapter/AdapterInterface.php
+namespace Db\Adapter;
+/**
+ * Abstract interface
+ */
+interface AdapterInterface
+{
+    public function connect(\Db\Config $config);
+    public function fetch($sql);
+}
+
+// File: ./Db/Adapter/Mysql.php
+namespace Db\Adapter;
+/**
+ * MySQLi Adapter
+ */
+class Mysqli implements \Db\Adapter\AdapterInterface
+{
+    private $_mysqli;
+
+    public function connect(\Db\Config $config)
+    {
+        $this->_mysqli = new \mysqli($config->host, $config->user, $config->password
+            , $config->dbscheme);
+    }
+    
+    public function fetch($sql)
+    {
+        return $this->_mysqli->query($sql)->fetch_object();
+    }
+    
+}
+
+// File: ./Db/Adapter/Pdo.php
+
+namespace Db\Adapter;
+/**
+ * MySQLi Pdo
+ */
+class Pdo implements \Db\Adapter\AdapterInterface
+{
+    private $_dbh;
+
+    public function connect(\Db\Config $config)
+    {
+        $dsn = sprintf('msqli::dbname=%s;host=%s', $config->dbscheme, $config->host);
+        $this->_dbh = new \PDO($dsn, $config->user, $config->password);
+    }
+    public function fetch($sql)
+    {
+        $sth = $this->_dbh->prepare($sql);
+        $sth->execute();
+        return $sth->fetch();
+    }
+}
+
+// File: ./Db/Config.php
+
+namespace Db;
+/**
+ * Usage
+ */
+class Config
+{
+    public $driver = 'Mysqli';
+    public $host = 'localhost';
+    public $user = 'test';
+    public $password = 'test';
+    public $dbscheme = 'test_test';
+}
+
+// File: ./Db/Factory.php
+
+namespace Db;
+/**
+ * Db Factory
+ */
+class Factory
+{
+    public static function connect(Config $config)
+    {
+        $className = sprintf("\\Db\\Adapter\\%s", $config->driver);
+        if (class_exists($className)) {
+            $adapter = new $className();
+            $adapter->connect($config);
+            return $adapter;
+        }
+    }
+}
+//File: example.php
+include "Db/Config.php";
+include "Db/Factory.php";
+include "Db/Adapter/AdapterInterface.php";
+include "Db/Adapter/Mysql.php";
+include "Db/Adapter/Pdo.php";
+
+$config = new \Db\Config();
+
+$db = \Db\Factory::connect($config);
+var_dump($db->fetch('SELECT * FROM `test`'));
+{% endhighlight %}
+
+
+###  JavaScript Example
+
+Imagine that we are to write a plugin which can be used with jQuery as well as with YUI libraries.
+The plugin solves some task required DOM modification. Each of these libraries provides a distinct 
+DOM manipulation API. We declare third one and adapters per library to make their 
+interfaces compatible to that one of ours.  Node.factory returns instance of adapter depending on
+which library is available in global scope.
+
+![Adapter pattern EcmaScript example class diagram](./assets/img/Adapter/EcmaScript/uml.png)
+
+
+{% highlight js linenos %}
+/*
+ * @category Design Pattern Tutorial
+ * @package Adapter Sample
+ * @author Dmitry Sheiko <me@dsheiko.com>
+ * @licence MIT
+ * @jscs standard:Jquery
+ * Code style: http://docs.jquery.com/JQuery_Core_Style_Guidelines
+ */
+
+/*global window:true, jQuery:false */
+
+(function( window, undefined ) {
+
+"use strict";
+var $ = window.jQuery,
+    YUI = window.YUI,
+    Jquery_Adapter = function( $ ) {
+        var _node;
+        return {
+            find : function( selector ) {
+                _node = $( selector );
+                return this;
+            },
+            setAttr : function( attr, value ) {
+                _node.attr( attr, value );
+            },
+            getAttr : function( attr ) {
+                return _node.attr( attr );
+            }
+        };
+    },
+    
+    Yui_Adapter = function( Y ) {
+        var _node;
+        return {
+            find : function( selector ) {
+                _node = Y.one( selector );
+                return this;
+            },
+            setAttr : function( attr, value ) {
+                _node.set( attr, value );
+            },
+            getAttr : function( attr ) {
+                return _node.get( attr );
+            }
+        };
+    },
+    
+    node = (function() {
+        if ( window.jQuery !== undefined ) {
+            return new Jquery_Adapter( window.jQuery );
+        } else if ( window.YUI !== undefined ) {
+            return new Yui_Adapter( window.YUI );
+        } else {
+            throw new Error( "Neither jQuery nor YUI library available" );
+        }
+    }());
+
+/**
+ * Usage
+ */
+node.find( 'div' ).set( 'id', 'something' );
+
+}( window ));
+{% endhighlight %}
+
+
+
+###  TypeScript Example
+
+
+{% highlight js linenos %}
+/*
+ * @category Design Pattern Tutorial
+ * @package Adapter Sample
+ * @author Dmitry Sheiko <me@dsheiko.com>
+ * @licence MIT
+ */
+
+module Adapter
+{
+    export interface AbstractAdapter
+    {
+        find( selector: string ): AbstractAdapter;
+        setAttr( attr: string, value: string ): AbstractAdapter;
+        getAttr( attr: string ): any;
+    }
+    export class Jquery implements AbstractAdapter
+    {
+        private _node;
+        private _qs;
+        constructor( $ )
+        {
+            this._qs = $;
+        }
+        public find( selector: string )
+        {
+            this._node = this._qs( selector );
+            return this;
+        }
+        public setAttr( attr: string, value: string ) {
+            this._node.attr( attr, value );
+            return this;
+        }
+        public getAttr( attr: string ) {
+            return this._node.attr( attr );
+        }
+    }
+    export class Yui implements AbstractAdapter
+    {
+        private _node;
+        private _qs;
+        constructor( Y )
+        {
+            this._qs = Y;
+        }
+        public find( selector: string )
+        {
+            this._node = this._qs.one( selector );
+            return this;
+        }
+        public setAttr( attr: string, value: string ) {
+            this._node.set( attr, value );
+            return this;
+        }
+        public getAttr( attr: string ) {
+            return this._node.get( attr );
+        }
+    }
+}
+
+module node
+{
+    export function factory()
+    {
+        var instance = null;
+        if ( jQuery !== undefined ) {
+            instance = new Adapter.Jquery( jQuery );
+        } else if ( YUI !== undefined ) {
+            instance = new Adapter.Yui( YUI );
+        } 
+        if ( instance === null ) {
+            throw new Error( "Neither jQuery nor YUI library available" );
+        }
+        return instance;
+    }
+}
+
+/**
+ * Usage
+ */
+declare var jQuery;
+declare var YUI;
+node.factory().find( 'div' ).set( 'id', 'something' );
+{% endhighlight %}
+
 ## Bridge
-{: .bs-docs-section #object-structural-bridge}
+{: .bs-docs-section #bridge}
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Decouple an abstraction from its implementation so that the two can vary independently.
@@ -2294,8 +2638,447 @@ mobileThemAImp.render();
 // Touch gestures bound
 {% endhighlight %}
 
+## Composite
+{: .bs-docs-section #composite}
+<blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
+<p>
+Compose objects into tree structures to represent part-whole hierarchies. 
+Composite lets clients treat individual objects and compositions of objects uniformly.
+</p>
+<footer>—  <cite><a title="Gamma, Erich; Helm, Richard; Johnson, Ralph; Vlissides, John (1994-10-31). Design Patterns: Elements of Reusable Object-Oriented Software" href="http://www.goodreads.com/book/show/85009.Design_Patterns">Gang of Four</a></cite></footer>
+</blockquote>
+
+
+![Composite pattern class diagram](./assets/img/Composite/uml.png)
+
+The pattern allows:
+
+* 
+
+###  PHP Example
+
+
+![Composite pattern PHP example class diagram](./assets/img/Composite/PHP/uml.png)
+
+
+{% highlight php linenos %}
+<?php
+/*
+ * @category Design Pattern Tutorial
+ * @package Composite Sample
+ * @author Dmitry Sheiko <me@dsheiko.com>
+ * @link http://dsheiko.com
+ */
+
+
+// Abstract component
+abstract class Element
+{
+    // Child-element collection
+    protected $_collection = array();
+    // Element name
+    protected $_name;
+    // Element text 
+    protected $_text;
+    // Indent multiplier 
+    static $_iCount = 0;
+    
+    public function __construct($text = "") 
+    {
+        $this->_text = $text;
+        
+    }
+
+    public function add(Element $el)
+    {
+        $this->_collection[] = $el;
+    }
+    // Mock render
+    public function render() 
+    {
+        $indent = str_repeat("  ", self::$_iCount);
+        print $indent . "Element {$this->_name}" . 
+            ($this->_text ? " ({$this->_text})": "") . "\n";
+        $this->_renderEach();
+        
+    }
+    // Render each of child-elements
+    protected function _renderEach()
+    {
+        if (!$this->_collection) {
+            return;
+        }
+        self::$_iCount++;
+        foreach ($this->_collection as $el) {
+            $el->render();
+        }
+    }
+}
+// Div composition
+class Div extends Element
+{
+    protected $_name = "Div";
+    
+}
+// P composition
+class P extends Element
+{
+    protected $_name = "P";
+   
+}
+// Leaf object of the composition
+class Span extends Element
+{
+    protected $_name = "Span";
+    
+}
+
+/**
+ * Usage
+ */
+$span1 = new Span("text 1");
+$span2 = new Span("text 2");
+$p = new P();
+$p->add($span1);
+$p->add($span2);
+$div = new Div();
+$div->add($p);
+$div->render();
+
+// Output:
+// Element Div
+//   Element P
+//     Element Span (text 1)
+//     Element Span (text 2)
+{% endhighlight %}
+
+
+###  JavaScript Example
+
+![Composite pattern EcmaScript example class diagram](./assets/img/Composite/EcmaScript/uml.png)
+
+
+{% highlight js linenos %}
+/*
+ * @category Design Pattern Tutorial
+ * @package Composite Sample
+ * @author Dmitry Sheiko <me@dsheiko.com>
+ * @link http://dsheiko.com
+ * @jscs standard:Jquery
+ * Code style: http://docs.jquery.com/JQuery_Core_Style_Guidelines
+ */
+(function() {
+"use strict";
+/*global console:false */
+
+// Composite
+var Graphic = function() {
+        return {
+            collection: [],
+            render: function() {
+                this.collection.forEach(function( el ){
+                    el.render();
+                });
+            },
+            add: function ( graphic ) {
+                if ( !graphic instanceof Graphic ) {
+                    throw new Error("Method argument must be an instance of Graphic");
+                }
+                this.collection.push( graphic );
+            }
+        };
+
+    },
+    // Primitive
+    Rectangle = function( ctx, x, y, width, height ) {
+        this.ctx = ctx;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+
+    },
+    // Primitive
+    Line = function( ctx, x1, y1, x2, y2 ) {
+        this.ctx = ctx;
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
+    },
+    // Container
+    Picture = function() {
+    },
+    client; 
+
+Rectangle.prototype = new Graphic();
+Rectangle.prototype.render = function() {
+    console.log( 'Rectangle in context ' + this.ctx.name + 
+        ' at ' + this.x + ', ' + this.y + 
+        ' of ' + this.width + 'px width and ' + 
+        this.height + 'px height' );    
+};
+
+Line.prototype = new Graphic();
+Line.prototype.render = function() {
+    console.log( 'Line in context ' + this.ctx.name + 
+        ' from ' + this.x1 + ', ' + this.y1 + 
+        ' to ' + this.x2 + ', ' + this.y2 );
+};
+Picture.prototype = new Graphic();
+
+/**
+ * Usage
+ */
+
+client = {
+    // Mock function which emulates canvas context
+    getContext: function() {
+        return { name: "2D" };
+    },
+    run: function() {
+        var ctx = this.getContext(),
+            rect1 = new Rectangle( ctx, 70, 70, 150, 150 ),
+            line1 = new Line( ctx, 0, 0, 50, 50 ),
+            line2 = new Line( ctx, 50, 0, 0, 50 ),
+            pic1 = new Picture();
+        
+        pic1.add( rect1 );
+        pic1.add( line1 );
+        pic1.add( line2 );
+        pic1.render();
+    }
+};
+
+client.run();
+
+
+// Output:
+// Rectangle in context 2D at 70, 70 of 150px width and 150px height
+// Line in context 2D from 0, 0 to 50, 50
+// Line in context 2D from 50, 0 to 0, 50
+
+}());
+{% endhighlight %}
+
+
+###  JSA Example
+
+
+{% highlight js linenos %}
+/*
+ * @category Design Pattern Tutorial
+ * @package Composite Sample
+ * @author Dmitry Sheiko <me@dsheiko.com>
+ * @link http://dsheiko.com
+ * @jscs standard:Jquery
+ * Code style: http://docs.jquery.com/JQuery_Core_Style_Guidelines
+ */
+(function() {
+"use strict";
+/*global console:false, require:false */
+
+// Composite
+var jsa = require("../../../vendors/jsa/jsa.umd"),
+    Graphic = function() {
+        return {
+            collection: [],
+            render: function() {
+                this.collection.forEach(function( el ){
+                    el.render();
+                });
+            },
+            add: function ( graphic ) {
+                if ( !graphic instanceof Graphic ) {
+                    throw new Error("Method argument must be an instance of Graphic");
+                }
+                this.collection.push( graphic );
+            }
+        };
+
+    },
+    // Primitive
+    Rectangle = function( ctx, x, y, width, height ) {
+        return {
+            __extends__: Graphic,
+            render: function() {
+                console.log( 'Rectangle in context ' + ctx.name + 
+                    ' at ' + x + ', ' + y + 
+                    ' of ' + width + 'px width and ' + 
+                    height + 'px height' );    
+            }
+            
+        };
+
+    },
+    // Primitive
+    Line = function( ctx, x1, y1, x2, y2 ) {
+        return {
+            __extends__: Graphic,
+            render: function() {
+                console.log( 'Line in context ' + ctx.name + 
+                    ' from ' + x1 + ', ' + y1 + 
+                    ' to ' + x2 + ', ' + y2 );
+            }
+        };
+    },
+    // Container
+    Picture = function() {
+        return {
+            __extends__: Graphic
+        };
+    },
+
+    client = {
+        // Mock function which emulates canvas context
+        getContext: function() {
+            return { name: "2D" };
+        },
+        run: function() {
+            var ctx = this.getContext(),
+                rect1 = Rectangle.createInstance( ctx, 70, 70, 150, 150 ),
+                line1 = Line.createInstance( ctx, 0, 0, 50, 50 ),
+                line2 = Line.createInstance( ctx, 50, 0, 0, 50 ),
+                pic1 = Picture.createInstance();
+
+            pic1.add( rect1 );
+            pic1.add( line1 );
+            pic1.add( line2 );
+            pic1.render();
+        }
+    };
+
+client.run();
+
+
+// Output:
+// Rectangle in context 2D at 70, 70 of 150px width and 150px height
+// Line in context 2D from 0, 0 to 50, 50
+// Line in context 2D from 50, 0 to 0, 50
+
+}());
+{% endhighlight %}
+
+
+###  TypeScript Example
+
+
+{% highlight js linenos %}
+/*
+ * @category Design Pattern Tutorial
+ * @package Composite Sample
+ * @author Dmitry Sheiko <me@dsheiko.com>
+ * @licence MIT
+ */
+
+"use strict";
+
+declare var console;
+// Composite
+class Graphic 
+{
+    private collection:Graphic[] = [];
+    
+    public render():void 
+    {
+        this.collection.forEach(function( el ){
+            el.render();
+        });
+    }
+    public add(graphic: Graphic):void 
+    {
+        this.collection.push( graphic );
+    }
+}
+// Primitive
+class Rectangle extends Graphic
+{
+    private ctx: CanvasContext;
+    private x: number;
+    private y: number;
+    private width: number;
+    private height: number;
+    constructor( ctx: CanvasContext, x: number, y: number, width: number, height: number )
+    {
+        this.ctx = ctx;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+    public render()
+    {
+        console.log( 'Rectangle in context ' + this.ctx.name + 
+            ' at ' + this.x + ', ' + this.y + 
+            ' of ' + this.width + 'px width and ' + 
+            this.height + 'px height' );   
+    }
+}
+// Primitive
+class Line extends Graphic
+{
+    private ctx: CanvasContext;
+    private x1: number;
+    private y1: number;
+    private x2: number;
+    private y2: number;
+    constructor( ctx: CanvasContext, x1:number, y1:number, x2:number, y2:number )
+    {
+ this.ctx = ctx;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+    public render()
+    {
+         console.log( 'Line in context ' + ctx.name + 
+            ' from ' + x1 + ', ' + y1 + 
+            ' to ' + x2 + ', ' + y2 ); 
+    }
+}
+// Composite
+class Picture extends Graphic
+{
+}
+
+interface CanvasContext
+{
+    name: string;
+}
+
+module client
+{
+    // Mock function which emulates canvas context
+    function getContext(): CanvasContext
+    {
+        return { name: "2D" };
+    }
+    export function run() {
+        var ctx = this.getContext(),
+            rect1 = new Rectangle( ctx, 70, 70, 150, 150 ),
+            line1 = new Line( ctx, 0, 0, 50, 50 ),
+            line2 = new Line( ctx, 50, 0, 0, 50 ),
+            pic1 = new Picture();
+
+        pic1.add( rect1 );
+        pic1.add( line1 );
+        pic1.add( line2 );
+        pic1.render();
+    }
+}
+
+client.run();
+
+
+// Output:
+// Rectangle in context 2D at 70, 70 of 150px width and 150px height
+// Line in context 2D from 0, 0 to 50, 50
+// Line in context 2D from 50, 0 to 0, 50
+{% endhighlight %}
+
 ## Decorator
-{: .bs-docs-section #object-structural-decorator}
+{: .bs-docs-section #decorator}
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality.
@@ -2716,7 +3499,7 @@ console.log( "Price: $" + myMacbook.getPrice() );
 {% endhighlight %}
 
 ## Flyweight
-{: .bs-docs-section #object-structural-flyweight}
+{: .bs-docs-section #flyweight}
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Use sharing to support large numbers of fine-grained objects efficiently.

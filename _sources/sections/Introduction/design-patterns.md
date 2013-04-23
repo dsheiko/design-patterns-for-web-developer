@@ -1,6 +1,6 @@
 ---
-title: Design Patterns
-category: Introduction
+title: What Is a Design Pattern?
+category: ..
 ---
 
 Inventor of design patterns Christopher Alexander ([Alexander et al.]) has put it like that:
