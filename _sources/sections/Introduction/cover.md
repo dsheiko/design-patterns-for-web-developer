@@ -1,6 +1,5 @@
 ---
 title: Cover
-category: ..
 ---
 
 <article id="cover" class="bs-docs-section-header" markdown="1">

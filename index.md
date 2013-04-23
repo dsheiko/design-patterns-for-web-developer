@@ -19,6 +19,11 @@ Online book by [Dmitry Sheiko](http::/dsheiko.com)
 {: .bs-docs-section #preface}
 Why This Handbook Was Written
 
+I've been studying DP for years, but with every new read book I see far I was
+on .. 
+That's about web applicable examples
+So this is an online book on github to be continously updated
+
 ## Introduction
 {: .bs-docs-section #introduction}
 Why This Handbook Was Written
@@ -54,7 +59,7 @@ I think the best way to go with Design Patterns, that running each one through t
 Once implemented an approach, it makes easier to do it again when you need it. And here below I did it for myself.
 
 ## What Is a Design Pattern?
-{: .bs-docs-section #what-is-a-design-pattern-}
+{: .bs-docs-section #design-pattern-intro}
 Inventor of design patterns Christopher Alexander ([Alexander et al.]) has put it like that:
 "Each pattern describes a problem which occurs over and over again in
 our environment, and then describes the core of the solution to that
@@ -79,7 +84,7 @@ achieved on procedural languages. In that case there must be introduced
 additional patterns such as "Inheritance," "Encapsulation," and "Polymorphism."
 
 ## Why object-oriented programming?
-{: .bs-docs-section #why-object-oriented-programming-}
+{: .bs-docs-section #oop-intro}
 OOP is meant to improve maintainability, make code easier to read and understand.
 Object-oriented design patterns provide proved solution, recognizable by other developer by name.
 

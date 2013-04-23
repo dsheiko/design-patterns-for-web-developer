@@ -1,6 +1,5 @@
 ---
 title: Preface
-category: ..
 ---
 
 Why This Handbook Was Written

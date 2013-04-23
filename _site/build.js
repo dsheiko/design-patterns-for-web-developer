@@ -41,13 +41,20 @@ var fs = require("fs"),
 
                 for ( category in sections ) {
                     if ( sections.hasOwnProperty( category ) ) {
-                        out += '<li><a href="#">' + category + '</a>' + "\n";
-                        if ( sections[ category ].length ) {
-                            out += '<ul class="nav">' + "\n";
+                        if ( category.indexOf("#") === 0 ) {
                             sections[ category ].forEach( function( section ){
                                 out += '<li><a href="#' + section.id + '">' + section.title + '</a></li>' + "\n";
                             });
-                            out += '</ul>';
+                            
+                        } else {
+                            out += '<li><a class="nav-header" href="#">' + category + '</a>' + "\n";
+                            if ( sections[ category ].length ) {
+                                out += '<ul class="nav">' + "\n";
+                                sections[ category ].forEach( function( section ){
+                                    out += '<li><a href="#' + section.id + '">' + section.title + '</a></li>' + "\n";
+                                });
+                                out += '</ul>';
+                            }
                         }
                     }
                 }
@@ -85,7 +92,7 @@ var fs = require("fs"),
                     category: "",
                     title: "",
                     content: ""
-                };
+                }, incrementor = 1;
                 return {
 
                     /**
@@ -140,6 +147,7 @@ var fs = require("fs"),
                             if ( !section.title ) {
                                 throw new Error( "Invalid Liquid syntax: title attribute is missing in file " + file  );
                             }
+                            section.category = section.category || ( "#" + ( incrementor++ ) );
                             section.id = section.id || util.unqieueId( section.title );
                             section.content =  this.processTemplate(this.processInclude(
                                 lines.splice( i + 1 ).join("\n")

@@ -1,6 +1,5 @@
 ---
 title: Introduction
-category: ..
 ---
 
 Why This Handbook Was Written
