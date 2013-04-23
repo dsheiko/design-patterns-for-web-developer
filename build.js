@@ -60,7 +60,8 @@ var fs = require("fs"),
              * @return {string}
              */
             renderSection: function( section ) {
-                return '## ' + section.title + "\n{: .bs-docs-section #" + section.id + "}\n" + section.content;
+                return "\n\n## " + section.title + "\n{: .bs-docs-section #" + section.id + "}\n" +
+                    util.trim( section.content );
             }
         }
     }()),
@@ -68,7 +69,14 @@ var fs = require("fs"),
      * @module
      */
     builder = (function(){
+            /**
+             * @var {array}
+             */
         var sections = [],
+            /**
+             * @var {object} which sections are sortable
+             */
+            sortable = {},
             /**
              * @module
              */
@@ -114,22 +122,23 @@ var fs = require("fs"),
                      * @param {string} content
                      * @return {object} section
                      */
-                    parse: function( content ) {
+                    parse: function( file ) {
                         var re = /^---\s*$/g,
+                            content = fs.readFileSync( file, 'utf-8' ),
                             lines = content.split("\n"),
                             i = 0,
                             parts;
-                            //console.log(lines[ 0 ], lines[ 1 ], lines[ 2 ]);
+
                         if ( re.test( lines[ 0 ] )) {
                             while ( !re.test( lines[ ++i ] ) ) {
                                 parts = lines[ i ].split(":");
                                 if ( parts.length < 2 ) {
-                                    throw new Error( "Invalid Liquid syntax: " + lines[ i ] );
+                                    throw new Error( "Invalid Liquid syntax: " + lines[ i ] + " in file " + file);
                                 }
                                 section[ util.trim( parts[ 0 ] ) ] = util.trim( parts[ 1 ] );
                             }
                             if ( !section.title ) {
-                                throw new Error( "Invalid Liquid syntax: title attribute is missing"  );
+                                throw new Error( "Invalid Liquid syntax: title attribute is missing in file " + file  );
                             }
                             section.id = util.unqieueId( section.category + "-" + section.title );
                             section.content =  this.processTemplate(this.processInclude(
@@ -143,44 +152,51 @@ var fs = require("fs"),
             /**
              * Process section file
              * @param {string} file
-             * @param {string} section
              */
-            processFile = function( file, section ) {
+            processFile = function( file ) {
                 var liquid = new Liquid();
-                    section = liquid.parse( fs.readFileSync( file, 'utf-8' ) );
+                    section = liquid.parse( file );
                 sections[ section.category ] || ( sections[ section.category ] = [] );
                 sections[ section.category ].push( section );
             },
             /**
              * Process directory with section file
              * @param {string} dir
-             * @param {string} section
              */
-            processDir = function( dir, section ) {
+            processDir = function( dir ) {
                 var rdir = fs.readdirSync( dir ),
                     stat;
                 rdir && rdir.forEach(function( file ){
                         var re = /\.md$/gi;
                         stat = fs.statSync( dir + "/" + file );
                         stat.isFile() && re.test( file ) &&
-                            processFile( dir + "/" + file, section );
-                        stat.isDirectory() && processDir( dir + "/" + file, section );
+                            processFile( dir + "/" + file );
+                        stat.isDirectory() && processDir( dir + "/" + file );
                 });
             }
         return {
+            /**
+             * Let the system know that the category to be sorted
+             * @param {string} category
+             */
+            setSortable: function( categories ) {
+                sortable = categories;
+                return this;
+            },
             /**
              * Process a supplied path(can be a file or a directory)
              * @param {string} path
              * @param {string} section
              */
-            processPath: function( path, section ) {
+            processPath: function( path ) {
                     var stat;
                     path = path.replace(/\/+$/, "");
                     if (  !fs.existsSync( path ) ) {
                             return console.error( path + " doesn't exist\n" );
                     }
                     stat = fs.statSync( path );
-                    return stat.isFile() ? processFile( path, section ) : processDir( path, section );
+                    stat.isFile() ? processFile( path ) : processDir( path );
+                    return this;
             },
             /**
              * Save generated files (doc nav and contet)
@@ -189,9 +205,11 @@ var fs = require("fs"),
                 var content = "", category;
                 for ( category in sections ) {
                     if ( sections.hasOwnProperty( category ) ) {
-                        sections[ category ].sort(function( a, b ){
-                            return a.title.localeCompare( b.title );
-                        }).forEach(function( section ){
+                        sortable.indexOf( category ) === -1  || (
+                            sections[ category ] = sections[ category ].sort(function( a, b ){
+                                return a.title.localeCompare( b.title );
+                        }));
+                        sections[ category ].forEach(function( section ){
                             content += view.renderSection( section );
                         })
                     }
@@ -206,9 +224,17 @@ var fs = require("fs"),
 
     process.chdir( "./_sources")
 
-    builder.processPath( "./sections/Object Creational", "Object Creational" );
-    builder.processPath( "./sections/Object Structural", "Object Structural" );
-    builder.save();
+    builder
+        .setSortable([
+            "Object Creational",
+            "Object Structural"]
+        )
+        .processPath("./sections/Introduction/index.md")
+        .processPath("./sections/Introduction/design-patterns.md")
+        .processPath("./sections/Introduction/oop.md")
+        .processPath("./sections/Object Creational")
+        .processPath("./sections/Object Structural")
+        .save();
 
     process.chdir( "../")
     exec("jekyll", function(error, stdout, stderr){ sys.puts(stdout) });

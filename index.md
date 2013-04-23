@@ -2,9 +2,171 @@
 layout: default
 title: Design Patterns for Web-Developer
 ---
+
+
+## Introduction
+{: .bs-docs-section #introduction-introduction}
+After having your project fully tested, deployed and running, it seems the application architecture is pretty
+good enough. All the requirements met and everybody is happy. But then as it happens,
+the requirements change and you, all of sudden, find yourself in the time of troubles.
+It comes out that some modules easier to hack than to modify. Change of other ones brings
+endless changes in a cascade of dependent modules. Or you change one module and whole
+the application starts to collapse like a house of cards. And, of course, you find
+out that you can’t reuse already written modules for the new tasks, because the encapsulation of the desired parts
+would take too much risk and work.  Robert C. Martin was very accurate naming those symptoms of rotting design as
+[Viscosity, Rigidity, Fragility and Immobility](http://www.objectmentor.com/resources/articles/Principles_and_Patterns.pdf "Viscosity, Rigidity, Fragility and Immobility")
+
+Well, the architecture tends to be refactored. You equip yourself with
+[the list of heuristics](http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) and sniff over
+the code for bad smells. Give enough efforts and time and you will find a lot of them.
+So what are you going to do next? Will you try to find your own solution for every rotting spot just following
+[the “solid” principles](http://en.wikipedia.org/wiki/SOLID)? Surely it comes on your mind that some thousands
+of programmers been solving the exact issue already for hundred times with different programming languages.
+It must be a pattern to follow. Here we come, that is exactly what
+[Design Patterns](http://en.wikipedia.org/wiki/Software_design_pattern) are about. If you think that when you
+have to design a module you can just pick a suitable snippet from your archive, give up.
+It doesn’t work with Design Patterns. They are abstract concepts, which you should feel. When designing a module,
+you take on account one or more due design patterns to build your own solution based on them. So, how to learn them, how to feel them?
+
+Once on a W3C conference [Doug Schepers](http://www.w3.org/People/Schepers/)
+asked the audience “Who of you is learning from the code?”
+and everybody just laughed back. It was a rhetorical question.
+Everybody learns mostly from the code, but guided by specifications and manuals.
+For a software engineer an example of good designed code gives much more vision than pages of text explanations.
+I think the best way to go with Design Patterns, that running each one through the playground.
+Once implemented an approach, it makes easier to do it again when you need it. And here below I did it for myself.
+
+## Design Patterns
+{: .bs-docs-section #introduction-design-patterns}
+Inventor of design patterns Christopher Alexander has put it like that:
+"Each pattern describes a problem which occurs over and over again in
+our environment, and then describes the core of the solution to that
+problem, in such a way that you can use this solution a million
+times over, without ever doing it the same way twice". He was no programmer,
+but an architect and anyway the definition is still true for software
+architecture. Software design patterns have been applied practically for a long time, but
+gained formalization of the concept and further popularity after the book "Elements of Reusable Object-Oriented Software"
+was published by so-called "Gang of Four" (Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides).
+
+<div class="bs-docs-sidenote" markdown="1">
+#### Notable books
+* [__Design Patterns: Elements of Reusable Object-Oriented Software__ _by Erich Gamma, Ralph Johnson, John Vlissides, Richard Helm_](http://www.goodreads.com/book/show/85009.Design_Patterns)
+* [__Enterprise Integration Patterns: Designing, Building, and Deploying Messaging Solutions__ _by Gregor Hohpe, Bobby Woolf_](http://www.goodreads.com/book/show/85012.Enterprise_Integration_Patterns)
+* [__Patterns of Enterprise Application Architecture__ _by Martin Fowler, David Rice, Matthew Foemmel, Edward Hieatt, Robert Mee, Randy Stafford_](http://www.goodreads.com/book/show/70156.Patterns_of_Enterprise_Application_Architecture)
+* [__Head First Design Patterns__ _by Eric Freeman, Bert Bates, Kathy Sierra_](http://www.goodreads.com/book/show/58128.Head_First_Design_Patterns)
+* [__Code Complete__ _by Steve McConnell_](http://www.goodreads.com/book/show/4845.Code_Complete)
+</div>
+
+Design patterns describe object-oriented designs, but can be, theoretically,
+achieved on procedural languages. In that case there must be introduced
+additional patterns such as "Inheritance," "Encapsulation," and "Polymorphism."
+
+## Why object-oriented programming?
+{: .bs-docs-section #introduction-why-object-oriented-programming-}
+OOP is meant to improve maintainability, make code easier to read and understand.
+Object-oriented design patterns provide proved solution, recognizable by other developer by name.
+
+So, to proceed with design patterns, would useful to remind the following
+features of OOP: [abstraction](#abstraction), [encapsulation](#encapsulation), [modularity](#modularity), [polymorphism](#polymorphism), and [inheritance](#inheritance),
+[separation of responsibilities](#srp).
+
+
+When following OOP paradigm almost all the code is encapsulated into
+so called objects. Each object can have members: properties (can be referred also as fields or instance variables)
+and methods. Properties represent object state and methods describe its behavior.
+
+Object members can be private (accessible only in the scope of the host object),
+protected (accessible as for the host object as well as for all its derivates –
+the objects that inherit from it) and public (accessible from outside).
+
+In class-based OOP (C++, Java, SmallTalk, PHP5), first of all we define a class.
+Later on we can use it as a prototype when creating new objects (instances).
+In prototypal OOP (JavaScript, ActionScript, Self) there is no classes but objects.
+Though, one objects can serve as prototypes while making new objects.
+
+### Abstraction
+{: #abstraction}
+
+Abstraction is a technique to collect data and code similar in form under scopes named to express its meaning.
+Well, let’s take an example from real life. We are to build a site, which consists of pages. Every page can have, beside the content, input forms and navigation. So, we can define abstract objects representing components of the application: Page, Form, Navigation. Thus, we can focus on top-level concepts rather than on details.
+Let’s now put it graphically (we will use UML – quick introduction into UML 2.x):
+
+![Abstraction Illustration](./assets/img/Introduction/abstraction.png)
+
+E.g. [Strategy](#strategy) pattern
+
+### Encapsulation
+{: #encapsulation }
+
+The user of an object can view the object as a black box that provides services. Instance properties and methods can be rewritten, but as far as object implements the same interfaces (exposed services stay unchanged), any code that uses the object doesn’t need to be changed.
+
+E.g. we have object Form which consumes Captcha object. Form uses only 2 captcha services:
+{% highlight php linenos %}
+$captcha->getHtml(),
+$captcha->isValid()
+{% endhighlight %}
+
+and knows nothing of internal implementation. If you decide to change captcha implementation, the code of the object can be fully rewritten, but the methods (getHtml and isValid) will still be used.  So you don’t need to make any changes to the consumer object (Form).
+
+E.g. Observer pattern
+
+### Modularity
+{: #modularity}
+As we examined above objects can be independent of each other.  The bigger degree of that independency (lose coupling) the better application design.  So to say, many Design Patterns are meant help with it (Façade, Mediator,..)
+
+Objects also can be passed into other objects (see Dependency Injection). It’s used for example in Visitor pattern.
+
+
+
+### Inheritance
+{: #inheritance}
+One objects can inherit from others. In class-based OOP one class can
+extend another. So instance of the last will appear as an extended instance of base class.
+
+E.g. we have <var>AbstractPage</var> class defining common properties and behavior for
+any page on the site (<var>getPageByUrl</var>, <var>getTitle</var>). PageContact extends
+AbstractPage with form property. PageNewsDetails – content, teaserImage, comments.
+
+
+
+### Separation of responsibility
+{: #srp}
+
+Robert C. Martin collected the essential principles of good design under abbr.
+SOLID. The first one (Single Responsibility Principle) can be considered
+as a feature of OOP.  While designing your code you shall take care that
+any member of the class serves to achieve the goal the class meant for.
+
+E.g.
+{% highlight php linenos %}
+ <?php
+
+class \Page\Contact
+{
+    private $_tpl = "./tpl/contact-page.phtml";
+    private $_title = "Contact Page";
+    private $_form = new \Form\Contact();
+
+    public function getTitle()
+    {
+        return $this->_title;
+    }
+    public function getForm()
+    {
+        return $_form;
+    }
+    public function getHtml()
+    {
+        return strtr(file_get_contents($this->_tpl), array(
+            "title" => $this->_title,
+            s"form" => $this->_form,
+        ));
+    }
+}
+{% endhighlight %}
+
 ## Abstract Factory
 {: .bs-docs-section #object-creational-abstract-factory}
-
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Provide an interface for creating families of related or dependent objects without specifying their concrete classes.
@@ -537,9 +699,9 @@ page.render();
 
 
 {% endhighlight %}
+
 ## Builder
 {: .bs-docs-section #object-creational-builder}
-
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Separate the construction of a complex object from its representation so that the same construction process can create different representations.
@@ -1014,9 +1176,9 @@ class ThemeA extends AbstractBuilder
 // The module has close button
 // The module has resize control
 {% endhighlight %}
+
 ## Prototype
 {: .bs-docs-section #object-creational-prototype}
-
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Specify the kinds of objects to create using a prototypical instance, and create new objects by copying this prototype.
@@ -1418,9 +1580,9 @@ saveChangesBtn.render();
 
 
 {% endhighlight %}
+
 ## Singleton
 {: .bs-docs-section #object-creational-singleton}
-
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Ensure a class only has one instance, and provide a global point of access to it.
@@ -1598,9 +1760,9 @@ console.log(Singleton.getInstance() === Singleton.getInstance());
 
 
 {% endhighlight %}
+
 ## Bridge
 {: .bs-docs-section #object-structural-bridge}
-
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Decouple an abstraction from its implementation so that the two can vary independently.
@@ -2131,9 +2293,9 @@ mobileThemAImp.render();
 // Border
 // Touch gestures bound
 {% endhighlight %}
+
 ## Decorator
 {: .bs-docs-section #object-structural-decorator}
-
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Attach additional responsibilities to an object dynamically. Decorators provide a flexible alternative to subclassing for extending functionality.
@@ -2552,9 +2714,9 @@ console.log( "Price: $" + myMacbook.getPrice() );
 // SDD: 256
 // Price: $1499
 {% endhighlight %}
+
 ## Flyweight
 {: .bs-docs-section #object-structural-flyweight}
-
 <blockquote cite="http://www.goodreads.com/book/show/85009.Design_Patterns">
 <p>
 Use sharing to support large numbers of fine-grained objects efficiently.
