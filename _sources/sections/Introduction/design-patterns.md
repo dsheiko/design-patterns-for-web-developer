@@ -3,7 +3,7 @@ title: Design Patterns
 category: Introduction
 ---
 
-Inventor of design patterns Christopher Alexander has put it like that:
+Inventor of design patterns Christopher Alexander ([Alexander et al.]) has put it like that:
 "Each pattern describes a problem which occurs over and over again in
 our environment, and then describes the core of the solution to that
 problem, in such a way that you can use this solution a million

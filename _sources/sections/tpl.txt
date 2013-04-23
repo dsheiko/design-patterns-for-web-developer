@@ -1,0 +1,51 @@
+---
+title: Bridge
+category: Object Structural
+---
+
+{% template "sections/includes/gof.html" %}
+Decouple an abstraction from its implementation so that the two can vary independently.
+{% endtemplate %}
+
+
+![Bridge pattern class diagram](./assets/img/Bridge/uml.png)
+
+The pattern allows:
+
+* 
+
+###  PHP Example
+
+
+![Bridge pattern PHP example class diagram](./assets/img/Bridge/PHP/uml.png)
+
+
+{% highlight php linenos %}
+{% include "examples/Bridge/PHP/tutorial.php" %}
+{% endhighlight %}
+
+
+###  JavaScript Example
+
+![Bridge pattern EcmaScript example class diagram](./assets/img/Bridge/EcmaScript/uml.png)
+
+
+{% highlight js linenos %}
+{% include "examples/Bridge/JavaScript/example.js" %}
+{% endhighlight %}
+
+
+###  JSA Example
+
+
+{% highlight js linenos %}
+{% include "examples/Bridge/JSA/example.js" %}
+{% endhighlight %}
+
+
+###  TypeScript Example
+
+
+{% highlight js linenos %}
+{% include "examples/Bridge/TypeScript/example.ts" %}
+{% endhighlight %}
