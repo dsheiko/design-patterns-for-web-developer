@@ -244,6 +244,7 @@ var fs = require("fs"),
         .processPath("./sections/Introduction/oop.md")
         .processPath("./sections/Object Creational")
         .processPath("./sections/Object Structural")
+        .processPath("./sections/Outro/references.md")
         .save();
 
     process.chdir( "../")
