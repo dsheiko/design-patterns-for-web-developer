@@ -1,8 +1,9 @@
 ---
-title: Cover
+title: Welcome
+no-header: yes
 ---
 
-<article id="cover" class="bs-docs-section-header" markdown="1">
+<article id="welcome" class="bs-docs-section-header" markdown="1">
 
 # Design Patterns for Web-Developer
 

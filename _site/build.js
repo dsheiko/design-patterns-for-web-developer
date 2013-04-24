@@ -45,7 +45,7 @@ var fs = require("fs"),
                             sections[ category ].forEach( function( section ){
                                 out += '<li><a href="#' + section.id + '">' + section.title + '</a></li>' + "\n";
                             });
-                            
+
                         } else {
                             out += '<li><a class="nav-header" href="#">' + category + '</a>' + "\n";
                             if ( sections[ category ].length ) {
@@ -67,7 +67,7 @@ var fs = require("fs"),
              * @return {string}
              */
             renderSection: function( section ) {
-                return "\n\n## " + ( section.title === "Cover" ? "&nbsp;" : section.title ) + "\n{: .bs-docs-section #" + section.id + "}\n" +
+                return "\n\n## " + ( section["no-header"] ? "&nbsp;" : section.title ) + "\n{: .bs-docs-section #" + section.id + "}\n" +
                     util.trim( section.content );
             }
         }

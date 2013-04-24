@@ -43,7 +43,7 @@
     <div class="bs-docs-sidebar">
 <ul class="nav bs-docs-sidenav">
 <h3 class="bs-docs-sidenav-heading"><a href="/">Design Patterns for Web-Developer</a></h3>
-<li><a href="#cover">Cover</a></li>
+<li><a href="#welcome">Welcome</a></li>
 <li><a href="#preface">Preface</a></li>
 <li><a href="#introduction">Introduction</a></li>
 <li><a href="#design-pattern-intro">What Is a Design Pattern?</a></li>
@@ -67,8 +67,8 @@
 
     <!-- Page content of course! -->
     <div class="bs-docs-container">
-    <h2 class="bs-docs-section" id="cover"> </h2>
-<article id="cover" class="bs-docs-section-header">
+    <h2 class="bs-docs-section" id="welcome">&nbsp;</h2>
+<article id="welcome" class="bs-docs-section-header">
 
   <h1 id="design-patterns-for-web-developer">Design Patterns for Web-Developer</h1>
 
@@ -77,16 +77,22 @@
 </article>
 
 <h2 class="bs-docs-section" id="preface">Preface</h2>
+<p>I ran into software design pattern concept just few years after millenium. 
+I took it serious much later, but that&#8217;s now already years since I started to study and re-study the patterns.
+From the pattern documentation that is a masterpiece by GoF and by Martin Fowler it always seems so
+easy to grasp. However, one doesn&#8217;t really get it until he has some experience implementing the patterns in
+own tasks. So studying I make wed related examples</p>
+
+<p>with every new read book or article I&#8217;ve been getting a better grasp on them.</p>
+
 <p>Why This Handbook Was Written</p>
 
-<p>I’ve been studying DP for years, but with every new read book I see far I was
+<p>I&#8217;ve been studying DP for years, but with every new read book I see far I was
 on .. 
-That’s about web applicable examples
+That&#8217;s about web applicable examples
 So this is an online book on github to be continously updated</p>
 
 <h2 class="bs-docs-section" id="introduction">Introduction</h2>
-<p>Why This Handbook Was Written</p>
-
 <p>After having your project fully tested, deployed and running, it seems the application architecture is pretty
 good enough. All the requirements met and everybody is happy. But then as it happens,
 the requirements change and you, all of sudden, find yourself in the time of troubles.
@@ -119,14 +125,14 @@ Once implemented an approach, it makes easier to do it again when you need it. A
 
 <h2 class="bs-docs-section" id="design-pattern-intro">What Is a Design Pattern?</h2>
 <p>Inventor of design patterns Christopher Alexander ([Alexander et al.]) has put it like that:
-“Each pattern describes a problem which occurs over and over again in
+&#8220;Each pattern describes a problem which occurs over and over again in
 our environment, and then describes the core of the solution to that
 problem, in such a way that you can use this solution a million
-times over, without ever doing it the same way twice”. He was no programmer,
+times over, without ever doing it the same way twice&#8221;. He was no programmer,
 but an architect and anyway the definition is still true for software
 architecture. Software design patterns have been applied practically for a long time, but
-gained formalization of the concept and further popularity after the book “Elements of Reusable Object-Oriented Software”
-was published by so-called “Gang of Four” (Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides).</p>
+gained formalization of the concept and further popularity after the book &#8220;Elements of Reusable Object-Oriented Software&#8221;
+was published by so-called &#8220;Gang of Four&#8221; (Erich Gamma, Richard Helm, Ralph Johnson, John Vlissides).</p>
 
 <div class="bs-docs-sidenote">
   <h4 id="notable-books">Notable books</h4>
@@ -141,7 +147,7 @@ was published by so-called “Gang of Four” (Erich Gamma, Richard Helm, Ralph 
 
 <p>Design patterns describe object-oriented designs, but can be, theoretically,
 achieved on procedural languages. In that case there must be introduced
-additional patterns such as “Inheritance,” “Encapsulation,” and “Polymorphism.”</p>
+additional patterns such as &#8220;Inheritance,&#8221; &#8220;Encapsulation,&#8221; and &#8220;Polymorphism.&#8221;</p>
 
 <h2 class="bs-docs-section" id="oop-intro">Why object-oriented programming?</h2>
 <p>OOP is meant to improve maintainability, make code easier to read and understand.
@@ -257,7 +263,7 @@ Provide an interface for creating families of related or dependent objects witho
 
 <p>Abstract factory declares an interface to be implemented by every concrete factory responsible
 for creation of product objects (usually belonging to a family). So the client using
-concrete factories is isolated from implementation classes. Client doesn’t know product class names; that’s responsibility
+concrete factories is isolated from implementation classes. Client doesn&#8217;t know product class names; that&#8217;s responsibility
 of a concrete factory. The pattern also makes it easy to switch between product families. Since concrete factories
 implement the same interface, simply change of the concrete factory on the client will bring to a different product family.</p>
 
@@ -268,8 +274,8 @@ but they can also be implemented via Prototype.</p>
 
 <h3 id="php-example">PHP Example</h3>
 
-<p>Let’s imagine we are required to build a UI, which is represented differently depending on the configuration.
-If the page is requested on a desktop PC it uses jQuery UI framework. If it’s on a mobile device - jQuery Mobile.
+<p>Let&#8217;s imagine we are required to build a UI, which is represented differently depending on the configuration.
+If the page is requested on a desktop PC it uses jQuery UI framework. If it&#8217;s on a mobile device - jQuery Mobile.
 In this example we have two interfaces <var>\Widget\Button\iButton</var> and <var>\Widget\Dialog\iDialog</var> and
 implementations of those for desktop PC and mobile devices. To create a widget object we use factories: <var>Widget\Factory\Desktop</var> and
 <var>Widget\Factory\Mobile</var>. Thus the client (<var>\Application</var>) picks out the required factory (here based on passed in configuration object)
@@ -903,7 +909,7 @@ a new object (Product) from a given initial document (<var>Entity</var>) and usi
 
 <p>In EcmaScript example we use Director (<var>moduleManager</var>) to build a widget based
 on a supplied configuration and using a given Concrete Builder (<var>ThemeA</var>).
-Thus if configuration changes toward an other theme, it’s going to be transparent
+Thus if configuration changes toward an other theme, it&#8217;s going to be transparent
 for the client application.</p>
 
 <p><img src="./assets/img/Builder/EcmaScript/uml.png" alt="Builder pattern EcmaScript example class diagram" /></p>
@@ -1249,7 +1255,7 @@ we can reduce the number of classes.</p>
 
 <h3 id="php-example-2">PHP Example</h3>
 
-<p>Let’s assume, we deal with micro-formats in our application.
+<p>Let&#8217;s assume, we deal with micro-formats in our application.
 The application is built on the framework, which already has base class (<var>Element</var>)
 for HTML element objects. Thus, every element makes an instance of this class.
 Micro-format elements are HTML elements, which are marked in a particular way
@@ -1346,7 +1352,7 @@ Now we have a state-full object, which we clone every time we need a new a micro
 
 <p>In this imaginable application we need a button to submit the form (Save changes)
  and a button to preserve the form data (Save draft). The framework comprises
- an object representing an abstract button (<var>Toolbar.Button</var>). The object’s
+ an object representing an abstract button (<var>Toolbar.Button</var>). The object&#8217;s
  constructor receives configuration object as an argument (object specifiers). Thus, any instance
  of <var>Toolbar.Button</var> makes a configured button. Any button meant for saving has
  a particular appearance. In <a href="http://twitter.github.com/bootstrap">Twitter Bootstrap 2</a> it is gained by adding class
@@ -1804,7 +1810,7 @@ a mains power plug adapter which allows British plugs to be connected to America
 The same in programming. We use adapters to reuse objects cooperating with 
 incompatible interfaces. That can be unrelated classes or classes wit unpredictable interfaces.<br />
 For instance, in Database Abstract Layer (DAL). You need an API
-to access DB, but you don’t want to be confined to a single driver. 
+to access DB, but you don&#8217;t want to be confined to a single driver. 
 Every driver provides its own interface. So you work out your own API and make a 
 target object which converts driver (adoptee) API into that of yours. </p>
 
@@ -2260,7 +2266,7 @@ methods to subsclasses <var>GraphViewData</var> and <var>TableViewData</var>.</p
 <p>EcmaScript examples describe a solution for themable widget (slideshow).
 Consider a slideshow which is meant to have thumbnail- or bullets-like
 pagination depending on a theme and act differently on desktop and mobile devices.
-Here the slideshow doesn’t have pagination on mobiles devices, but supports
+Here the slideshow doesn&#8217;t have pagination on mobiles devices, but supports
 touch gestures to navigate slides.</p>
 
 <p><var>AbstractImplementor</var> implies an interface to be implemented by by all its derivatives:
@@ -3066,7 +3072,7 @@ Attach additional responsibilities to an object dynamically. Decorators provide 
 </ul>
 
 <p>When we need to enhance an individual object with a particular responsibility, use of inheritance may be impractical.
-Let’s say we have a widget class. In some cases we need this widget with border,
+Let&#8217;s say we have a widget class. In some cases we need this widget with border,
 in some with scrollbar, in some with both. Relying on inheritance we would need
 not only classes for every representation, but also classes for every combination, provided
 number of possible combinations increases excessively with every new added representation. Using decorators
@@ -3191,7 +3197,7 @@ scrollbar and status bar we just wrap widget instance with corresponding decorat
 <h3 id="javascript-example-7">JavaScript Example</h3>
 
 <p>This example shows Decorator pattern from an other prospective. We have here an object, which represents
-a concrete product MacbookAir. It’s one of the class defined by MacbookAbstract.
+a concrete product MacbookAir. It&#8217;s one of the class defined by MacbookAbstract.
 The object comprises the base product configuration and corresponding price.
 Now we can specify decorators for extensible configuration properties (<var>RAM</var>, <var>SDD</var>).
 Combination of decorators will give a product object of the intended configuration.
@@ -3493,7 +3499,7 @@ Thus, Character has <var>GlyphContext</var> with index set up according to the C
 During Character rendering <var>GlyphContext::getFont</var> returns the font object we expect.</p>
 
 <p>As you see <var>GlyphContext</var> acts as extrinsic state repository.
-Besides, it’s glyph representation context. You can have many <var>GlyphContext</var> instances keeping different
+Besides, it&#8217;s glyph representation context. You can have many <var>GlyphContext</var> instances keeping different
 rendering attributes for the same glyph structure. So by switching context you choose representation strategy for the structure.</p>
 
 <p>Flyweights are created by means a factory, which ensures they are shared properly.
@@ -4224,6 +4230,9 @@ the required information.</p>
 </code></pre></div>
 
     </div>
+    <a href="#welcome" class="bs-docs-top">
+        Back to top
+    </a>
 
     <!-- Main docs footer (social buttons, copyright, etc). -->
     <!-- Footer
@@ -4250,9 +4259,6 @@ the required information.</p>
 <script src="./assets/js/bootstrap-scrollspy.js"></script>
 <script src="./assets/js/bootstrap-collapse.js"></script>
 <script src="./assets/js/bootstrap-affix.js"></script>
-
-<!--script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script-->
-<script src="./assets/js/holder/holder.js"></script>
 
 <script src="./assets/js/application.js"></script>
 

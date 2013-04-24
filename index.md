@@ -5,8 +5,8 @@ title: Design Patterns for Web-Developer
 
 
 ## &nbsp;
-{: .bs-docs-section #cover}
-<article id="cover" class="bs-docs-section-header" markdown="1">
+{: .bs-docs-section #welcome}
+<article id="welcome" class="bs-docs-section-header" markdown="1">
 
 # Design Patterns for Web-Developer
 
@@ -17,6 +17,14 @@ Online book by [Dmitry Sheiko](http::/dsheiko.com)
 
 ## Preface
 {: .bs-docs-section #preface}
+I ran into software design pattern concept just few years after millenium. 
+I took it serious much later, but that's now already years since I started to study and re-study the patterns.
+From the pattern documentation that is a masterpiece by GoF and by Martin Fowler it always seems so
+easy to grasp. However, one doesn't really get it until he has some experience implementing the patterns in
+own tasks. So studying I make wed related examples
+
+with every new read book or article I've been getting a better grasp on them.
+
 Why This Handbook Was Written
 
 I've been studying DP for years, but with every new read book I see far I was
@@ -26,8 +34,6 @@ So this is an online book on github to be continously updated
 
 ## Introduction
 {: .bs-docs-section #introduction}
-Why This Handbook Was Written
-
 After having your project fully tested, deployed and running, it seems the application architecture is pretty
 good enough. All the requirements met and everybody is happy. But then as it happens,
 the requirements change and you, all of sudden, find yourself in the time of troubles.
