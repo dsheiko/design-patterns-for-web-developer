@@ -2986,17 +2986,17 @@ client.run();
 
 declare var console;
 // Composite
-class Graphic 
+class Graphic
 {
     private collection:Graphic[] = [];
-    
-    public render():void 
+
+    public render():void
     {
         this.collection.forEach(function( el ){
             el.render();
         });
     }
-    public add(graphic: Graphic):void 
+    public add(graphic: Graphic):void
     {
         this.collection.push( graphic );
     }
@@ -3019,10 +3019,10 @@ class Rectangle extends Graphic
     }
     public render()
     {
-        console.log( 'Rectangle in context ' + this.ctx.name + 
-            ' at ' + this.x + ', ' + this.y + 
-            ' of ' + this.width + 'px width and ' + 
-            this.height + 'px height' );   
+        console.log( 'Rectangle in context ' + this.ctx.name +
+            ' at ' + this.x + ', ' + this.y +
+            ' of ' + this.width + 'px width and ' +
+            this.height + 'px height' );
     }
 }
 // Primitive
@@ -3035,7 +3035,7 @@ class Line extends Graphic
     private y2: number;
     constructor( ctx: CanvasContext, x1:number, y1:number, x2:number, y2:number )
     {
- this.ctx = ctx;
+        this.ctx = ctx;
         this.x = x;
         this.y = y;
         this.width = width;
@@ -3043,9 +3043,9 @@ class Line extends Graphic
     }
     public render()
     {
-         console.log( 'Line in context ' + ctx.name + 
-            ' from ' + x1 + ', ' + y1 + 
-            ' to ' + x2 + ', ' + y2 ); 
+         console.log( 'Line in context ' + ctx.name +
+            ' from ' + x1 + ', ' + y1 +
+            ' to ' + x2 + ', ' + y2 );
     }
 }
 // Composite

@@ -2953,17 +2953,17 @@ Composite lets clients treat individual objects and compositions of objects unif
 
 <span class="nx">declare</span> <span class="kd">var</span> <span class="nx">console</span><span class="p">;</span>
 <span class="c1">// Composite</span>
-<span class="kr">class</span> <span class="nx">Graphic</span> 
+<span class="kr">class</span> <span class="nx">Graphic</span>
 <span class="p">{</span>
     <span class="kr">private</span> <span class="nx">collection</span><span class="o">:</span><span class="nx">Graphic</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
-    
-    <span class="kr">public</span> <span class="nx">render</span><span class="p">()</span><span class="o">:</span><span class="k">void</span> 
+
+    <span class="kr">public</span> <span class="nx">render</span><span class="p">()</span><span class="o">:</span><span class="k">void</span>
     <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span> <span class="nx">el</span> <span class="p">){</span>
             <span class="nx">el</span><span class="p">.</span><span class="nx">render</span><span class="p">();</span>
         <span class="p">});</span>
     <span class="p">}</span>
-    <span class="kr">public</span> <span class="nx">add</span><span class="p">(</span><span class="nx">graphic</span><span class="o">:</span> <span class="nx">Graphic</span><span class="p">)</span><span class="o">:</span><span class="k">void</span> 
+    <span class="kr">public</span> <span class="nx">add</span><span class="p">(</span><span class="nx">graphic</span><span class="o">:</span> <span class="nx">Graphic</span><span class="p">)</span><span class="o">:</span><span class="k">void</span>
     <span class="p">{</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span> <span class="nx">graphic</span> <span class="p">);</span>
     <span class="p">}</span>
@@ -2986,10 +2986,10 @@ Composite lets clients treat individual objects and compositions of objects unif
     <span class="p">}</span>
     <span class="kr">public</span> <span class="nx">render</span><span class="p">()</span>
     <span class="p">{</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s1">&#39;Rectangle in context &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> 
-            <span class="s1">&#39; at &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> 
-            <span class="s1">&#39; of &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="s1">&#39;px width and &#39;</span> <span class="o">+</span> 
-            <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">+</span> <span class="s1">&#39;px height&#39;</span> <span class="p">);</span>   
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s1">&#39;Rectangle in context &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span>
+            <span class="s1">&#39; at &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span>
+            <span class="s1">&#39; of &#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="s1">&#39;px width and &#39;</span> <span class="o">+</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">+</span> <span class="s1">&#39;px height&#39;</span> <span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 <span class="c1">// Primitive</span>
@@ -3002,7 +3002,7 @@ Composite lets clients treat individual objects and compositions of objects unif
     <span class="kr">private</span> <span class="nx">y2</span><span class="o">:</span> <span class="nx">number</span><span class="p">;</span>
     <span class="nx">constructor</span><span class="p">(</span> <span class="nx">ctx</span><span class="o">:</span> <span class="nx">CanvasContext</span><span class="p">,</span> <span class="nx">x1</span><span class="o">:</span><span class="nx">number</span><span class="p">,</span> <span class="nx">y1</span><span class="o">:</span><span class="nx">number</span><span class="p">,</span> <span class="nx">x2</span><span class="o">:</span><span class="nx">number</span><span class="p">,</span> <span class="nx">y2</span><span class="o">:</span><span class="nx">number</span> <span class="p">)</span>
     <span class="p">{</span>
- <span class="k">this</span><span class="p">.</span><span class="nx">ctx</span> <span class="o">=</span> <span class="nx">ctx</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">ctx</span> <span class="o">=</span> <span class="nx">ctx</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
         <span class="k">this</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
@@ -3010,9 +3010,9 @@ Composite lets clients treat individual objects and compositions of objects unif
     <span class="p">}</span>
     <span class="kr">public</span> <span class="nx">render</span><span class="p">()</span>
     <span class="p">{</span>
-         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s1">&#39;Line in context &#39;</span> <span class="o">+</span> <span class="nx">ctx</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> 
-            <span class="s1">&#39; from &#39;</span> <span class="o">+</span> <span class="nx">x1</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="nx">y1</span> <span class="o">+</span> 
-            <span class="s1">&#39; to &#39;</span> <span class="o">+</span> <span class="nx">x2</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="nx">y2</span> <span class="p">);</span> 
+         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s1">&#39;Line in context &#39;</span> <span class="o">+</span> <span class="nx">ctx</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span>
+            <span class="s1">&#39; from &#39;</span> <span class="o">+</span> <span class="nx">x1</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="nx">y1</span> <span class="o">+</span>
+            <span class="s1">&#39; to &#39;</span> <span class="o">+</span> <span class="nx">x2</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="nx">y2</span> <span class="p">);</span>
     <span class="p">}</span>
 <span class="p">}</span>
 <span class="c1">// Composite</span>
