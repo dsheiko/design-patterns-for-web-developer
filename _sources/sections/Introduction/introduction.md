@@ -2,7 +2,6 @@
 title: Introduction
 ---
 
-Why This Handbook Was Written
 
 After having your project fully tested, deployed and running, it seems the application architecture is pretty
 good enough. All the requirements met and everybody is happy. But then as it happens,
