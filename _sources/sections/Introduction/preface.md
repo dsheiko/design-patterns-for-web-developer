@@ -2,17 +2,16 @@
 title: Preface
 ---
 
-I ran into software design pattern concept just few years after millenium. 
-I took it serious much later, but that's now already years since I started to study and re-study the patterns.
-From the pattern documentation that is a masterpiece by GoF and by Martin Fowler it always seems so
-easy to grasp. However, one doesn't really get it until he has some experience implementing the patterns in
-own tasks. So studying I make wed related examples
+When you study a pattern by a book such as [GoF](#ref-GoF) or [PoEAA](#ref-PoEAA)
+it seems within your grasp. But as soon as you run into a task required the pattern
+it brings many questions: "Is it really the very pattern for the case? 
+Do I implement it aright? Did I get the pattern on the first place?"
+I believe the best way to study software design patterns is implementing each in your 
+preferred language on your specific tasks. For example if you take Bridge pattern
+XWindow and PMWindow you unlikely to have such task in web-deve on the contrary 
+themeng..
 
-with every new read book or article I've been getting a better grasp on them.
+In my turn I made these examples in PHP and EcmaScript
 
-Why This Handbook Was Written
 
-I've been studying DP for years, but with every new read book I see far I was
-on .. 
-That's about web applicable examples
 So this is an online book on github to be continously updated
