@@ -10,4 +10,4 @@ STATUS: Pre-Alpha
 If you see anything that is technically wrong or otherwise in need of
 correction, please [open an issue](hhttps://github.com/dsheiko/design-patterns-for-web-developer/issues/new) and one of the maintainers will take a look.
 
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/aa8021abd047194852af664b21b2e408 "githalytics.com")](http://githalytics.com/dsheiko/design-patterns-for-web-developer)
+[![Analytics](https://ga-beacon.appspot.com/UA-1150677-13/dsheiko/design-patterns-for-web-developer)](http://githalytics.com/dsheiko/design-patterns-for-web-developer)
