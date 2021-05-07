@@ -1,5 +1,9 @@
 # Design Patterns for web-developers by Dmitry Sheiko
 
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
+> WARNING - THIS PROJECT IS NO LONGER MAINTAINED!!!
+
 This is the source code for the Design Patterns for web-developers book contents.  It is licensed under
 the MIT license.
 
